@@ -1,0 +1,19 @@
+Functionality for the University Administrative Staff:
+●	Register new students - Administrative staff are able to add new students to the system’s records. Students have information including their name, address, phone number, course history, date of birth and other information. To do this, they will log in to the administration portal, navigate to the “register new student”, and enter the provided information. 
+●	Register new faculty - Administrative staff are able to add new faculty to the system’s records. Faculty have information including their name, address, phone number, course history, date of birth and other information. To do this, they will log in to the administration portal, navigate to the “register new faculty”, and enter the provided information. 
+●	Remove faculty and students  - Administrative staff are able to remove faculty and students from the system’s records. 
+●	Enter the course schedule for each term - Administrative staff are able to apply a course list to individual semesters.
+●	Add and/or update information about offered courses - Administrative staff are able to add new courses and/or modify existing courses’ data.
+
+Functionality for Faculty:
+●	Look up what courses they are assigned to teach - Faculty members are able to view the courses they are teaching.
+●	View detailed information about courses - Faculty members are able to view course data such as name, location, and time.
+●	Retrieve the roster of students for each course - Faculty members are also able to view the student list of a course.
+●	Assign grades to students enrolled in their courses - Faculty members are able to assign grades to students as well as modify their existing grades.
+
+ 
+Functionality for Students:
+●	Retrieve information about courses - Students are able to look up information about courses that are offered. Information includes a course description, the number of credits, any prerequisite courses, the time, and the instructor for the course. Students can log in and navigate to the course information section.
+●	Register for courses - Students are able to register for courses. Courses have prerequisites that must be met before they can be registered for. To register, students log in, select register for courses and select any courses that they would like to register for. The courses are checked against their transcript, and if they meet the prerequisites, then they are allowed to proceed to register for the course(s).
+●	Print transcripts - Students are able to access their entered grades at any time. To do this, they log in and select the option to print their transcript. The document may then be downloaded.
+●	Drop registered courses - Students are able to drop courses that they have previously registered for. The student logs in and selects the course that they would like to drop.
