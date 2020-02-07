@@ -1,1 +1,19 @@
-<mxfile host="Electron" modified="2020-02-02T00:02:20.855Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/12.5.3 Chrome/78.0.3904.130 Electron/7.1.9 Safari/537.36" etag="2muk2SwryjyGb9wXYG1u" version="12.5.3" type="device"><diagram id="CLRaHryyYa0xOvTVhCor" name="Page-1">1VVNj5swEP01HBNBCAkc87HdXalNW+XQ48rgCVg1NjImJP31HcB8iY20ibaHOlI0fp4Z2+/NGMvdpZdnRbLkm6TArYVNL5a7txaLlW3jfwVcG2C59BsgVow2kNMDR/YHDGji4oJRyEeOWkquWTYGIykERHqEEaVkOXY7ST7eNSMxTIBjRPgU/cWoThrU9+wefwEWJ+3OTnvhlLTOBsgTQmU5gNwny90pKXVjpZcd8Iq7lpcm7suN1e5gCoT+SMDlzLl/SN4OQUZpQI6l91bOjBhnwgtz4Zk5rb62FMRKFpnxA6Xh8h7xJGzd7enBnO66WCYgU9Dqii4m0XJtQtoSMdOy57vLmgy47mqEGI3jLnVPAxqGiTtYWU1YeRVnySKYcINs4Gm2iU5xg72DJuEsFmhHeHtQCFScMSyojVlIGaVV+LZMmIZjRqIqV4ndgxhSLShUZ7Nxlmslf8NOcqnq7Vy7HrhyYpwP8FM9EL8p01CO25Uw1WgoghPMg+FYTzVxlvOl46xXqKnn+wvX+0cKrScKWYsVSSsKRZhnNRP27B3sqBUTseVu0N5xhpy8YvSKVyqGCq1Y1453J/uuKKhDkYagHs73Q0la4CPmbS1vP4K+slw/nLYQOZYeVhWSKrrsmz77z4IIzTTDh/bRPags6hegyhoSTkQEe5TmM5ilRN/TeBxO+r9vu2vfTnbgO93PnT6NH+nKwJt7gd2nubsrcdp/qeq1wefeffoL</diagram></mxfile>
+<mxfile host="www.draw.io" modified="2020-02-07T17:43:38.442Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0" etag="7A4XbazATWQhPmRak-xj" version="12.6.6" type="github">
+  <diagram id="CLRaHryyYa0xOvTVhCor" name="Page-1">
+    <mxGraphModel dx="1646" dy="1038" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="xvll8Nh_N9pdd9aSw5_w-8" value="-" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="470" y="40" width="300" height="210" as="geometry"/>
+        </mxCell>
+        <mxCell id="xvll8Nh_N9pdd9aSw5_w-6" value="Invoice" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#000000;fillColor=#ffffff;" parent="xvll8Nh_N9pdd9aSw5_w-8" vertex="1">
+          <mxGeometry x="-300" width="600" height="14.41" as="geometry"/>
+        </mxCell>
+        <mxCell id="xvll8Nh_N9pdd9aSw5_w-7" value="&amp;nbsp; -&amp;nbsp; Client: client&lt;br&gt;&amp;nbsp; -&amp;nbsp; String: OrderNumber&lt;br&gt;&amp;nbsp; -&amp;nbsp; ItemList: orderedProducts&lt;br&gt;&amp;nbsp; -&amp;nbsp; double: balanceDue&lt;br&gt;&lt;div&gt;&amp;nbsp; -&amp;nbsp; String: date&lt;/div&gt;&lt;div&gt;&amp;nbsp; +&amp;nbsp; void: createTransaction(client, orderedProducts, balance, date)&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#000000;fillColor=#ffffff;" parent="xvll8Nh_N9pdd9aSw5_w-8" vertex="1">
+          <mxGeometry x="-300" y="14.41" width="600" height="195.59" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
