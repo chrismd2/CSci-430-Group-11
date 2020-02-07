@@ -10,9 +10,9 @@ public class Client{
 	
 	public Client(int id, String name, String phoneNumber, String address){
 		balance = 0.0f; //Balance is empty by default
-		//shoppingCart = new ItemList();
-		//myInvoices = new InvoiceList();
-		//myTransactions = new TransactionList();
+		shoppingCart = new ItemList();
+		myInvoices = new InvoiceList();
+		myTransactions = new TransactionList();
 		clientId = id;
 		this.phoneNumber = phoneNumber;
 		clientName = name;
