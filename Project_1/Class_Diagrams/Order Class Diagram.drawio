@@ -1,1 +1,19 @@
-<mxfile host="Electron" modified="2020-02-02T00:04:48.757Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/12.5.3 Chrome/78.0.3904.130 Electron/7.1.9 Safari/537.36" etag="vncyU39ecI-YOH0hEkh5" version="12.5.3" type="device"><diagram id="CLRaHryyYa0xOvTVhCor" name="Page-1">1VXbjpswEP0aHhMB5vqYy/YitWkrHvq4crADVg1GxiykX98xmABiI21W7UMdKRofz4ztc2aMhQ5F91HiKv8qCOWWa5POQkfLdQPbhn8NXAfA86IByCQjA+RMQMJ+UwOauKxhhNYLRyUEV6xagqkoS5qqBYalFO3S7SL4ctcKZ3QFJCnma/QnIyof0Mi3J/wTZVk+7uyMFy7w6GyAOsdEtDMIPVnoIIVQg1V0B8o1dyMvQ9yHO6u3g0laqrcEdC+cR6f8+RRXhMQ4af3ndmPEeMG8MRfemNOq60hBJkVTGT8qFe1eIx6fR3d7fTDndl0oEyoKquQVXEwiLzQhY4mYaTvxfcuaz7h2RxGw0Ti7pZ5oAMMw8QArwYqVb5JQuWIGuICz7HNVQPqjAybmLCvBTuHuEID2mjEG5bQzCwUjRIfv25wpmlQ41bla6B3AgOiSUH0yG2a1kuIXPQguZL8dsvsBKxfG+Qy/9APwuyLNxbhfB2uF5hI48Taej3CtiBNuHT+IAjf0fDuObOT/I4HClUCWG+BCc1ie66qnwt68giVKsjKz0A5soTU9NcVZKxtwreRZW5nqfR/Ol3IGJH8+vjvZdylIA2+Yv7f84wL6wmr17rRNWUPtQVkBqeUt+27K/qPBpWKKwTv7N3ggWNEHWoXTi/rvG+U6awBv9gvWT9kb+shF7jaap3Ef7iOYTp+Wfm32fUZPfwA=</diagram></mxfile>
+<mxfile host="www.draw.io" modified="2020-02-07T13:54:02.358Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36" etag="09edVjcztUFsKJonJFR_" version="12.6.6" type="github">
+  <diagram id="CLRaHryyYa0xOvTVhCor" name="Page-1">
+    <mxGraphModel dx="706" dy="446" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="xvll8Nh_N9pdd9aSw5_w-8" value="-" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="240" y="60" width="220" height="250" as="geometry"/>
+        </mxCell>
+        <mxCell id="xvll8Nh_N9pdd9aSw5_w-6" value="Order" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#000000;fillColor=#ffffff;" parent="xvll8Nh_N9pdd9aSw5_w-8" vertex="1">
+          <mxGeometry width="219.99999999999997" height="17.156862745098035" as="geometry"/>
+        </mxCell>
+        <mxCell id="xvll8Nh_N9pdd9aSw5_w-7" value="&amp;nbsp; -&amp;nbsp; String: orderNumber&lt;br&gt;&amp;nbsp; -&amp;nbsp; String: clientID&lt;br&gt;&amp;nbsp; -&amp;nbsp; Product[]; ProductList&lt;br&gt;&amp;nbsp; -&amp;nbsp; unsigned int[]: ProductQuantities&lt;br&gt;&amp;nbsp; -&amp;nbsp; String: date&lt;br&gt;&amp;nbsp;+&amp;nbsp; String: getOrderNumber()&lt;br&gt;&amp;nbsp;+&amp;nbsp; ProductIterator: showProductData()" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#000000;fillColor=#ffffff;" parent="xvll8Nh_N9pdd9aSw5_w-8" vertex="1">
+          <mxGeometry y="17.154545454545456" width="219.99999999999997" height="232.84545454545452" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
