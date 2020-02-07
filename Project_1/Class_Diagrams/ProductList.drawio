@@ -1,1 +1,25 @@
-<mxfile host="www.draw.io" modified="2020-02-07T17:59:47.760Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0" version="12.6.6" etag="K-YMRUlNtimESlAPXkcH" type="github"><diagram id="izc-extmcofrk_fSplO7">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="www.draw.io" modified="2020-02-07T18:01:38.481Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0" etag="Z7Luz6X5TTL8eSFRiE9v" version="12.6.6" type="github">
+  <diagram id="izc-extmcofrk_fSplO7" name="Page-1">
+    <mxGraphModel dx="1646" dy="1038" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="bjPgcxyXlXS8JECezjEC-1" value="ProductList" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="120" y="80" width="250" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="bjPgcxyXlXS8JECezjEC-2" value="- Product[] - myProducts" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="bjPgcxyXlXS8JECezjEC-1">
+          <mxGeometry y="26" width="250" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="bjPgcxyXlXS8JECezjEC-3" value="+ void: addProduct(Product)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="bjPgcxyXlXS8JECezjEC-1">
+          <mxGeometry y="52" width="250" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="bjPgcxyXlXS8JECezjEC-4" value="+ void: removeProduct(Product)&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="bjPgcxyXlXS8JECezjEC-1">
+          <mxGeometry y="78" width="250" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="bjPgcxyXlXS8JECezjEC-5" value="+ Product: findProduct(productId)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="bjPgcxyXlXS8JECezjEC-1">
+          <mxGeometry y="104" width="250" height="26" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
