@@ -12,7 +12,9 @@ CSci 430 Object Oriented Programming
 
   COMMENTS: This program runs projects for CSci 430, Object Oriented with options
             numbered for each program
-            #1 Project 1
+            #1 Project 1: Warehouse
+              - p ProductTester
+            #2 Project 2
 */
 import test.AverageList;
 import Project_1.Source_Code.Product;
@@ -34,6 +36,8 @@ public class ProjectTester
     obj.setPurchasePrice(15.26);
     obj.setSalePrice(23.34);
     System.out.println(obj.getData());
+    obj.setData(obj.getProductNumber() + ".1B", obj.getDescription()+" collected with some other product data to test the getters", obj.getPurchasePrice() + 15.33, obj.getSalePrice() + 33.2);
+    System.out.println(obj.getData());
   }
 
 
@@ -47,11 +51,14 @@ public class ProjectTester
       for(int i = 0; i < args.length; i++){
         switch(args[i]){
           case "1":
-            System.out.println("Running Project 1");
+            System.out.println("Running Project 1: Warehouse");
             break;
           case "1p":
             System.out.println("Testing Product from Warehouse");
             ProductTester();
+            break;
+          case "2":
+            System.out.println("Running Project 2");
             break;
           case "avg":
             String arr[] = new String [1];
