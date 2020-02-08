@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class ItemList{
-	ArrayList itemList;
+	ArrayList<OrderedItem> itemList;
 	
 	public ItemList(){
 		itemList = new ArrayList<OrderedItem>(); 
@@ -38,4 +38,7 @@ public class ItemList{
 		}//end while()
 	}//end changeInQuantity
 	
+	public Iterator<OrderedItem> getIterator(){
+		return itemList.iterator();
+	}//end getIterator
 }

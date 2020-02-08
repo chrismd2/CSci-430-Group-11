@@ -1,72 +1,72 @@
 /******************************************************************************
-	Invoice.java
-	Contains all fields and methods associated with a Invoice.
+	Payment.java
+	Contains all fields and methods associated with a Payment.
 	fields:
-		clientInvoice: The amount of the Invoice that the client has made.
+		clientPayment: The amount of the payment that the client has made.
 		clientAccount: A reference to the Client's account object
-		date: The date of this Invoice
-		Order: A reference to the order that this Invoice was given for.
-		applied: Specifies whether or not the Invoice has been applied to the Client's balance.
+		date: The date of this Payment
+		PaymentNumber: The unique identifier number given to this Payment.
+		applied: Specifies whether or not the payment has been applied to the Client's balance.
 	methods:
-		sendToAccount: Sends the Invoice to the client's account, applying it to their balance.
-		removeFromAccount: Removes the Invoice from the client's account, removing it from their balance.
+		sendToAccount: Sends the payment to the client's account, applying it to their balance.
+		removeFromAccount: Removes the payment from the client's account, removing it from their balance.
 *******************************************************************************/
 import java.text.SimpleDateFormat;
 import java.util.Date;
-public class Invoice{
-	double invoiceAmount;
+
+public class Payment{
+	double clientPayment;
 	Client clientAccount;
 	String date;
-	Order order;
+	int paymentNumber;
 	boolean applied;
 	
 	//Constructor:
-	public Invoice(Client clientAccount, Order order){
+	public Payment(double paymentMade, Client clientAccount, int paymentNumber){
+		clientPayment = paymentMade;
 		this.clientAccount = clientAccount;
+		this.paymentNumber = paymentNumber;
 		date = new SimpleDateFormat(Constants.DATE_FORMAT).format(new Date());
-		this.order = order;
 		applied = false;
-		/***** Modify in the future to calculate the invoice: *****/
-		invoiceAmount = 0.0f;
 	}//end Constructor
 	
 	/************************************************************
 		sendToAccount
 		
-		Sends the Invoice to the client's account, modifies the applied flag to specify that a Invoice has been made.
+		Sends the payment to the client's account, modifies the applied flag to specify that a payment has been made.
 		
 		If the applied flag is set to true when called, then the method won't apply the balance.
 	*************************************************************/
 	public void sendToAccount(){
 		if(applied == false){
-			clientAccount.addInvoice(this);
+			clientAccount.addPayment(this);
 			applied = true;
 		}//end if
 		else
-			System.out.println("Invoice has already been applied to account; Cannot apply again");
+			System.out.println("Payment has already been applied to account; Cannot apply again");
 
 	}//end sendToAccount
 	
 	/**************************************************************
 		removeFromAccount
-		Removes the Invoice from the Client's account.
+		Removes the payment from the Client's account.
 		Modifies the applied flag to specify that it is not currently applied to client's balance
 		
 		If applied flag is set to false when called, then the method won't remove the balance.
 	*****************************************************************/
 	public void removeFromAccount(){
 		if(applied){
-			clientAccount.removeInvoice(this);
+			clientAccount.removePayment(this);
 			applied = false;
 		}//end if
 		else
-			System.out.println("Invoice has is not currently applied to client's account;\nNo Invoice to be removed.");
+			System.out.println("Payment has is not currently applied to client's account;\nNo payment to be removed.");
 		
 	}//end removeFromAccount
 	
-	//getInvoiceAmount:
-	public double getInvoiceAmount(){
-		return invoiceAmount;
-	}//end getInvoiceAmount
+	//getPaymentAmount:
+	public double getPaymentAmount(){
+		return clientPayment;
+	}//end getPaymentAmount
 
 }
