@@ -1,3 +1,14 @@
+/******************************************************************************
+	ItemList.java
+	Serves as an interface for the a list of items with specified quantities.
+	methods:
+		void ItemList()
+		void addItem(Product newItem, int quantity)
+		void removeItem(Product removeProduct)
+		void changeQuantity(Product changeProduct, int quantity)
+		Iterator getIterator()
+******************************************************************************/
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -13,16 +24,7 @@ public class ItemList{
 	}
 	
 	public void removeItem(Product removeProduct){
-		Iterator<OrderedItem> it = itemList.iterator();
-		OrderedItem curr;
-		boolean done = false;
-		while(it.hasNext() && !done){
-			curr = it.next();
-			if(curr.getProduct() == removeProduct){
-				it.remove();
-				done = true;
-			}//end if
-		}//end while()
+		itemList.remove(removeProduct);
 	}//end removeItem
 	
 	public void changeQuantity(Product changeProduct, int quantity){

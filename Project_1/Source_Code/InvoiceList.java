@@ -7,6 +7,7 @@
 		default Constructor: Creates an empty InvoiceList
 		addInvoice: Adds the given Invoice to the list.
 		removeInvoice: Removes the given Invoice from the list.
+		getIterator: Returns an iterator that will iterate across each Invoice object.
 ******************************************************************************/
 import java.util.Iterator;
 import java.util.ArrayList;
