@@ -1,5 +1,6 @@
 /******************************************************************************
 	Order.java
+	Responsible Individual: Brent Clapp
 	Class containing all of the fields and methods regarding an individual Order placed by a Client
 	fields:
 		orderNumber	- int

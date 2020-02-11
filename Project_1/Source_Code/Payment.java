@@ -1,5 +1,6 @@
 /******************************************************************************
 	Payment.java
+	Responsible Individual: Brent Clapp
 	Contains all fields and methods associated with a Payment.
 	fields:
 		clientPayment: The amount of the payment that the client has made.

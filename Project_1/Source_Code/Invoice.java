@@ -1,5 +1,6 @@
 /******************************************************************************
 	Invoice.java
+	Responsible Individual: Brent Clapp
 	Contains all fields and methods associated with a Invoice.
 	fields:
 		clientInvoice: The amount of the Invoice that the client has made.

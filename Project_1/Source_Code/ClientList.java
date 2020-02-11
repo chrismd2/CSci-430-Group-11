@@ -1,5 +1,6 @@
 /*****************************************************************************
 	ClientList.java
+	Responsible Individual: ClientList
 	Contains all of the Clients registered with the Warehouse
 	fields:
 		clients - The list of all clients

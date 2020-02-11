@@ -1,5 +1,6 @@
 /******************************************************************************
 	ItemList.java
+	Responsible Individual: Brent Clapp
 	Serves as an interface for the a list of items with specified quantities.
 	methods:
 		void ItemList()

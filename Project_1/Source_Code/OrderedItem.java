@@ -1,3 +1,19 @@
+/******************************************************************************
+	OrderedItem.java
+	Responsible Individual: Brent Clapp
+	Represents an individual instance of a Product with a specified quantity of that product.
+	Fields:
+		Product productOrdered	- The specific instance of productOrdered
+		int quantity	 - The quantity of productOrdered
+	Methods:
+		Constructor:
+			OrderedItem(Product item, int quantity)
+		Setters:
+			void changeQuantity(int quantity)
+		Getters:
+			Product getProduct()
+			int getQuantity()
+*******************************************************************************/
 public class OrderedItem{
 	Product productOrdered;
 	int quantity;

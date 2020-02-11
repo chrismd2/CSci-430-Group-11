@@ -1,5 +1,6 @@
 /*****************************************************************
 Client.java
+Responsible individual: Brent Clapp
 Contains all of an individual client's information, and all of the methods to view
 and modify that information.
 	Fields:
@@ -12,7 +13,25 @@ and modify that information.
 		shoppingCart: The list of items that the client has placed in their shopping cart,
 								but has not purchased yet.
 	Methods:
-		
+		Constructor:
+			Client(int id, String name, String phoneNumber, String address)
+		Setters:
+			void setClientName(String name)
+			void setClientId(int id)
+			void setPhone(String phone)
+			void setAddress(String address)
+			void addPayment(Payment p)
+			void removePayment(Payment p)
+			void addInvoice(Invoice i)
+			void removeInvoice(Invoice i)
+		Getters:
+			String getName()
+			int getId()
+			String getClientPhone()
+			String getClientAddress()
+			Iterator getInvoices()
+			Iterator getPayments()
+			Iterator getCart()
 *****************************************************************/
 import java.util.Iterator;
 public class Client{

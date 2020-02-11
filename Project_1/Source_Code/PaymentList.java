@@ -1,5 +1,6 @@
 /*******************************************************************
 PaymentList.java
+Responsible Individual: Brent Clapp
 Container for the list of payments that a single client has made.
 	fields:
 		Payments: The list of payments that the client has made.

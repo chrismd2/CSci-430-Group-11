@@ -1,5 +1,6 @@
 /******************************************************************************
 	InvoiceList.java
+	Responsible Individual: Brent Clapp
 	Contains all of the invoices for a single client.
 	fields: 
 		invoices - The list of all invoices for the clients account

@@ -1,5 +1,6 @@
 /*****************************************************************************
 	OrderList.java
+	Responsible Individual: Brent Clapp
 	Contains all of the Orders in the Warehouse's system.
 	fields:
 		orders: A list of all Order objects present in the system
