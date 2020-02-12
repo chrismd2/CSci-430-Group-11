@@ -5,7 +5,7 @@ It does so just as UserInterface.java but from the project tester class.
 This and UserInterface.java should only differ by name and package declaration.
 ***********************************************************************/
 
-package Project_1.Source_Code;
+//package Project_1.Source_Code;
 
 import java.util.Scanner;
 
