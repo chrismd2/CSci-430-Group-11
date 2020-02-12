@@ -12,6 +12,8 @@
 		sendToAccount: Sends the Invoice to the client's account, applying it to their balance.
 		removeFromAccount: Removes the Invoice from the client's account, removing it from their balance.
 *******************************************************************************/
+package Project_1.Source_Code;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 public class Invoice{

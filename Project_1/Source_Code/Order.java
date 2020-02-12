@@ -16,8 +16,10 @@
 		getters:
 			Iterator<OrderedItem> getItemList()
 			int getItemQuantity(Product p)
-		
+			int getId()		
 *******************************************************************************/
+package Project_1.Source_Code;
+
 import java.util.Iterator;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,16 +39,16 @@ public class Order{
 	
 	/****** Setters **********/
 	//Adding/Removing items from itemsOrdered:
-	public void addItem(OrderedItem i, int quantity){
-		itemsOrdered.add(i, quantity);
+	public void addItem(Product p, int quantity){
+		itemsOrdered.addItem(p, quantity);
 	}//end addItem
 	
-	public void removeItem(OrderedItem i){
-		itemsOrdered.remove(i);
+	public void removeItem(Product p){
+		itemsOrdered.removeItem(p);
 	}//end removeItem
 	
-	public void modifyItemQuantity(OrderedItem i, int quantity){
-		itemsOrdered.changeQuantity(i, quantity);
+	public void modifyItemQuantity(Product p, int quantity){
+		itemsOrdered.changeQuantity(p, quantity);
 	}//end modifyItemQuantity
 	
 	
@@ -61,17 +63,20 @@ public class Order{
 	
 	//Getting the quantity of an ordered item
 	public int getItemQuantity(Product p){
-		Iterator<OrderedItem> it = itemList.iterator();
+		Iterator<OrderedItem> it = itemsOrdered.getIterator();
 		OrderedItem curr;
 		boolean done = false;
-		while(it.hasNext && !done){
+		while(it.hasNext() && !done){
 			curr = it.next();
 			if(curr.getProduct() == p)
 				return curr.getQuantity();
 		}//end while
 		return 0;	//If not found, then quantity is 0.
 	}//end getItemQuantity
-	
+
+	public int getId(){
+		return orderNumber;
+	}//end getId	
 	/******* END GETTERS *********/
 
 }

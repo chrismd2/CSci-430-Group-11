@@ -10,6 +10,8 @@
 		removeInvoice: Removes the given Invoice from the list.
 		getIterator: Returns an iterator that will iterate across each Invoice object.
 ******************************************************************************/
+package Project_1.Source_Code;
+
 import java.util.Iterator;
 import java.util.ArrayList;
 

@@ -33,6 +33,8 @@ and modify that information.
 			Iterator getPayments()
 			Iterator getCart()
 *****************************************************************/
+package Project_1.Source_Code;
+
 import java.util.Iterator;
 public class Client{
 	String clientName;

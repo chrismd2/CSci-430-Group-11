@@ -11,6 +11,8 @@
 		void findOrder(int id) - Finds the order with the given id. Returns null if not found.
 		Iterator getIterator() - Returns an iterator that will Iterate through all Order objects.
 *****************************************************************************/
+package Project_1.Source_Code;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -19,7 +21,7 @@ public class OrderList{
 	
 	//Default constructor:
 	public OrderList(){
-		myOrders = new OrderList<Order>();
+		myOrders = new ArrayList<Order>();
 	}//end OrderList
 
 	//addOrder:
@@ -35,10 +37,11 @@ public class OrderList{
 	//findOrder:
 	public Order findOrder(int id){
 		Iterator it = myOrders.iterator();
-		Client curr;
+		Order curr = null;
 		boolean done = false;
 		while(!done && it.hasNext() ){
-			if(curr.getId == id)
+			curr = (Order)it.next();
+			if(curr.getId() == id)
 				done = true;
 		}//end while
 		if(!done){

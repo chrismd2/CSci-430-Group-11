@@ -14,6 +14,8 @@
 			Product getProduct()
 			int getQuantity()
 *******************************************************************************/
+package Project_1.Source_Code;
+
 public class OrderedItem{
 	Product productOrdered;
 	int quantity;
