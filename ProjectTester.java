@@ -18,9 +18,14 @@ CSci 430 Object Oriented Programming
 */
 import test.AverageList;
 import Project_1.Source_Code.Product;
+import Project_1.Source_Code.WarehouseUserInterface;
 
 public class ProjectTester
 {
+  static void RunWarehouse(){
+    Project_1.Source_Code.WarehouseUserInterface UI = new Project_1.Source_Code.WarehouseUserInterface();
+    UI.run();
+  }
   static void showOptionsList(){
     System.out.print("Current Options:\n\t");
     System.out.print("1: Run Warehouse\n\t\t");
@@ -52,6 +57,7 @@ public class ProjectTester
         switch(args[i]){
           case "1":
             System.out.println("Running Project 1: Warehouse");
+            RunWarehouse();
             break;
           case "1p":
             System.out.println("Testing Product from Warehouse");
