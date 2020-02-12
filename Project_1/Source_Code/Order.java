@@ -16,7 +16,7 @@
 		getters:
 			Iterator<OrderedItem> getItemList()
 			int getItemQuantity(Product p)
-			int getId()		
+			int getId()
 *******************************************************************************/
 package Project_1.Source_Code;
 
