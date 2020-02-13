@@ -21,11 +21,9 @@ import java.io.*;
 
 public class ProductList implements Serializable{
   private static List Products = new LinkedList();
-  private static int ID;
   Product aProduct = new Product();
 
   public ProductList(){
-    ID = 1;
   }
   public void insertProduct(Product P){
     Products.add(P);
@@ -38,5 +36,25 @@ public class ProductList implements Serializable{
       Product P = (Product) currnent.next();
       System.out.println(P.getData());
     }
+  }
+  public void removeProduct(string PID){
+    int i = 0;
+    for(Iterator current = Products.iterator(); current.hasnext()){
+      i++;
+      Product P = (Product) currnent.next();
+      if(P.getProductNumber == PID){
+        Products.remove(i);
+      }
+    }
+  }
+  public void findProduct(string PID){
+    for(Iterator current = Products.iterator(); current.hasnext()){
+      i++;
+      Product P = (Product) currnent.next();
+      if(P.getProductNumber == PID){
+        return P;
+      }
+    }
+    return null;
   }
 }
