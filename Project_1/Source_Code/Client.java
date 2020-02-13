@@ -33,11 +33,15 @@ and modify that information.
 			Iterator getPayments()
 			Iterator getCart()
 *****************************************************************/
-//package Project_1.Source_Code;
 package Source_Code;
 
-import java.util.Iterator;
-public class Client{
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class Client implements Serializable{
+	private static final long serialVersionUID = 1L;
 	String clientName;
 	int clientId;
 	double balance;

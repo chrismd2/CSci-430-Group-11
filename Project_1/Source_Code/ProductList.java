@@ -13,13 +13,14 @@ CSci 430 Object Oriented Programming
   COMMENTS: Manages the products currently tracked by a warehouse
 */
 
-//package Source_Code;
+package Source_Code;
 
 import java.util.*;
 import java.lang.*;
 import java.io.*;
 
 public class ProductList implements Serializable{
+   private static final long serialVersionUID = 1L;
   private static List Products = new LinkedList();
   Product aProduct = new Product();
 

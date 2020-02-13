@@ -11,15 +11,17 @@
 		void findOrder(int id) - Finds the order with the given id. Returns null if not found.
 		Iterator getIterator() - Returns an iterator that will Iterate through all Order objects.
 *****************************************************************************/
-//package Project_1.Source_Code;
 package Source_Code;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
+import java.io.*;
+import java.lang.*;
 
-public class OrderList{
+public class OrderList implements Serializable{
+	private static final long serialVersionUID = 1L;
 	ArrayList<Order> myOrders;
-
+	private static OrderList orderList;
+	
 	//Default constructor:
 	public OrderList(){
 		myOrders = new ArrayList<Order>();
@@ -56,4 +58,33 @@ public class OrderList{
 	public Iterator getIterator(){
 		return myOrders.iterator();
 	}//end getIterator
+
+	private void writeObject(java.io.ObjectOutputStream output){
+		try{
+			output.defaultWriteObject();
+			output.writeObject(orderList);
+		} catch(IOException ioe){
+			ioe.printStackTrace();
+		}//end try-catch IOException
+	}//end writeObject
+	
+	private void readObject(java.io.ObjectInputStream input){
+		try{
+			if(orderList != null){
+				return;
+			} else {
+				input.defaultReadObject();
+				if(orderList == null) {
+					orderList = (OrderList) input.readObject();
+				} else {
+					input.readObject();
+				} //end else
+			}//end else
+		} catch( IOException ioe) {
+			ioe.printStackTrace();
+		} catch(ClassNotFoundException cnfe) {
+			cnfe.printStackTrace();
+		}//end try-catch
+	
+	}
 }

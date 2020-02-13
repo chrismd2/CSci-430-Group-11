@@ -1,40 +1,38 @@
-//package Project_1.Source_Code;
 package Source_Code;
 
-import warehouse.Supplier;
 import java.util.*;
 import java.io.*;
 public class SupplierList implements Serializable {
   private static final long serialVersionUID = 1L;
-  private List Suppliers = new LinkedList();
-  private static SupplierList SupplierList;
-  
-  private SupplierList() {
+  private List suppliers = new LinkedList();
+  private static SupplierList supplierList;
+	
+  public SupplierList() {
   }
   public static SupplierList instance() {
-    if (SupplierList == null) {
-      return (SupplierList = new SupplierList());
+    if (supplierList == null) {
+      return (supplierList = new SupplierList());
     } else {
-      return SupplierList;
+      return supplierList;
     }
   }
-  public boolean insertSupplier(Supplier Supplier) {
-    Suppliers.add(Supplier);
+  public boolean insertSupplier(Supplier supplier) {
+    suppliers.add(supplier);
     return true;
   }
 
   public Iterator getSuppliers(){
-     return Suppliers.iterator();
+     return suppliers.iterator();
   }
   
-  public Supplier search(String SupplierID)
+  public Supplier search(int supplierID)
   {
-      for (Iterator iterator = Suppliers.iterator(); iterator.hasNext(); )
+      for (Iterator iterator = suppliers.iterator(); iterator.hasNext(); )
       {
-          Supplier Supplier = (Supplier) iterator.next();
-          if (Supplier.getId().equals(SupplierID))
+          Supplier supplier = (Supplier) iterator.next();
+          if (supplier.getId() == supplierID)
           {
-              return Supplier;
+              return supplier;
           }
       }
       return null;
@@ -43,7 +41,7 @@ public class SupplierList implements Serializable {
   private void writeObject(java.io.ObjectOutputStream output) {
     try {
       output.defaultWriteObject();
-      output.writeObject(SupplierList);
+      output.writeObject(supplierList);
     } catch(IOException ioe) {
       ioe.printStackTrace();
     }
@@ -51,12 +49,12 @@ public class SupplierList implements Serializable {
 
   private void readObject(java.io.ObjectInputStream input) {
     try {
-      if (SupplierList != null) {
+      if (supplierList != null) {
         return;
       } else {
         input.defaultReadObject();
-        if (SupplierList == null) {
-          SupplierList = (SupplierList) input.readObject();
+        if (supplierList == null) {
+          supplierList = (SupplierList) input.readObject();
         } else {
           input.readObject();
         }
@@ -68,7 +66,7 @@ public class SupplierList implements Serializable {
     }
   }
   public String toString() {
-    return Suppliers.toString();
+    return suppliers.toString();
   }
 }
 

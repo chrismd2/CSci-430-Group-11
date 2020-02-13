@@ -28,8 +28,7 @@ Project 1 - Warehouse
     +  void: setSalePrice(double)
 
 */
-//package Project_1.Source_Code;
-//package Source_Code;
+package Source_Code;
 
 import java.util.*;
 import java.lang.*;

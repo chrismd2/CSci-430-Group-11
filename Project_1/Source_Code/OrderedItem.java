@@ -14,10 +14,12 @@
 			Product getProduct()
 			int getQuantity()
 *******************************************************************************/
-//package Project_1.Source_Code;
 package Source_Code;
 
-public class OrderedItem{
+import java.util.*;
+import java.io.*;
+public class OrderedItem implements Serializable{
+	private static final long serialVersionUID = 1L;
 	Product productOrdered;
 	int quantity;
 

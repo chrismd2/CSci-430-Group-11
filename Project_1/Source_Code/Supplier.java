@@ -1,4 +1,4 @@
-//package Project_1.Source_Code;
+package Source_Code;
 
 import java.util.*;
 import java.lang.*;
@@ -6,19 +6,14 @@ import java.io.*;
 
 public class Supplier implements Serializable {
   private static final long serialVersionUID = 1L;
-  private Manufacturer manu;
+  private int id;
   private int quantity;
   private double price;
 
-  public Supplier(Manufacturer m, int quantity, double price){
-    this.manu = m;
+  public Supplier(int id, int quantity, double price){
+    this.id = id;
     this.quantity = quantity;
     this.price = price;
-  }
-
-  public Manufacturer getManufacturer()
-  {
-    return manu;
   }
 
   public int getQuantity()
@@ -30,6 +25,10 @@ public class Supplier implements Serializable {
   {
     return price;
   }
+  
+  public int getId(){
+	return id;
+  }//end getId
 
   public void setNewQuantity(int q)
   {
