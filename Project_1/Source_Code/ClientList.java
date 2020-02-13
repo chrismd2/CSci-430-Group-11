@@ -11,7 +11,8 @@
 		Client findClient(int id) - Returns the Client object with the given id. Returns null if not found.
 		Iterator getIterator() - Returns an iterator that will iterate across each Client object.
 ******************************************************************************/
-package Project_1.Source_Code;
+//package Project_1.Source_Code;
+package Source_Code;
 
 import java.util.Iterator;
 import java.util.ArrayList;
@@ -23,17 +24,17 @@ public class ClientList{
 	public ClientList(){
 		clients = new ArrayList<Client>();
 	}//end ClientList
-	
+
 	//addClient:
 	public void addClient(Client c){
 		clients.add(c);
 	}//end addClient()
-	
+
 	//removeClient:
 	public void removeClient(Client c){
 		clients.remove(c);
 	}//end removeClient()
-	
+
 	//findClient:
 	public Client findClient(int id){
 		Iterator it = clients.iterator();
@@ -50,7 +51,7 @@ public class ClientList{
 		}//end if
 		return curr;
 	}//end findClient
-	
+
 	//getIterator:
 	public Iterator<Client> getIterator(){
 		return clients.iterator();

@@ -14,12 +14,13 @@
 			Product getProduct()
 			int getQuantity()
 *******************************************************************************/
-package Project_1.Source_Code;
+//package Project_1.Source_Code;
+package Source_Code;
 
 public class OrderedItem{
 	Product productOrdered;
 	int quantity;
-	
+
 	public OrderedItem(Product item, int quantity){
 		productOrdered = item;
 		this.quantity = quantity;
@@ -28,11 +29,11 @@ public class OrderedItem{
 	public void changeQuantity(int quantity){
 		this.quantity = quantity;
 	}//end changeQuantity
-	
+
 	public Product getProduct(){
 		return productOrdered;
 	}//end getProduct()
-	
+
 	public int getQuantity(){
 		return quantity;
 	}//end getQuantity()

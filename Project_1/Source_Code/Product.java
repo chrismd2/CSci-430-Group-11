@@ -28,7 +28,8 @@ Project 1 - Warehouse
     +  void: setSalePrice(double)
 
 */
-package Project_1.Source_Code;
+//package Project_1.Source_Code;
+package Source_Code;
 
 public class Product{
   String productID;
@@ -95,5 +96,9 @@ public class Product{
 
   public void setSalePrice(double input){
     salePrice = input;
+  }
+
+  public String toString(){
+    return getData();
   }
 }

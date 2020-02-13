@@ -18,7 +18,8 @@
 			int getItemQuantity(Product p)
 			int getId()
 *******************************************************************************/
-package Project_1.Source_Code;
+//package Project_1.Source_Code;
+package Source_Code;
 
 import java.util.Iterator;
 import java.text.SimpleDateFormat;
@@ -29,38 +30,38 @@ public class Order{
 	String date;
 	Client clientAccount;
 	ItemList itemsOrdered;
-	
+
 	public Order(Client c, int orderNumber){
 		clientAccount = c;
 		this.orderNumber = orderNumber;
 		itemsOrdered = new ItemList();
 		date = new SimpleDateFormat(Constants.DATE_FORMAT).format(new Date());
 	}//end Order constructor
-	
+
 	/****** Setters **********/
 	//Adding/Removing items from itemsOrdered:
 	public void addItem(Product p, int quantity){
 		itemsOrdered.addItem(p, quantity);
 	}//end addItem
-	
+
 	public void removeItem(Product p){
 		itemsOrdered.removeItem(p);
 	}//end removeItem
-	
+
 	public void modifyItemQuantity(Product p, int quantity){
 		itemsOrdered.changeQuantity(p, quantity);
 	}//end modifyItemQuantity
-	
-	
+
+
 	/****** END SETTERS ********/
-	
-	
+
+
 	/****** Getters *************/
 	//Getting an iterator from itemsOrdered
 	public Iterator getItemList(){
 		return itemsOrdered.getIterator();
 	}//end getItemList
-	
+
 	//Getting the quantity of an ordered item
 	public int getItemQuantity(Product p){
 		Iterator<OrderedItem> it = itemsOrdered.getIterator();
@@ -76,7 +77,7 @@ public class Order{
 
 	public int getId(){
 		return orderNumber;
-	}//end getId	
+	}//end getId
 	/******* END GETTERS *********/
 
 }

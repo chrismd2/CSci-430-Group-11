@@ -12,7 +12,8 @@
 		sendToAccount: Sends the Invoice to the client's account, applying it to their balance.
 		removeFromAccount: Removes the Invoice from the client's account, removing it from their balance.
 *******************************************************************************/
-package Project_1.Source_Code;
+//package Project_1.Source_Code;
+package Source_Code;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,7 +23,7 @@ public class Invoice{
 	String date;
 	Order order;
 	boolean applied;
-	
+
 	//Constructor:
 	public Invoice(Client clientAccount, Order order){
 		this.clientAccount = clientAccount;
@@ -32,12 +33,12 @@ public class Invoice{
 		/***** Modify in the future to calculate the invoice: *****/
 		invoiceAmount = 0.0f;
 	}//end Constructor
-	
+
 	/************************************************************
 		sendToAccount
-		
+
 		Sends the Invoice to the client's account, modifies the applied flag to specify that a Invoice has been made.
-		
+
 		If the applied flag is set to true when called, then the method won't apply the balance.
 	*************************************************************/
 	public void sendToAccount(){
@@ -49,12 +50,12 @@ public class Invoice{
 			System.out.println("Invoice has already been applied to account; Cannot apply again");
 
 	}//end sendToAccount
-	
+
 	/**************************************************************
 		removeFromAccount
 		Removes the Invoice from the Client's account.
 		Modifies the applied flag to specify that it is not currently applied to client's balance
-		
+
 		If applied flag is set to false when called, then the method won't remove the balance.
 	*****************************************************************/
 	public void removeFromAccount(){
@@ -64,9 +65,9 @@ public class Invoice{
 		}//end if
 		else
 			System.out.println("Invoice has is not currently applied to client's account;\nNo Invoice to be removed.");
-		
+
 	}//end removeFromAccount
-	
+
 	//getInvoiceAmount:
 	public double getInvoiceAmount(){
 		return invoiceAmount;
