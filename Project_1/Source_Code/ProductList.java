@@ -21,7 +21,7 @@ import java.io.*;
 
 public class ProductList implements Serializable{
    private static final long serialVersionUID = 1L;
-  private static List Products = new LinkedList();
+  private static List<Products> Products = new LinkedList<Products>();
   Product aProduct = new Product();
 
   public ProductList(){
