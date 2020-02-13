@@ -29,9 +29,13 @@ Project 1 - Warehouse
 
 */
 //package Project_1.Source_Code;
-package Source_Code;
+//package Source_Code;
 
-public class Product{
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class Product implements Serializable {
   String productID;
   String description;
   double purchasePrice;
