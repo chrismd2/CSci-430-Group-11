@@ -80,5 +80,11 @@ public class Order implements Serializable{
 		return orderNumber;
 	}//end getId
 	/******* END GETTERS *********/
+	
+	//toString:
+	public String toString(){
+		return "Order Number: " + orderNumber + " Client Number: " + clientAccount.getId() + " Date: " + date
+					+ "\n" + itemsOrdered.toString();
+	}//end toString
 
 }

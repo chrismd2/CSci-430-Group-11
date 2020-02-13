@@ -2,11 +2,14 @@
 UserInterface.java
 This file contains code for the user to interact with the Warehouse System via a terminal.
 ***********************************************************************/
-import java.util.Scanner;
-import java.util.Iterator;
+import java.util.*;
+import java.text.*;
+import java.io.*;
 
 public class UserInterface
 {
+	private static Warehouse warehouse;
+
 	public static void ProductTester(){
 
 	    ProductList objList = new ProductList();
@@ -33,12 +36,27 @@ public class UserInterface
 										"Enter OPENWARE to open or create the Warehouse\n" +
 										"Enter ADDCLIENT to add a client to the Warehouse\n" +
 										"Enter REMOVECLIENT to remove a client from the Warehouse\n" +
-										"Enter FINDCLIENT to find information about a client\n"+
+										"Enter FINDCLIENT to find information about a client\n\n"+
+										"PRODUCT OPERATIONS:\n"+
+										"______________________________________________\n" +
 										"Enter PRODUCT to test product\n";
 										
 	public static void main(String[] args){
-		processInput();
+		UserInterface.instance().processInput();
 	}//end run
+	
+	private UserInterface(){
+		Scanner in = new Scanner(System.in);
+		String inputStr;
+		System.out.println("Use saved data? (y|n)");
+		inputStr = in.next();
+		if(inputStr.charAt(0) == 'y' || inputStr.charAt(0) == 'Y'){
+			
+		} else{ //Creating new Warehouse
+			warehouse = Warehouse.instance();
+		}//end if-else
+	
+	}
 
 	/*************************************************************************
 	processInput
@@ -46,7 +64,6 @@ public class UserInterface
 	which query was selected, and activates the code for that query.
 	*************************************************************************/
 	public static void processInput(){
-		Warehouse warehouse = null;
 		Scanner input = new Scanner(System.in);
 		String inputStr = "notExit";
 	

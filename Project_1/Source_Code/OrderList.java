@@ -95,4 +95,8 @@ public class OrderList implements Serializable{
 		}//end try-catch
 	
 	}
+	
+	public String toString(){
+		return myOrders.toString();
+	}//end toString
 }

@@ -40,4 +40,8 @@ public class OrderedItem implements Serializable{
 	public int getQuantity(){
 		return quantity;
 	}//end getQuantity()
+	
+	public String toString(){
+		return "Product: " + productOrdered.getDescription() + " Quantity: " + quantity + '\n';
+	}//end toString
 }

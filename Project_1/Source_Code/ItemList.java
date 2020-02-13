@@ -47,5 +47,9 @@ public class ItemList implements Serializable{
 	public Iterator<OrderedItem> getIterator(){
 		return itemList.iterator();
 	}//end getIterator
+	
+	public String toString(){
+		return itemList.toString();
+	}//end toString
 
 }

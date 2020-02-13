@@ -175,4 +175,8 @@ public class Client implements Serializable{
 	}//end getCart
 	/****************** END GETTERS ***********************/
 
+	
+	public String toString(){
+		return "Name: " + clientName + " id: " + clientId + " Phone: " + phoneNumber + "\nAddress: " + address;
+	}//end toString
 }//end Client class

@@ -95,5 +95,8 @@ public class ClientList implements Serializable{
     }//end try-catch block
   }
 		
+  public String toString(){
+	return clients.toString();
+  }//end toString
 		
 }
