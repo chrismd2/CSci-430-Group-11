@@ -18,14 +18,15 @@
 			int getItemQuantity(Product p)
 			int getId()
 *******************************************************************************/
-//package Project_1.Source_Code;
 package Source_Code;
 
-import java.util.Iterator;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
+import java.io.*;
+import java.lang.*;
 
-public class Order{
+public class Order implements Serializable{
+	private static final long serialVersionUID = 1L;
 	int orderNumber;
 	String date;
 	Client clientAccount;
