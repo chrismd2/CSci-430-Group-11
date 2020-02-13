@@ -21,11 +21,22 @@ import java.io.*;
 
 public class ProductList implements Serializable{
    private static final long serialVersionUID = 1L;
-  private static List<Products> Products = new LinkedList<Products>();
-  Product aProduct = new Product();
-
+  private static List<Product> Products = new LinkedList<Product>();
+  private Product aProduct = new Product();
+  private static ProductList pList; //Used for serialize methods
+  
   public ProductList(){
   }
+  
+  public static ProductList instance() {
+	if(pList == null){
+		return (pList = new pList());
+	} else{
+		return pList;
+	}//end if-else
+	
+  }//end instance()
+  
   public void insertProduct(Product P){
     Products.add(P);
   }
@@ -57,4 +68,32 @@ public class ProductList implements Serializable{
     }
     return null;
   }
+  
+  private void writeObject(java.io.ObjectOutputStream output) {
+	try{
+		output.defaultWriteObject();
+		output.writeObject(pList);
+	} catch(IOException ioe){
+		ioe.printStackTrace();
+	} //end try-catch block
+  }//end writeObject
+  
+  private void readObject(java.io.ObjectInputStream input){
+	try{
+		if(pList != null)
+			return;
+		else{
+			input.defaultReadObject();
+			if(pList == null){
+				pList = (ProductList) input.readObject();
+			} else {
+				input.readObject();
+			}//end if-else
+		}//end if-else
+	} catch (IOException ioe){
+		ioe.printStackTrace();
+	} catch(ClassNotFoundException cnfe) {
+		cnfe.printStackTrace();
+	}//end try-catch block
+  }//end readObject
 }

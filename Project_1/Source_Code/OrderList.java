@@ -19,14 +19,22 @@ import java.lang.*;
 
 public class OrderList implements Serializable{
 	private static final long serialVersionUID = 1L;
-	ArrayList<Order> myOrders;
+	private ArrayList<Order> myOrders;
 	private static OrderList orderList;
+	
+	public static OrderList instance() {
+		if(orderList == null){
+			return (orderList = new orderList() );
+		} else{
+			return orderList;
+		}//end if-else
+	}//end instance()
 	
 	//Default constructor:
 	public OrderList(){
 		myOrders = new ArrayList<Order>();
 	}//end OrderList
-
+	
 	//addOrder:
 	public void addOrder(Order o){
 		myOrders.add(o);
