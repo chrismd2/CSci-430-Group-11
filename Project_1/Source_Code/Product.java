@@ -35,10 +35,10 @@ import java.lang.*;
 import java.io.*;
 
 public class Product implements Serializable {
-  String productID;
-  String description;
-  double purchasePrice;
-  double salePrice;
+  private String productID;
+  private String description;
+  private double purchasePrice;
+  private double salePrice;
 
   public Product(){
     productID = "";

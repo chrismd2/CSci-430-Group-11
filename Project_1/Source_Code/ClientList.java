@@ -19,7 +19,7 @@ import java.io.*;
 
 public class ClientList implements Serializable{
 	private static final long serialVersionUID = 1L;
-	ArrayList<Client> clients;
+	private ArrayList<Client> clients;
 	private static ClientList clientList;
 	
 	//Default Constructor:

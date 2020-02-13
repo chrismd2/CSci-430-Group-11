@@ -42,14 +42,14 @@ import java.io.*;
 
 public class Client implements Serializable{
 	private static final long serialVersionUID = 1L;
-	String clientName;
-	int clientId;
-	double balance;
-	String phoneNumber;
-	String address;
-	PaymentList myPayments;
-	InvoiceList myInvoices;
-	ItemList shoppingCart;
+	private String clientName;
+	private int clientId;
+	private double balance;
+	private String phoneNumber;
+	private String address;
+	private PaymentList myPayments;
+	private InvoiceList myInvoices;
+	private ItemList shoppingCart;
 
 	//Client Constructor
 	public Client(int id, String name, String phoneNumber, String address){

@@ -12,17 +12,16 @@
 		sendToAccount: Sends the Invoice to the client's account, applying it to their balance.
 		removeFromAccount: Removes the Invoice from the client's account, removing it from their balance.
 *******************************************************************************/
-//package Project_1.Source_Code;
 package Source_Code;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 public class Invoice{
-	double invoiceAmount;
-	Client clientAccount;
-	String date;
-	Order order;
-	boolean applied;
+	private double invoiceAmount;
+	private Client clientAccount;
+	private String date;
+	private Order order;
+	private boolean applied;
 
 	//Constructor:
 	public Invoice(Client clientAccount, Order order){

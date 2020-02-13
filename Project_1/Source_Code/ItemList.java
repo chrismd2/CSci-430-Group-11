@@ -17,7 +17,7 @@ import java.io.*;
 
 public class ItemList implements Serializable{
 	private static final long serialVersionUID = 1L;
-	ArrayList<OrderedItem> itemList;
+	private ArrayList<OrderedItem> itemList;
 	
 	public ItemList(){
 		itemList = new ArrayList<OrderedItem>();

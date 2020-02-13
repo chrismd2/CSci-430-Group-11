@@ -12,18 +12,17 @@
 		sendToAccount: Sends the payment to the client's account, applying it to their balance.
 		removeFromAccount: Removes the payment from the client's account, removing it from their balance.
 *******************************************************************************/
-//package Project_1.Source_Code;
 package Source_Code;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Payment{
-	double clientPayment;
-	Client clientAccount;
-	String date;
-	int paymentNumber;
-	boolean applied;
+	private double clientPayment;
+	private Client clientAccount;
+	private String date;
+	private int paymentNumber;
+	private boolean applied;
 
 	//Constructor:
 	public Payment(double paymentMade, Client clientAccount, int paymentNumber){

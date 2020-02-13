@@ -27,10 +27,10 @@ import java.lang.*;
 
 public class Order implements Serializable{
 	private static final long serialVersionUID = 1L;
-	int orderNumber;
-	String date;
-	Client clientAccount;
-	ItemList itemsOrdered;
+	private int orderNumber;
+	private String date;
+	private Client clientAccount;
+	private ItemList itemsOrdered;
 
 	public Order(Client c, int orderNumber){
 		clientAccount = c;

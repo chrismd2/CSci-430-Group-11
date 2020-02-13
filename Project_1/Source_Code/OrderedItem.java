@@ -21,8 +21,8 @@ import java.io.*;
 import java.lang.*;
 public class OrderedItem implements Serializable{
 	private static final long serialVersionUID = 1L;
-	Product productOrdered;
-	int quantity;
+	private Product productOrdered;
+	private int quantity;
 
 	public OrderedItem(Product item, int quantity){
 		productOrdered = item;

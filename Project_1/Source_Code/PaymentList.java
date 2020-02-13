@@ -9,14 +9,13 @@ Container for the list of payments that a single client has made.
 		addPayment: Adds a payment to the paymentList
 		removePayment: Removes a payment from the paymentList
 *******************************************************************/
-//package Project_1.Source_Code;
 package Source_Code;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class PaymentList{
-	ArrayList<Payment> payments;
+	private ArrayList<Payment> payments;
 
 	public PaymentList(){
 		payments = new ArrayList<Payment>();
