@@ -35,19 +35,9 @@ public class UserInterface
 										"Enter REMOVECLIENT to remove a client from the Warehouse\n" +
 										"Enter FINDCLIENT to find information about a client\n"+
 										"Enter PRODUCT to test product\n";
-
+										
 	public static void main(String[] args){
-		Warehouse warehouse = null;
-
-		Scanner input = new Scanner(System.in);
-
-		String inputStr = "notExit";
-		while(!inputStr.equals("exit") && !inputStr.equals("e")){
-			System.out.println("type exit to quit | type q for a list of queries that can be used");
-			warehouse = processInput(inputStr, warehouse);
-			inputStr = input.next();
-		}
-
+		processInput();
 	}//end run
 
 	/*************************************************************************
@@ -55,34 +45,40 @@ public class UserInterface
 	Called every cycle of the testing loop. When user specifies query, this tests to see
 	which query was selected, and activates the code for that query.
 	*************************************************************************/
-	public static Warehouse processInput(String str, Warehouse warehouse){
-		switch(str){
-			case "query":
-			case "q":	//print list of queries
-				System.out.println(QUERYLIST);
-				break;
-			case "OPENWARE":
-				warehouse= openWarehouse();
-				System.out.println("Warehouse opened");
-				break;
-			case "ADDCLIENT":
-				addClient(warehouse);
-				break;
-			case "REMOVECLIENT":
+	public static void processInput(){
+		Warehouse warehouse = null;
+		Scanner input = new Scanner(System.in);
+		String inputStr = "notExit";
+	
+		while(!(inputStr.equals("exit") || inputStr.equals("e")) ){
+			inputStr = input.next();
+			System.out.println("type exit to quit | type q for a list of queries that can be used");
+			switch(str){
+				case "query":
+				case "q":	//print list of queries
+					System.out.println(QUERYLIST);
+					break;
+				case "OPENWARE":
+					warehouse= openWarehouse();
+					System.out.println("Warehouse opened");
+					break;
+				case "ADDCLIENT":
+					addClient(warehouse);
+					break;
+				case "REMOVECLIENT":
 
-				break;
-			case "FINDCLIENT":
+					break;
+				case "FINDCLIENT":
 
-				break;
-			case "PRODUCT":
-				ProductTester();
-				break;
-			default:
-				System.out.println("Entered text did not match an option; Please try again.");
-		}//end switch
-
-
-		return warehouse;
+					break;
+				case "PRODUCT":
+					ProductTester();
+					break;
+					default:
+					System.out.println("Entered text did not match an option; Please try again.");
+			}//end switch
+		}//end while not exited
+		
 	}//end processInput
 
 	/******************************************************************************
