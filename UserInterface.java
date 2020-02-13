@@ -16,14 +16,14 @@ public class UserInterface
 										"Enter FINDCLIENT to find information about a client\n";
 										
 	public static void main(String[] args){
-		//Warehouse warehouse;
+		Warehouse warehouse = null;
 
 		Scanner input = new Scanner(System.in);
 
 		String inputStr = "notExit";
 		while(!inputStr.equals("exit") && !inputStr.equals("e")){
 			System.out.println("type exit to quit | type q for a list of queries that can be used");
-			processInput(inputStr);
+			warehouse = processInput(inputStr, warehouse);
 			inputStr = input.next();
 		}
 
@@ -34,17 +34,18 @@ public class UserInterface
 	Called every cycle of the testing loop. When user specifies query, this tests to see
 	which query was selected, and activates the code for that query.
 	*************************************************************************/
-	public static void processInput(String str){
+	public static Warehouse processInput(String str, Warehouse warehouse){
 		switch(str){
 			case "query":
 			case "q":	//print list of queries
 				System.out.println(QUERYLIST);
 				break;
 			case "OPENWARE":
-				//do something to open the warehouse, or create if doesn't exist
+				warehouse= openWarehouse();
+				System.out.println("Warehouse opened");
 				break;
 			case "ADDCLIENT":
-				
+				addClient(warehouse);
 				break;
 			case "REMOVECLIENT":
 				
@@ -57,8 +58,40 @@ public class UserInterface
 		}//end switch
 	
 	
+		return warehouse;	
 	}//end processInput
 	
+	/******************************************************************************
+	openWarehouse
+	Opens the given Warehouse, or creates if it doesn't exist
+	Returns the Warehouse object
+	*******************************************************************************/
+	public static Warehouse openWarehouse(){
+									/********************** NOTE ******************************************
+									Serializable is not implemented at the moment, so I am just going to create the Warehouse
+									every time without checking. This method will need a significant overhaul when that time comes.
+									*********************END NOTE **************************************/
+		Warehouse w = new Warehouse();
+		return w;
+	}//end openWarehouse
+	
+	/******************************************************************************
+	addClient
+	Code to prompt user for necessary information to add a new client to the Warehouse
+	*******************************************************************************/
+	public static void addClient(Warehouse w){
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter a name for the client: ");
+		String name = input.next();
+		System.out.print("Enter an id for the client: ");				// To be removed once automatic functionality implemented.
+		int id = input.nextInt();
+		System.out.print("Enter a phone number for the client: ");
+		String phone = input.next();
+		System.out.print("Enter an address for the client: ");
+		String address = input.next();
+		w.addClient(name, phone, address, id);
+		System.out.println("Client added successfully");
+	}//end addClient
 }
 
 
