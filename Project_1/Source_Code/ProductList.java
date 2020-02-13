@@ -32,26 +32,25 @@ public class ProductList implements Serializable{
     return Products.iterator();
   }
   public void showList(){
-    for(Iterator current = Products.iterator(); current.hasnext()){
-      Product P = (Product) currnent.next();
+    for(Iterator current = Products.iterator(); current.hasNext();){
+      Product P = (Product) current.next();
       System.out.println(P.getData());
     }
   }
-  public void removeProduct(string PID){
+  public void removeProduct(String PID){
     int i = 0;
-    for(Iterator current = Products.iterator(); current.hasnext()){
+    for(Iterator current = Products.iterator(); current.hasNext();){
       i++;
-      Product P = (Product) currnent.next();
-      if(P.getProductNumber == PID){
+      Product P = (Product) current.next();
+      if(P.getProductNumber() == PID){
         Products.remove(i);
       }
     }
   }
-  public void findProduct(string PID){
-    for(Iterator current = Products.iterator(); current.hasnext()){
-      i++;
-      Product P = (Product) currnent.next();
-      if(P.getProductNumber == PID){
+  public Product findProduct(String PID){
+    for(Iterator current = Products.iterator(); current.hasNext();){
+      Product P = (Product) current.next();
+      if(P.getProductNumber() == PID){
         return P;
       }
     }
