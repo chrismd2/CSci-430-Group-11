@@ -32,8 +32,3 @@ public class Waitlist implements Serializable {
     this.quantity = newQ;
   }
 }
-
-
-
-
-}
