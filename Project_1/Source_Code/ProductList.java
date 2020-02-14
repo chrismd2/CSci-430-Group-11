@@ -30,7 +30,7 @@ public class ProductList implements Serializable{
   
   public static ProductList instance() {
 	if(pList == null){
-		return (pList = new pList());
+		return (pList = new ProductList());
 	} else{
 		return pList;
 	}//end if-else

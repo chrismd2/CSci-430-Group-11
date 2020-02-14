@@ -24,7 +24,7 @@ public class OrderList implements Serializable{
 	
 	public static OrderList instance() {
 		if(orderList == null){
-			return (orderList = new orderList() );
+			return (orderList = new OrderList() );
 		} else{
 			return orderList;
 		}//end if-else

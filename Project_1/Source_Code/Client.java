@@ -177,6 +177,6 @@ public class Client implements Serializable{
 
 	
 	public String toString(){
-		return "Name: " + clientName + " id: " + clientId + " Phone: " + phoneNumber + "\nAddress: " + address;
+		return "\nName: " + clientName + " id: " + clientId + " Phone: " + phoneNumber + "\nAddress: " + address;
 	}//end toString
 }//end Client class
