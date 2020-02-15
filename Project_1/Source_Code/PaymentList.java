@@ -11,10 +11,12 @@ Container for the list of payments that a single client has made.
 *******************************************************************/
 package Source_Code;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
+import java.lang.*;
+import java.io.*;
 
-public class PaymentList{
+public class PaymentList implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Payment> payments;
 
 	public PaymentList(){
@@ -32,4 +34,8 @@ public class PaymentList{
 	public Iterator<Payment> getIterator(){
 		return payments.iterator();
 	}//end getIterator
+	
+	public String toString(){
+		return payments.toString();
+	}//end toString
 }

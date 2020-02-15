@@ -7,28 +7,28 @@
 		clientAccount: A reference to the Client's account object
 		date: The date of this Invoice
 		Order: A reference to the order that this Invoice was given for.
-		applied: Specifies whether or not the Invoice has been applied to the Client's balance.
 	methods:
 		sendToAccount: Sends the Invoice to the client's account, applying it to their balance.
-		removeFromAccount: Removes the Invoice from the client's account, removing it from their balance.
 *******************************************************************************/
 package Source_Code;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-public class Invoice{
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+public class Invoice implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private double invoiceAmount;
 	private Client clientAccount;
 	private String date;
 	private Order order;
-	private boolean applied;
 
 	//Constructor:
 	public Invoice(Client clientAccount, Order order){
 		this.clientAccount = clientAccount;
 		date = new SimpleDateFormat(Constants.DATE_FORMAT).format(new Date());
 		this.order = order;
-		applied = false;
 		/***** Modify in the future to calculate the invoice: *****/
 		invoiceAmount = 0.0f;
 	}//end Constructor
@@ -41,35 +41,17 @@ public class Invoice{
 		If the applied flag is set to true when called, then the method won't apply the balance.
 	*************************************************************/
 	public void sendToAccount(){
-		if(applied == false){
 			clientAccount.addInvoice(this);
-			applied = true;
-		}//end if
-		else
-			System.out.println("Invoice has already been applied to account; Cannot apply again");
-
 	}//end sendToAccount
 
-	/**************************************************************
-		removeFromAccount
-		Removes the Invoice from the Client's account.
-		Modifies the applied flag to specify that it is not currently applied to client's balance
-
-		If applied flag is set to false when called, then the method won't remove the balance.
-	*****************************************************************/
-	public void removeFromAccount(){
-		if(applied){
-			clientAccount.removeInvoice(this);
-			applied = false;
-		}//end if
-		else
-			System.out.println("Invoice has is not currently applied to client's account;\nNo Invoice to be removed.");
-
-	}//end removeFromAccount
 
 	//getInvoiceAmount:
 	public double getInvoiceAmount(){
 		return invoiceAmount;
 	}//end getInvoiceAmount
 
+	public String toString(){
+		return "\nClient id: " + clientAccount.getId() + " Amount: " + invoiceAmount + " Date " + date;
+	}//end toString
+	
 }

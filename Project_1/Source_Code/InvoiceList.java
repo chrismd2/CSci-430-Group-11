@@ -12,10 +12,12 @@
 ******************************************************************************/
 package Source_Code;
 
-import java.util.Iterator;
-import java.util.ArrayList;
+import java.util.*;
+import java.lang.*;
+import java.io.*;
 
-public class InvoiceList{
+public class InvoiceList implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Invoice> invoices;
 
 	public InvoiceList(){
@@ -34,4 +36,7 @@ public class InvoiceList{
 		return invoices.iterator();
 	}//end getIterator
 
+	public String toString(){
+		return invoices.toString();
+	}//end toString
 }

@@ -15,14 +15,16 @@
 package Source_Code;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
+import java.lang.*;
+import java.io.*;
 
-public class Payment{
+public class Payment implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private double clientPayment;
 	private Client clientAccount;
 	private String date;
 	private int paymentNumber;
-	private boolean applied;
 
 	//Constructor:
 	public Payment(double paymentMade, Client clientAccount, int paymentNumber){
@@ -30,7 +32,6 @@ public class Payment{
 		this.clientAccount = clientAccount;
 		this.paymentNumber = paymentNumber;
 		date = new SimpleDateFormat(Constants.DATE_FORMAT).format(new Date());
-		applied = false;
 	}//end Constructor
 
 	/************************************************************
@@ -41,35 +42,17 @@ public class Payment{
 		If the applied flag is set to true when called, then the method won't apply the balance.
 	*************************************************************/
 	public void sendToAccount(){
-		if(applied == false){
 			clientAccount.addPayment(this);
-			applied = true;
-		}//end if
-		else
-			System.out.println("Payment has already been applied to account; Cannot apply again");
-
 	}//end sendToAccount
 
-	/**************************************************************
-		removeFromAccount
-		Removes the payment from the Client's account.
-		Modifies the applied flag to specify that it is not currently applied to client's balance
-
-		If applied flag is set to false when called, then the method won't remove the balance.
-	*****************************************************************/
-	public void removeFromAccount(){
-		if(applied){
-			clientAccount.removePayment(this);
-			applied = false;
-		}//end if
-		else
-			System.out.println("Payment has is not currently applied to client's account;\nNo payment to be removed.");
-
-	}//end removeFromAccount
 
 	//getPaymentAmount:
 	public double getPaymentAmount(){
 		return clientPayment;
 	}//end getPaymentAmount
+	
+	public String toString(){
+		return "\nDate: " + date + " Amount: " + clientPayment;
+	}//end toString
 
 }
