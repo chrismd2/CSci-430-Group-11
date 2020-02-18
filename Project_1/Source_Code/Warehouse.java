@@ -86,4 +86,8 @@ public class Warehouse implements Serializable{
 	
 	}//end readObject
 	/************* End Serialization methods **************************************/
+	
+	public String toString(){
+		return clients.toString();
+	}//end toString
 }//end Warehouse class

@@ -3,30 +3,37 @@ UserInterface.java
 This file contains code for the user to interact with the Warehouse System via a terminal.
 ***********************************************************************/
 import Source_Code.*;
-import java.util.Scanner;
-import java.util.Iterator;
+import java.util.*;
+import java.io.*;
+import java.lang.*;
 
 public class UserInterface
 {
 	final static String QUERYLIST = "CLIENT OPERATIONS:\n" +
 										"______________________________________________\n" +
-										"Enter OPENWARE to open or create the Warehouse\n" +
+										"Enter DISPLAY to call the toString method for the WH\n" +
 										"Enter ADDCLIENT to add a client to the Warehouse\n" +
-										"Enter REMOVECLIENT to remove a client from the Warehouse\n" +
 										"Enter FINDCLIENT to find information about a client\n";
 
 	public static void main(String[] args){
-		Warehouse warehouse = null;
+		Warehouse warehouse;
 
 		Scanner input = new Scanner(System.in);
+		
+		System.out.println("Open saved warehouse?\n (Y|N)");
+		String opt = input.next();
+		if(opt.equals("Y"))
+			warehouse = openWarehouse();
+		else
+			warehouse = new Warehouse();
+		
+		processInput(warehouse);
 
-		String inputStr = "notExit";
-		while(!inputStr.equals("exit") && !inputStr.equals("e")){
-			System.out.println("type exit to quit | type q for a list of queries that can be used");
-			warehouse = processInput(inputStr, warehouse);
-			inputStr = input.next();
-		}
-
+		System.out.println("Save changes to warehouse?\n(Y|N)");
+		opt = input.next();
+		if(opt.equals("Y"))
+			saveChanges(warehouse);
+		
 	}//end run
 
 	/*************************************************************************
@@ -34,31 +41,35 @@ public class UserInterface
 	Called every cycle of the testing loop. When user specifies query, this tests to see
 	which query was selected, and activates the code for that query.
 	*************************************************************************/
-	public static Warehouse processInput(String str, Warehouse warehouse){
-		switch(str){
-			case "query":
-			case "q":	//print list of queries
-				System.out.println(QUERYLIST);
-				break;
-			case "OPENWARE":
-				warehouse= openWarehouse();
-				System.out.println("Warehouse opened");
-				break;
-			case "ADDCLIENT":
-				addClient(warehouse);
-				break;
-			case "REMOVECLIENT":
+	public static void processInput(Warehouse warehouse){
+		Scanner input = new Scanner(System.in);
+		String inputStr = "";
+		while(!inputStr.equals("exit") && !inputStr.equals("e")){
+			System.out.println("type exit to quit | type q for a list of queries that can be used: ");
+			inputStr = input.next();
+	
+			switch(inputStr){
+				case "query":
+				case "q":	//print list of queries
+					System.out.println(QUERYLIST);
+					break;
+				case "ADDCLIENT":
+					addClient(warehouse);
+					break;
+				case "FINDCLIENT":
 
-				break;
-			case "FINDCLIENT":
-
-				break;
-			default:
-				System.out.println("Entered text did not match an option; Please try again.");
-		}//end switch
-
-
-		return warehouse;
+					break;
+				case "DISPLAY":
+					System.out.println(warehouse.toString() );
+				case "exit":
+				case "e":
+					System.out.println("Exiting warehouse operations\n");
+					break;
+				default:
+					System.out.println("Entered text did not match an option; Please try again.");
+			}//end switch
+		}//end while
+			
 	}//end processInput
 
 	/******************************************************************************
@@ -67,11 +78,24 @@ public class UserInterface
 	Returns the Warehouse object
 	*******************************************************************************/
 	public static Warehouse openWarehouse(){
-									/********************** NOTE ******************************************
-									Serializable is not implemented at the moment, so I am just going to create the Warehouse
-									every time without checking. This method will need a significant overhaul when that time comes.
-									*********************END NOTE **************************************/
-		Warehouse w = new Warehouse();
+		Warehouse w = null;
+		try{
+	
+			FileInputStream inFile = new FileInputStream("WareData");
+			ObjectInputStream inObj = new ObjectInputStream(inFile);
+			
+			w = (Warehouse) inObj.readObject();
+			
+			inObj.close();
+			inFile.close();
+			
+			System.out.println("Read in saved warehouse successfully\n");
+		
+		}  catch(ClassNotFoundException cnfe){
+			System.out.println("Class not found exception throw in reading input file\n");
+		} catch(IOException ioe){
+			System.out.println("IO Exception thrown in reading input file.");
+		}//end try-catch block
 		return w;
 	}//end openWarehouse
 
@@ -92,4 +116,24 @@ public class UserInterface
 		w.addClient(name, phone, address, id);
 		System.out.println("Client added successfully");
 	}//end addClient
+
+	/******************************************************************************
+	saveChanges
+	Saves any changes made to the warehouse.
+	******************************************************************************/
+	public static void saveChanges(Warehouse w){
+		try{
+			FileOutputStream outFile = new FileOutputStream("WareData");
+			ObjectOutputStream outObj = new ObjectOutputStream(outFile);
+			
+			outObj.writeObject(w);
+			
+			outObj.close();
+			outFile.close();
+			
+			System.out.println("File has been saved");
+		} catch(IOException ioe){
+			System.out.println("Exception thrown in saving changes\n");
+		}//end try-catch block
+	}//end saveChanges
 }
