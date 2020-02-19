@@ -44,7 +44,43 @@ public class Warehouse implements Serializable{
 		}//end if-else
 	}//end instance
 	
-
+	public static Warehouse retrieveData(String filename){
+		try {
+		  FileInputStream file = new FileInputStream(filename);
+		  ObjectInputStream in = new ObjectInputStream(file);
+		  //List all objects that need to be read.
+		  in.readObject();
+		  ClientIdServer.retrieve(in);
+		  OrderIdServer.retrieve(in);
+		  ProductIdServer.retrieve(in);
+		  SupplierIdServer.retrieve(in);
+		  return warehouse;
+		} catch(IOException ioe) {
+		  ioe.printStackTrace();
+		  return null;
+		} catch(ClassNotFoundException cnfe) {
+		  cnfe.printStackTrace();
+		  return null;
+		}
+	}//end retrieveData
+	
+	public static boolean saveData(String filename){
+		try {
+		  FileOutputStream file = new FileOutputStream(filename);
+		  ObjectOutputStream out = new ObjectOutputStream(file);
+		  //List all objects that need to be written
+		  out.writeObject(warehouse);
+		  out.writeObject(ClientIdServer.instance());
+		  out.close(); //Close both data streams
+		  file.close();
+		  return true;
+		} catch(IOException ioe) {
+		  ioe.printStackTrace();
+		  return false;
+		}//end try-cach block
+		
+	}//end saveData
+	
 	/*************************************************************
 	addClient
 	Constructs a new Client object, and adds it to the client lists

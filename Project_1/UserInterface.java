@@ -9,6 +9,8 @@ import java.lang.*;
 
 public class UserInterface
 {
+	private static Warehouse warehouse;
+	final static String FILENAME = "WareData";
 	final static String QUERYLIST = "CLIENT OPERATIONS:\n" +
 										"______________________________________________\n" +
 										"Enter DISPLAY to call the toString method for the WH\n" +
@@ -16,23 +18,23 @@ public class UserInterface
 										"Enter FINDCLIENT to find information about a client\n";
 
 	public static void main(String[] args){
-		Warehouse warehouse;
-
-		Scanner input = new Scanner(System.in);
-		
+		//Open the Warehouse:
+		Scanner input = new Scanner(System.in);		
 		System.out.println("Open saved warehouse?\n (Y|N)");
 		String opt = input.next();
 		if(opt.equals("Y"))
-			warehouse = openWarehouse();
+			openWarehouse();
 		else
 			warehouse = new Warehouse();
 		
-		processInput(warehouse);
-
+		//View or change:
+		processInput();
+		
+		//Close the Warehouse:
 		System.out.println("Save changes to warehouse?\n(Y|N)");
 		opt = input.next();
 		if(opt.equals("Y"))
-			saveChanges(warehouse);
+			saveChanges();
 		
 	}//end run
 
@@ -41,7 +43,7 @@ public class UserInterface
 	Called every cycle of the testing loop. When user specifies query, this tests to see
 	which query was selected, and activates the code for that query.
 	*************************************************************************/
-	public static void processInput(Warehouse warehouse){
+	public static void processInput(){
 		Scanner input = new Scanner(System.in);
 		String inputStr = "";
 		while(!inputStr.equals("exit") && !inputStr.equals("e")){
@@ -73,33 +75,6 @@ public class UserInterface
 	}//end processInput
 
 	/******************************************************************************
-	openWarehouse
-	Opens the given Warehouse, or creates if it doesn't exist
-	Returns the Warehouse object
-	*******************************************************************************/
-	public static Warehouse openWarehouse(){
-		Warehouse w = null;
-		try{
-	
-			FileInputStream inFile = new FileInputStream("WareData");
-			ObjectInputStream inObj = new ObjectInputStream(inFile);
-			
-			w = (Warehouse) inObj.readObject();
-			
-			inObj.close();
-			inFile.close();
-			
-			System.out.println("Read in saved warehouse successfully\n");
-		
-		}  catch(ClassNotFoundException cnfe){
-			System.out.println("Class not found exception throw in reading input file\n");
-		} catch(IOException ioe){
-			System.out.println("IO Exception thrown in reading input file.");
-		}//end try-catch block
-		return w;
-	}//end openWarehouse
-
-	/******************************************************************************
 	addClient
 	Code to prompt user for necessary information to add a new client to the Warehouse
 	*******************************************************************************/
@@ -116,22 +91,29 @@ public class UserInterface
 	}//end addClient
 
 	/******************************************************************************
+	openWarehouse
+	Opens the given Warehouse, or creates if it doesn't exist
+	Returns the Warehouse object
+	*******************************************************************************/
+	public static void openWarehouse(){
+			Warehouse w = Warehouse.retrieveData(FILENAME);
+			if(w == null){
+				System.out.println("Warehouse not found in file. Creating new Warehouse.");
+				warehouse = Warehouse.instance();
+			} else{
+				System.out.println("Warehouse successfully read from file.");
+				warehouse = w;
+			}//end else
+	}//end openWarehouse
+
+	/******************************************************************************
 	saveChanges
 	Saves any changes made to the warehouse.
 	******************************************************************************/
-	public static void saveChanges(Warehouse w){
-		try{
-			FileOutputStream outFile = new FileOutputStream("WareData");
-			ObjectOutputStream outObj = new ObjectOutputStream(outFile);
-			
-			outObj.writeObject(w);
-			
-			outObj.close();
-			outFile.close();
-			
-			System.out.println("File has been saved");
-		} catch(IOException ioe){
-			System.out.println("Exception thrown in saving changes\n");
-		}//end try-catch block
+	public static void saveChanges(){
+		if(warehouse.saveData(FILENAME) )
+				System.out.println("Saved successfully");
+		else
+			System.out.println("Save failed. Error occured");
 	}//end saveChanges
 }

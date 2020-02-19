@@ -29,6 +29,16 @@ public class ProductIdServer implements Serializable{
 	public String toString(){
 		return ("ProductIdServer. nextId: " + nextId + '\n');
 	}//end toString
+
+	public static void retrieve(ObjectInputStream in){
+		try{
+			thisServer = (ProductIdServer) in.readObject();
+		} catch(IOException ioe){
+			ioe.printStackTrace();
+		} catch(ClassNotFoundException cnfe){
+			cnfe.printStackTrace();
+		}//end try-catch
+	}//end retrieve()	
 	
 	private void writeObject(java.io.ObjectOutputStream out) throws IOException {
 		try{

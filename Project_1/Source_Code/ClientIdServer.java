@@ -53,4 +53,14 @@ public class ClientIdServer implements Serializable{
 			cnfe.printStackTrace();
 		} //end try-catch
 	}//end readObject
+
+	public static void retrieve(ObjectInputStream in){
+		try{
+			thisServer = (ClientIdServer) in.readObject();
+		} catch(IOException ioe){
+			ioe.printStackTrace();
+		} catch(ClassNotFoundException cnfe){
+			cnfe.printStackTrace();
+		}//end try-catch
+	}//end retrieve()
 }//end ClientIdServer class
