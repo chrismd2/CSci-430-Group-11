@@ -65,9 +65,13 @@ public class SupplierList implements Serializable {
       cnfe.printStackTrace();
     }
   }
-  public String toString() {
-    return suppliers.toString();
-  }
+  public String toString(){
+	String returnedString = "";
+	Iterator curr = suppliers.iterator(); 
+	while(curr.hasNext())
+		returnedString = returnedString.concat(curr.next().toString() + '\n');
+	return returnedString;
+  }//end toString
 }
 
 

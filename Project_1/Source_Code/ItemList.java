@@ -48,8 +48,12 @@ public class ItemList implements Serializable{
 		return itemList.iterator();
 	}//end getIterator
 	
-	public String toString(){
-		return itemList.toString();
-	}//end toString
+  public String toString(){
+	String returnedString = "";
+	Iterator curr = itemList.iterator(); 
+	while(curr.hasNext())
+		returnedString = returnedString.concat(curr.next().toString() + '\n');
+	return returnedString;
+  }//end toString
 
 }

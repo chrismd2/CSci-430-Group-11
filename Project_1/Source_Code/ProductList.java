@@ -21,8 +21,7 @@ import java.io.*;
 
 public class ProductList implements Serializable{
    private static final long serialVersionUID = 1L;
-  private static List<Product> Products = new LinkedList<Product>();
-  private Product aProduct = new Product();
+  private static List<Product> products = new LinkedList<Product>();
   private static ProductList pList; //Used for serialize methods
   
   public ProductList(){
@@ -38,29 +37,29 @@ public class ProductList implements Serializable{
   }//end instance()
   
   public void insertProduct(Product P){
-    Products.add(P);
+    products.add(P);
   }
   public Iterator getProduct(){
-    return Products.iterator();
+    return products.iterator();
   }
   public void showList(){
-    for(Iterator current = Products.iterator(); current.hasNext();){
+    for(Iterator current = products.iterator(); current.hasNext();){
       Product P = (Product) current.next();
       System.out.println(P.getData());
     }
   }
   public void removeProduct(String PID){
     int i = 0;
-    for(Iterator current = Products.iterator(); current.hasNext();){
+    for(Iterator current = products.iterator(); current.hasNext();){
       i++;
       Product P = (Product) current.next();
       if(P.getProductNumber() == PID){
-        Products.remove(i);
+        products.remove(i);
       }
     }
   }
   public Product findProduct(String PID){
-    for(Iterator current = Products.iterator(); current.hasNext();){
+    for(Iterator current = products.iterator(); current.hasNext();){
       Product P = (Product) current.next();
       if(P.getProductNumber() == PID){
         return P;
@@ -96,4 +95,12 @@ public class ProductList implements Serializable{
 		cnfe.printStackTrace();
 	}//end try-catch block
   }//end readObject
-}
+
+  public String toString(){
+	String returnedString = "";
+	Iterator curr = products.iterator(); 
+	while(curr.hasNext())
+		returnedString = returnedString.concat(curr.next().toString() + '\n');
+	return returnedString;
+  }//end toString
+ }

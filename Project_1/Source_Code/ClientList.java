@@ -96,7 +96,10 @@ public class ClientList implements Serializable{
   }
 		
   public String toString(){
-	return clients.toString();
+	String returnedString = "";
+	Iterator curr = clients.iterator(); 
+	while(curr.hasNext())
+		returnedString = returnedString.concat(curr.next().toString() + '\n');
+	return returnedString;
   }//end toString
-		
 }

@@ -88,6 +88,9 @@ public class Warehouse implements Serializable{
 	/************* End Serialization methods **************************************/
 	
 	public String toString(){
-		return clients.toString();
+		return "Clients: \n" + clients.toString() +
+				  "\nOrders: \n" + orders.toString() +
+				  "\nProducts: \n" + products.toString() +
+				  "\nSuppliers:\n" + suppliers.toString();
 	}//end toString
 }//end Warehouse class
