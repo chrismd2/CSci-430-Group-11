@@ -11,7 +11,7 @@ public class tester{
   	    obj.setData();
 
   			for(int i = 0; i < 10; i++){
-  				    obj.setProductNumber("x");
+//  				    obj.setProductNumber("x");
   				    obj.setDescription("some product");
   				    obj.setPurchasePrice(15.26+i);
   				    obj.setSalePrice(23.34+i);
@@ -26,15 +26,15 @@ public class tester{
 	public static void clientTester(){
 		System.out.println("\n\nTesting Clients:\n"+
 									"__________________\n");
-									
+/*									
 		ClientList myList = new ClientList();
 		for(int i = 0; i < 10; i++){
 			char let = 'a';
 			myList.addClient(new Client(i, Integer.toString(let), Integer.toString((int)let + i), Integer.toString((int)let + i + i) ) );
 			let++;
 		}//end for(i)
-	
-		System.out.println(myList.toString() );
+	*/
+		//System.out.println(myList.toString() );
 	
 	}//end clientTester
 	

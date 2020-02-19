@@ -32,9 +32,9 @@ public class Order implements Serializable{
 	private Client clientAccount;
 	private ItemList itemsOrdered;
 
-	public Order(Client c, int orderNumber){
+	public Order(Client c){
 		clientAccount = c;
-		this.orderNumber = orderNumber;
+		orderNumber = (OrderIdServer.instance() ).getId();
 		itemsOrdered = new ItemList();
 		date = new SimpleDateFormat(Constants.DATE_FORMAT).format(new Date());
 	}//end Order constructor

@@ -48,7 +48,7 @@ public class ProductList implements Serializable{
       System.out.println(P.getData());
     }
   }
-  public void removeProduct(String PID){
+  public void removeProduct(int PID){
     int i = 0;
     for(Iterator current = products.iterator(); current.hasNext();){
       i++;
@@ -58,7 +58,7 @@ public class ProductList implements Serializable{
       }
     }
   }
-  public Product findProduct(String PID){
+  public Product findProduct(int PID){
     for(Iterator current = products.iterator(); current.hasNext();){
       Product P = (Product) current.next();
       if(P.getProductNumber() == PID){

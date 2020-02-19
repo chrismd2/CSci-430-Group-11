@@ -107,13 +107,11 @@ public class UserInterface
 		Scanner input = new Scanner(System.in);
 		System.out.print("Enter a name for the client: ");
 		String name = input.next();
-		System.out.print("Enter an id for the client: ");				// To be removed once automatic functionality implemented.
-		int id = input.nextInt();
 		System.out.print("Enter a phone number for the client: ");
 		String phone = input.next();
 		System.out.print("Enter an address for the client: ");
 		String address = input.next();
-		w.addClient(name, phone, address, id);
+		w.addClient(name, phone, address);
 		System.out.println("Client added successfully");
 	}//end addClient
 

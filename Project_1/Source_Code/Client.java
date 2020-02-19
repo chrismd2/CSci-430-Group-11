@@ -14,10 +14,9 @@ and modify that information.
 								but has not purchased yet.
 	Methods:
 		Constructor:
-			Client(int id, String name, String phoneNumber, String address)
+			Client(String name, String phoneNumber, String address)
 		Setters:
 			void setClientName(String name)
-			void setClientId(int id)
 			void setPhone(String phone)
 			void setAddress(String address)
 			void addPayment(Payment p)
@@ -52,12 +51,12 @@ public class Client implements Serializable{
 	private ItemList shoppingCart;
 
 	//Client Constructor
-	public Client(int id, String name, String phoneNumber, String address){
+	public Client(String name, String phoneNumber, String address){
 		balance = 0.0f; //Balance is empty by default
 		shoppingCart = new ItemList();
 		myInvoices = new InvoiceList();
 		myPayments = new PaymentList();
-		clientId = id;
+		clientId = (ClientIdServer.instance() ).getId();
 		this.phoneNumber = phoneNumber;
 		clientName = name;
 		this.address = address;
@@ -68,11 +67,6 @@ public class Client implements Serializable{
 	public void setClientName(String name){
 		clientName = name;
 	}//end setClientName
-
-	//clientId:
-	public void setClientId(int id){
-		clientId = id;
-	}//end setClientId
 
 	/***********************
 		balance:

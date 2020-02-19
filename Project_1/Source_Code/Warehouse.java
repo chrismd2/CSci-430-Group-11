@@ -49,8 +49,8 @@ public class Warehouse implements Serializable{
 	addClient
 	Constructs a new Client object, and adds it to the client lists
 	*************************************************************/
-	public void addClient(String name, String phone, String address, int id){
-		clients.addClient(new Client(id, name, phone, address) );
+	public void addClient(String name, String phone, String address){
+		clients.addClient(new Client(name, phone, address) );
 	}//end addClient
 
 

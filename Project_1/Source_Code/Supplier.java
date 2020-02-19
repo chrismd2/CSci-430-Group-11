@@ -10,8 +10,8 @@ public class Supplier implements Serializable {
   private int quantity;
   private double price;
 
-  public Supplier(int id, int quantity, double price){
-    this.id = id;
+  public Supplier(int quantity, double price){
+    id = (SupplierIdServer.instance() ).getId();
     this.quantity = quantity;
     this.price = price;
   }

@@ -22,7 +22,6 @@ Project 1 - Warehouse
     +  String: getData()
     +  double: getPurchasePrice()
     +  double: getSalePrice()
-    +  void: setProductNumber(String)
     +  void: setDescription(String)
     +  void: setPurchasePrice(double)
     +  void: setSalePrice(double)
@@ -35,19 +34,19 @@ import java.lang.*;
 import java.io.*;
 
 public class Product implements Serializable {
-  private String productID;
+  private int productID;
   private String description;
   private double purchasePrice;
   private double salePrice;
 
   public Product(){
-    productID = "";
+    productID = ProductIdServer.instance().getId();
     description = "";
     purchasePrice = 0;
     salePrice = 0;
   }
 
-  public String getProductNumber(){
+  public int getProductNumber(){
     return productID;
   }
 
@@ -64,7 +63,8 @@ public class Product implements Serializable {
   }
 
   public String getData(){
-    String data = productID;
+    String data = "";
+	data += productID;
     data += " ";
     data += description;
     data += "\n\tPurchase Price: ";
@@ -72,10 +72,6 @@ public class Product implements Serializable {
     data += "\n\tSale Price: ";
     data += salePrice;
     return data;
-  }
-
-  public void setProductNumber(String input){
-    productID = input;
   }
 
   public void setDescription(String input){
@@ -86,8 +82,7 @@ public class Product implements Serializable {
     System.out.println("To use data Setter input data members in this order\n\tString productID\n\tString description\n\tdouble purchasePrice\n\tdouble salePrice");
   }
 
-  public void setData(String _productID, String _description, double _purchasePrice, double _salePrice){
-    productID       =       _productID;
+  public void setData(String _description, double _purchasePrice, double _salePrice){
     description     =     _description;
     purchasePrice   =   _purchasePrice;
     salePrice       =       _salePrice;
