@@ -11,22 +11,44 @@ public class UserInterface
 {
 	private static Warehouse warehouse;
 	final static String FILENAME = "WareData";
-	final static String QUERYLIST = "CLIENT OPERATIONS:\n" +
+	final static String MAINMENU =  "	MAIN MENU	\n" +
+									"______________________________________________\n" +
+									"type e to quit \n" +
+									"type c for a list of client actions\n" +
+									"type o for a list of order actions \n" +
+									"type p for a list of product actions\n" +
+									"type s for a list of supplier actions\n";
+	final static String CLIENTOPLIST = "CLIENT OPERATIONS:\n" +
 										"______________________________________________\n" +
+										"Enter m for main menu | Enter e to quit\n" +
 										"Enter DISPLAY to call the toString method for the WH\n" +
 										"Enter ADDCLIENT to add a client to the Warehouse\n" +
-										"Enter FINDCLIENT to find information about a client\n";
-
+										"Enter FINDCLIENT to find information about a client - NOT IMPLEMENTED\n" + 
+										"Enter ADDTOCART to add a product to a client's cart\n";
+	final static String ORDEROPLIST = "ORDER OPERATIONS:\n" + 
+									  "______________________________________________________\n" +
+									  "Enter m for main menu | Enter e to quit\n" +
+									  " options.... \n";
+	final static String PRODUCTOPLIST = "PRODUCT OPERATIONS: \n" +
+										"______________________________________________\n" +
+										"Enter m for main menu | Enter e to quit\n" +
+										"options.... \n";
+	final static String SUPPLIEROPLIST = "SUPPLIER OPERATIONS \n" +
+										 "______________________________________________\n" +
+										 "Enter m for main menu | Enter e to quit\n" +
+										 "options...\n";
+										
 	public static void main(String[] args){
 		//Open the Warehouse:
 		Scanner input = new Scanner(System.in);		
-		System.out.println("Open saved warehouse?\n (Y|N)");
+		System.out.println("Open saved warehouse?(Y|N)");
 		String opt = input.next();
 		if(opt.equals("Y"))
 			openWarehouse();
-		else
+		else{
 			warehouse = new Warehouse();
-		
+			System.out.println("New Warehouse system created");
+		}//end else
 		//View or change:
 		processInput();
 		
@@ -46,19 +68,31 @@ public class UserInterface
 	public static void processInput(){
 		Scanner input = new Scanner(System.in);
 		String inputStr = "";
+		System.out.println(MAINMENU);		
 		while(!inputStr.equals("exit") && !inputStr.equals("e")){
-			System.out.println("type exit to quit | type q for a list of queries that can be used: ");
 			inputStr = input.next();
 	
 			switch(inputStr){
-				case "query":
-				case "q":	//print list of queries
-					System.out.println(QUERYLIST);
+				case "client":
+				case "c":	//print list of queries
+					System.out.println(CLIENTOPLIST);
+					break;
+				case "order":
+				case "o":
+					System.out.println(ORDEROPLIST);
+					break;
+				case "product":
+				case "p":
+					System.out.println(PRODUCTOPLIST);
+					break;
+				case "supplier":
+				case "s":
+					System.out.println(SUPPLIEROPLIST);
 					break;
 				case "ADDCLIENT":
 					addClient(warehouse);
 					break;
-				case "FINDCLIENT":
+				case "FINDCLIENT": 
 
 					break;
 				case "DISPLAY":
@@ -66,6 +100,11 @@ public class UserInterface
 				case "exit":
 				case "e":
 					System.out.println("Exiting warehouse operations\n");
+					break;
+				case "m":
+				case "M":
+				case "main":
+					System.out.println(MAINMENU);
 					break;
 				default:
 					System.out.println("Entered text did not match an option; Please try again.");

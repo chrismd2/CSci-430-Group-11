@@ -71,6 +71,9 @@ public class Warehouse implements Serializable{
 		  //List all objects that need to be written
 		  out.writeObject(warehouse);
 		  out.writeObject(ClientIdServer.instance());
+		  out.writeObject(OrderIdServer.instance());
+		  out.writeObject(ProductIdServer.instance());
+		  out.writeObject(SupplierIdServer.instance());
 		  out.close(); //Close both data streams
 		  file.close();
 		  return true;
