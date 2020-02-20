@@ -25,7 +25,7 @@ public class Warehouse implements Serializable{
 	private SupplierList suppliers;
 	private ProductList products;
 	private static Warehouse warehouse;
-	
+
 	//Default constructor:
 	public Warehouse(){
 		//Initialize all lists to empty:
@@ -47,7 +47,7 @@ public class Warehouse implements Serializable{
 			return warehouse;
 		}//end if-else
 	}//end instance
-	
+
 	public static Warehouse retrieveData(String filename){
 		try {
 		  FileInputStream file = new FileInputStream(filename);
@@ -67,7 +67,7 @@ public class Warehouse implements Serializable{
 		  return null;
 		}
 	}//end retrieveData
-	
+
 	public static boolean saveData(String filename){
 		try {
 		  FileOutputStream file = new FileOutputStream(filename);
@@ -83,7 +83,7 @@ public class Warehouse implements Serializable{
 		  ioe.printStackTrace();
 		  return false;
 		}//end try-cach block
-		
+
 	}//end saveData
 
 	/*************************************************************
@@ -97,7 +97,7 @@ public class Warehouse implements Serializable{
 			ioe.printStackTrace();
 		}//end try-catch block
 	}//end writeObject
-	
+
 	private void readObject(java.io.ObjectInputStream input){
 		try{
 			if(warehouse != null){
@@ -115,10 +115,10 @@ public class Warehouse implements Serializable{
 		} catch(ClassNotFoundException cnfe){
 			cnfe.printStackTrace();
 		}//end try-catch block
-	
+
 	}//end readObject
 	/************* End Serialization methods **************************************/
-	
+
 	/****** FORMATTING METHODS: *******************/
 	public String toString(){
 		return "Clients: \n" + clients.toString() +
@@ -126,11 +126,11 @@ public class Warehouse implements Serializable{
 				  "\nProducts: \n" + products.toString() +
 				  "\nSuppliers:\n" + suppliers.toString();
 	}//end toString
-	
+
 	/********** END FORMATTING METHODS *******************/
-	
+
 	/************** CLIENT METHODS ***********************/
-	
+
 	/*************************************************************
 	addClient
 	Constructs a new Client object, and adds it to the client lists
@@ -138,7 +138,7 @@ public class Warehouse implements Serializable{
 	public void addClient(String name, String phone, String address){
 		clients.addClient(new Client(name, phone, address) );
 	}//end addClient
-	
+
 	/*****************************************************************
 	findClient
 	Returns a reference to the client object with the given id.
@@ -154,11 +154,11 @@ public class Warehouse implements Serializable{
 		while(it.hasNext()){
 			c = (Client)it.next();
 			if(c.getId() == id)
-				return c; 	
+				return c;
 		}//end while
 		return null;
 	}//end findClient
-	
+
 	/****************************************************************
 	getClients
 	Returns an iterator to the list of Clients in the system.
@@ -169,4 +169,23 @@ public class Warehouse implements Serializable{
 		return clients.getIterator();
 	}//end getClients
 	/***************** END CLIENT METHODS ********************/
+
+	/****************   PRODUCT METHODS   ********************/
+	public void addProduct(String _description, double _purchasePrice, double _salePrice){
+		ProductList.insertProduct(_description, _purchasePrice, _salePrice);
+	}
+  public Iterator getProducts(){
+    return ProductList.getProduct();
+  }
+	public void showProductlist(){
+		ProductList.showList();
+	}
+	public Product findProduct(int id){
+		return products.findProduct(id);
+	}//end findProduct
+	public void removeProducts(int PID){
+		ProductList.removeProduct(PID);
+	}
+
+	/**************** END PRODUCT METHODS ********************/
 }//end Warehouse class

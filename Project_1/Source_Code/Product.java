@@ -5,7 +5,7 @@ CSci 430 Object Oriented Programming
 Project 1 - Warehouse
   - Group 11
   - NAMES:
-     > Mark Christenson - This file's designer
+     > Mark Christenson
      > Brent Clapp
      > Sabeen Basnet
 
@@ -79,7 +79,7 @@ public class Product implements Serializable {
   }
 
   public void setData(){
-    System.out.println("To use data Setter input data members in this order\n\tString productID\n\tString description\n\tdouble purchasePrice\n\tdouble salePrice");
+    System.out.println("To use data Setter input data members in this order\n\tString description\n\tdouble purchasePrice\n\tdouble salePrice");
   }
 
   public void setData(String _description, double _purchasePrice, double _salePrice){

@@ -4,7 +4,7 @@
 CSci 430 Object Oriented Programming
   - Group 11
   - NAMES:
-     > Mark Christenson - This file's designer
+     > Mark Christenson
      > Brent Clapp
      > Sabeen Basnet
 
@@ -20,35 +20,37 @@ import java.lang.*;
 import java.io.*;
 
 public class ProductList implements Serializable{
-   private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
   private static List<Product> products = new LinkedList<Product>();
   private static ProductList pList; //Used for serialize methods
-  
+
   public ProductList(){
   }
-  
+
   public static ProductList instance() {
 	if(pList == null){
 		return (pList = new ProductList());
 	} else{
 		return pList;
 	}//end if-else
-	
+
   }//end instance()
-  
-  public void insertProduct(Product P){
+
+  public static void insertProduct(String _description, double _purchasePrice, double _salePrice){
+    Product P = new Product();
+    P.setData(_description, _purchasePrice, _salePrice);
     products.add(P);
   }
-  public Iterator getProduct(){
+  public static Iterator getProduct(){
     return products.iterator();
   }
-  public void showList(){
+  public static void showList(){
     for(Iterator current = products.iterator(); current.hasNext();){
       Product P = (Product) current.next();
       System.out.println(P.getData());
     }
   }
-  public void removeProduct(int PID){
+  public static void removeProduct(int PID){
     int i = 0;
     for(Iterator current = products.iterator(); current.hasNext();){
       i++;
@@ -58,7 +60,7 @@ public class ProductList implements Serializable{
       }
     }
   }
-  public Product findProduct(int PID){
+  public static Product findProduct(int PID){
     for(Iterator current = products.iterator(); current.hasNext();){
       Product P = (Product) current.next();
       if(P.getProductNumber() == PID){
@@ -67,8 +69,8 @@ public class ProductList implements Serializable{
     }
     return null;
   }
-  
-  private void writeObject(java.io.ObjectOutputStream output) {
+
+  private static void writeObject(java.io.ObjectOutputStream output) {
 	try{
 		output.defaultWriteObject();
 		output.writeObject(pList);
@@ -76,8 +78,8 @@ public class ProductList implements Serializable{
 		ioe.printStackTrace();
 	} //end try-catch block
   }//end writeObject
-  
-  private void readObject(java.io.ObjectInputStream input){
+
+  private static void readObject(java.io.ObjectInputStream input){
 	try{
 		if(pList != null)
 			return;
@@ -98,7 +100,7 @@ public class ProductList implements Serializable{
 
   public String toString(){
 	String returnedString = "";
-	Iterator curr = products.iterator(); 
+	Iterator curr = products.iterator();
 	while(curr.hasNext())
 		returnedString = returnedString.concat(curr.next().toString() + '\n');
 	return returnedString;
