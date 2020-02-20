@@ -22,6 +22,7 @@ public class UserInterface
 										"______________________________________________\n" +
 										"Enter m for main menu | Enter e to quit\n" +
 										"Enter ADDCLIENT to add a client to the Warehouse\n" +
+										"Enter MODIFYCLIENT to modify information about a client\n" +
 										"Enter DISPLAYALLCLIENTS to display all clients\n" +
 										"Enter DISPLAYCLIENT to find information about an individual client\n" + 
 										"Enter ADDTOCART to add a product to a client's cart\n";
@@ -98,6 +99,9 @@ public class UserInterface
 				case "DISPLAYALLCLIENTS":
 					displayAllClients();
 					break;
+				case "MODIFYCLIENT":	
+					modifyClient();
+					break;
 				case "exit":
 				case "e":
 					System.out.println("Exiting warehouse operations\n");
@@ -110,6 +114,7 @@ public class UserInterface
 				default:
 					System.out.println("Entered text did not match an option; Please try again.");
 			}//end switch
+			System.out.println("Please enter an option");
 		}//end while
 			
 	}//end processInput
@@ -143,6 +148,46 @@ public class UserInterface
 		else
 			System.out.println(c.toString());
 	}//end displayClient
+
+	/*******************************************************************************
+	modifyClient
+	Asks the user which element (name,phone,address) that they would like to modify,
+	and gets the new information.
+	*******************************************************************************/
+	public static void modifyClient(){
+		System.out.print("Enter the client's id number: ");
+		Scanner s = new Scanner(System.in);
+		Client c = warehouse.findClient(s.nextInt());
+		if(c == null)
+			System.out.println("Given id does not match a client; Aborting operation.");
+		else{
+			s = new Scanner(System.in); //Essentially, flush the input buffer
+			System.out.println("Select an element to modify.\n" +
+								"Enter n for name\n" +
+								"Enter p for phone\n" +
+								"Enter a for address");
+			switch(s.nextLine() ){
+				case "n":
+					System.out.println("Enter a new name for the client:");
+					c.setClientName(s.nextLine() );
+					System.out.println("Client name updated");
+					break;
+				case "p":
+					System.out.println("Enter a new phone number for the client: ");
+					c.setPhone(s.nextLine() );
+					System.out.println("Client phone updated");
+					break;
+				case "a":
+					System.out.println("Enter a new address for the client: ");
+					c.setAddress(s.nextLine() );
+					System.out.println("Client address updated");
+					break;
+				default:
+					System.out.println("Invalid option given; Aborting operation");
+					break;
+			}//end switch
+		}//end else
+	}//end modfiyClient
 
 	/*******************************************************************************
 	displayAllClients
