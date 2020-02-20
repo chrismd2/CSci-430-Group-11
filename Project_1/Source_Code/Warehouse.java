@@ -85,15 +85,6 @@ public class Warehouse implements Serializable{
 		}//end try-cach block
 		
 	}//end saveData
-	
-	/*************************************************************
-	addClient
-	Constructs a new Client object, and adds it to the client lists
-	*************************************************************/
-	public void addClient(String name, String phone, String address){
-		clients.addClient(new Client(name, phone, address) );
-	}//end addClient
-
 
 	/*************************************************************
 	Read/Write serialization methods:
@@ -128,10 +119,54 @@ public class Warehouse implements Serializable{
 	}//end readObject
 	/************* End Serialization methods **************************************/
 	
+	/****** FORMATTING METHODS: *******************/
 	public String toString(){
 		return "Clients: \n" + clients.toString() +
 				  "\nOrders: \n" + orders.toString() +
 				  "\nProducts: \n" + products.toString() +
 				  "\nSuppliers:\n" + suppliers.toString();
 	}//end toString
+	
+	/********** END FORMATTING METHODS *******************/
+	
+	/************** CLIENT METHODS ***********************/
+	
+	/*************************************************************
+	addClient
+	Constructs a new Client object, and adds it to the client lists
+	*************************************************************/
+	public void addClient(String name, String phone, String address){
+		clients.addClient(new Client(name, phone, address) );
+	}//end addClient
+	
+	/*****************************************************************
+	findClient
+	Returns a reference to the client object with the given id.
+	Parameters:
+		id(int) - the id of the requested client object
+	Returns:
+		client(Client) - A reference to the client object with the given
+						id. Returns null if the client cannot be found.
+	*********************************************************************/
+	public Client findClient(int id){
+		Iterator it = clients.getIterator();
+		Client c;
+		while(it.hasNext()){
+			c = (Client)it.next();
+			if(c.getId() == id)
+				return c; 	
+		}//end while
+		return null;
+	}//end findClient
+	
+	/****************************************************************
+	getClients
+	Returns an iterator to the list of Clients in the system.
+	The UI can use this iterator to find whatever information
+	that is needed
+	*****************************************************************/
+	public Iterator getClients(){
+		return clients.getIterator();
+	}//end getClients
+	/***************** END CLIENT METHODS ********************/
 }//end Warehouse class

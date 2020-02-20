@@ -21,9 +21,9 @@ public class UserInterface
 	final static String CLIENTOPLIST = "CLIENT OPERATIONS:\n" +
 										"______________________________________________\n" +
 										"Enter m for main menu | Enter e to quit\n" +
-										"Enter DISPLAY to call the toString method for the WH\n" +
 										"Enter ADDCLIENT to add a client to the Warehouse\n" +
-										"Enter FINDCLIENT to find information about a client - NOT IMPLEMENTED\n" + 
+										"Enter DISPLAYALLCLIENTS to display all clients\n" +
+										"Enter DISPLAYCLIENT to find information about an individual client\n" + 
 										"Enter ADDTOCART to add a product to a client's cart\n";
 	final static String ORDEROPLIST = "ORDER OPERATIONS:\n" + 
 									  "______________________________________________________\n" +
@@ -90,13 +90,14 @@ public class UserInterface
 					System.out.println(SUPPLIEROPLIST);
 					break;
 				case "ADDCLIENT":
-					addClient(warehouse);
+					addClient();
 					break;
-				case "FINDCLIENT": 
-
+				case "DISPLAYCLIENT": 
+					displayClient();
 					break;
-				case "DISPLAY":
-					System.out.println(warehouse.toString() );
+				case "DISPLAYALLCLIENTS":
+					displayAllClients();
+					break;
 				case "exit":
 				case "e":
 					System.out.println("Exiting warehouse operations\n");
@@ -117,18 +118,42 @@ public class UserInterface
 	addClient
 	Code to prompt user for necessary information to add a new client to the Warehouse
 	*******************************************************************************/
-	public static void addClient(Warehouse w){
+	public static void addClient(){
 		Scanner input = new Scanner(System.in);
 		System.out.print("Enter a name for the client: ");
-		String name = input.next();
+		String name = input.nextLine();
 		System.out.print("Enter a phone number for the client: ");
-		String phone = input.next();
+		String phone = input.nextLine();
 		System.out.print("Enter an address for the client: ");
-		String address = input.next();
-		w.addClient(name, phone, address);
+		String address = input.nextLine();
+		warehouse.addClient(name, phone, address);
 		System.out.println("Client added successfully");
 	}//end addClient
+	
+	/*****************************************************************************
+	displayClient
+	Prompts user for an id number, then displays information about that client
+	******************************************************************************/
+	public static void displayClient(){
+		System.out.print("Enter client id: ");
+		Scanner s = new Scanner(System.in);
+		Client c = warehouse.findClient(s.nextInt() );
+		if(c == null)
+			System.out.println("No client found with given id");
+		else
+			System.out.println(c.toString());
+	}//end displayClient
 
+	/*******************************************************************************
+	displayAllClients
+	Displays all client objects in the system.
+	*******************************************************************************/
+	public static void displayAllClients(){
+		Iterator it = warehouse.getClients();
+		while(it.hasNext() )
+			System.out.println(it.next().toString());
+	}//end displayAllClients
+	
 	/******************************************************************************
 	openWarehouse
 	Opens the given Warehouse, or creates if it doesn't exist
