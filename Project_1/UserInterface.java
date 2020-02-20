@@ -33,6 +33,9 @@ public class UserInterface
 	final static String PRODUCTOPLIST = "PRODUCT OPERATIONS: \n" +
 										"______________________________________________\n" +
 										"Enter m for main menu | Enter e to quit\n" +
+										"Enter ADDPRODUCT for add a product to the Warehouse\n" +
+										"Enter DISPLAYALLPRODUCTS to display all products\n" +
+										"Enter DISPLAYPRODUCT to find information about an individual product\n" +
 										"options.... \n";
 	final static String SUPPLIEROPLIST = "SUPPLIER OPERATIONS \n" +
 										 "______________________________________________\n" +
@@ -90,6 +93,17 @@ public class UserInterface
 				case "s":
 					System.out.println(SUPPLIEROPLIST);
 					break;
+
+				case "ADDPRODUCT":
+					addProduct();
+					break;
+				case "DISPLAYPRODUCT":
+					displayProduct();
+					break;
+				case "DISPLAYALLPRODUCTS":
+					displayAllProducts();
+					break;
+
 				case "ADDCLIENT":
 					addClient();
 					break;
@@ -118,6 +132,46 @@ public class UserInterface
 		}//end while
 			
 	}//end processInput
+
+	/******************************************************************************
+	addProduct
+	Code to prompt user for necessary information to add a new product to the Warehouse
+	*******************************************************************************/
+	public static void addProduct(){
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter a description for the product: ");
+		String description = input.nextLine();
+		System.out.print("Enter a purchase price for the product: ");
+		String purchasePrice = input.nextLine();
+		System.out.print("Enter an sale price for the product: ");
+		String salePrice = input.nextLine();
+		warehouse.addProduct(description, Double.valueOf(purchasePrice), Double.valueOf(salePrice) );
+		System.out.println("Product added successfully");
+	}//end addProduct
+
+	/*****************************************************************************
+	displayProduct
+	Prompts user for an id number, then displays information about that Product
+	******************************************************************************/
+	public static void displayProduct(){
+		System.out.print("Enter Product id: ");
+		Scanner s = new Scanner(System.in);
+		Product p = warehouse.findProduct(s.nextInt() );
+		if(p == null)
+			System.out.println("No Product found with given id");
+		else
+			System.out.println(p.toString());
+	}//end displayProduct
+
+	/*******************************************************************************
+	displayAllProducts
+	Displays all Product objects in the system.
+	*******************************************************************************/
+	public static void displayAllProducts(){
+		Iterator it = warehouse.getProducts();
+		while(it.hasNext() )
+			System.out.println(it.next().toString());
+	}//end displayAllProducts
 
 	/******************************************************************************
 	addClient
