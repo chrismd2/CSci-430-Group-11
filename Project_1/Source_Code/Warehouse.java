@@ -38,6 +38,10 @@ public class Warehouse implements Serializable{
 	//Instance method:
 	public static Warehouse instance(){
 		if(warehouse == null) {
+			OrderIdServer.instance();
+			ClientIdServer.instance();
+			ProductIdServer.instance();
+			SupplierIdServer.instance();
 			return (warehouse = new Warehouse() );
 		} else {
 			return warehouse;
@@ -74,8 +78,6 @@ public class Warehouse implements Serializable{
 		  out.writeObject(OrderIdServer.instance());
 		  out.writeObject(ProductIdServer.instance());
 		  out.writeObject(SupplierIdServer.instance());
-		  out.close(); //Close both data streams
-		  file.close();
 		  return true;
 		} catch(IOException ioe) {
 		  ioe.printStackTrace();
