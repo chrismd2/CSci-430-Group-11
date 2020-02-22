@@ -1,17 +1,17 @@
-<mxfile host="www.draw.io" modified="2020-02-07T17:43:38.442Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0" etag="7A4XbazATWQhPmRak-xj" version="12.6.6" type="github">
+<mxfile host="www.draw.io" modified="2020-02-22T18:30:38.621Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36" etag="S44G_2JTJ1pk6B0SWpO8" version="12.7.4" type="github">
   <diagram id="CLRaHryyYa0xOvTVhCor" name="Page-1">
-    <mxGraphModel dx="1646" dy="1038" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="706" dy="446" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
         <mxCell id="xvll8Nh_N9pdd9aSw5_w-8" value="-" style="group" parent="1" vertex="1" connectable="0">
-          <mxGeometry x="470" y="40" width="300" height="210" as="geometry"/>
+          <mxGeometry x="440" y="20" width="200" height="210" as="geometry" />
         </mxCell>
         <mxCell id="xvll8Nh_N9pdd9aSw5_w-6" value="Invoice" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#000000;fillColor=#ffffff;" parent="xvll8Nh_N9pdd9aSw5_w-8" vertex="1">
-          <mxGeometry x="-300" width="600" height="14.41" as="geometry"/>
+          <mxGeometry x="-200" width="400" height="14.41" as="geometry" />
         </mxCell>
-        <mxCell id="xvll8Nh_N9pdd9aSw5_w-7" value="&amp;nbsp; -&amp;nbsp; Client: client&lt;br&gt;&amp;nbsp; -&amp;nbsp; String: OrderNumber&lt;br&gt;&amp;nbsp; -&amp;nbsp; ItemList: orderedProducts&lt;br&gt;&amp;nbsp; -&amp;nbsp; double: balanceDue&lt;br&gt;&lt;div&gt;&amp;nbsp; -&amp;nbsp; String: date&lt;/div&gt;&lt;div&gt;&amp;nbsp; +&amp;nbsp; void: createTransaction(client, orderedProducts, balance, date)&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#000000;fillColor=#ffffff;" parent="xvll8Nh_N9pdd9aSw5_w-8" vertex="1">
-          <mxGeometry x="-300" y="14.41" width="600" height="195.59" as="geometry"/>
+        <mxCell id="xvll8Nh_N9pdd9aSw5_w-7" value="&amp;nbsp; -&amp;nbsp; Client: client&lt;br&gt;&amp;nbsp; -&amp;nbsp; String: OrderNumber&lt;br&gt;&amp;nbsp; -&amp;nbsp; ItemList: orderedProducts&lt;br&gt;&amp;nbsp; -&amp;nbsp; double: balanceDue&lt;br&gt;&lt;div&gt;&amp;nbsp; -&amp;nbsp; String: date&lt;/div&gt;&lt;div&gt;&amp;nbsp; +&amp;nbsp; void: createTransaction(client, orderedProducts, balance, date)&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void: sendToAccount()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + double: getInvoiceAmount()&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#000000;fillColor=#ffffff;" parent="xvll8Nh_N9pdd9aSw5_w-8" vertex="1">
+          <mxGeometry x="-200" y="14.41" width="400" height="195.59" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
