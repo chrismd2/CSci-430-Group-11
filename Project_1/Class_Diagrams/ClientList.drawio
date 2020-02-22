@@ -1,23 +1,29 @@
-<mxfile host="www.draw.io" modified="2020-02-07T18:05:14.908Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0" etag="i9gIyILsVcnoAZp37YfU" version="12.6.6" type="github">
+<mxfile host="www.draw.io" modified="2020-02-22T18:24:47.768Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36" etag="SJjOfTweaueXpN09Kcc8" version="12.7.4" type="github">
   <diagram id="t3Fh3Gw59ioASDk0ljvp" name="Page-1">
-    <mxGraphModel dx="1646" dy="1038" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="706" dy="495" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1100" math="0" shadow="0">
       <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
-        <mxCell id="tvQa6XyhG8Wh2WUw2lWo-1" value="ClientList" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
-          <mxGeometry x="20" y="20" width="290" height="130" as="geometry"/>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="tvQa6XyhG8Wh2WUw2lWo-1" value="ClientList" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+          <mxGeometry x="20" y="20" width="290" height="182" as="geometry" />
         </mxCell>
-        <mxCell id="tvQa6XyhG8Wh2WUw2lWo-2" value="- Client[]: myClients" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tvQa6XyhG8Wh2WUw2lWo-1">
-          <mxGeometry y="26" width="290" height="26" as="geometry"/>
+        <mxCell id="tvQa6XyhG8Wh2WUw2lWo-2" value="- Client[]: myClients" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tvQa6XyhG8Wh2WUw2lWo-1" vertex="1">
+          <mxGeometry y="26" width="290" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="tvQa6XyhG8Wh2WUw2lWo-3" value="+ void: addClient(Client)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tvQa6XyhG8Wh2WUw2lWo-1">
-          <mxGeometry y="52" width="290" height="26" as="geometry"/>
+        <mxCell id="r1xvMGwRadgNzhK44HRl-3" value="- void readObject(Input Stream)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tvQa6XyhG8Wh2WUw2lWo-1">
+          <mxGeometry y="52" width="290" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="tvQa6XyhG8Wh2WUw2lWo-4" value="+ void: removeClient(Client)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tvQa6XyhG8Wh2WUw2lWo-1">
-          <mxGeometry y="78" width="290" height="26" as="geometry"/>
+        <mxCell id="tvQa6XyhG8Wh2WUw2lWo-3" value="+ void: addClient(Client)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tvQa6XyhG8Wh2WUw2lWo-1" vertex="1">
+          <mxGeometry y="78" width="290" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="tvQa6XyhG8Wh2WUw2lWo-5" value="+ Client: findClient(clientId)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tvQa6XyhG8Wh2WUw2lWo-1">
-          <mxGeometry y="104" width="290" height="26" as="geometry"/>
+        <mxCell id="tvQa6XyhG8Wh2WUw2lWo-4" value="+ void: removeClient(Client)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tvQa6XyhG8Wh2WUw2lWo-1" vertex="1">
+          <mxGeometry y="104" width="290" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tvQa6XyhG8Wh2WUw2lWo-5" value="+ Client: findClient(clientId)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="tvQa6XyhG8Wh2WUw2lWo-1" vertex="1">
+          <mxGeometry y="130" width="290" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="r1xvMGwRadgNzhK44HRl-2" value="+ iterator: getIterator()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tvQa6XyhG8Wh2WUw2lWo-1">
+          <mxGeometry y="156" width="290" height="26" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
