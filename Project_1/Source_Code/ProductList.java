@@ -21,7 +21,7 @@ import java.io.*;
 
 public class ProductList implements Serializable{
   private static final long serialVersionUID = 1L;
-  private static List<Product> products = new LinkedList<Product>();
+  private List<Product> products = new LinkedList<Product>();
   private static ProductList pList; //Used for serialize methods
 
   public ProductList(){
@@ -36,21 +36,21 @@ public class ProductList implements Serializable{
 
   }//end instance()
 
-  public static void insertProduct(String _description, double _purchasePrice, double _salePrice){
+  public void insertProduct(String _description, double _purchasePrice, double _salePrice){
     Product P = new Product();
     P.setData(_description, _purchasePrice, _salePrice);
     products.add(P);
   }
-  public static Iterator getProduct(){
+  public Iterator getProduct(){
     return products.iterator();
   }
-  public static void showList(){
+  public void showList(){
     for(Iterator current = products.iterator(); current.hasNext();){
       Product P = (Product) current.next();
       System.out.println(P.getData());
     }
   }
-  public static void removeProduct(int PID){
+  public void removeProduct(int PID){
     int i = 0;
     for(Iterator current = products.iterator(); current.hasNext();){
       i++;
@@ -60,7 +60,7 @@ public class ProductList implements Serializable{
       }
     }
   }
-  public static Product findProduct(int PID){
+  public Product findProduct(int PID){
     for(Iterator current = products.iterator(); current.hasNext();){
       Product P = (Product) current.next();
       if(P.getProductNumber() == PID){

@@ -172,19 +172,19 @@ public class Warehouse implements Serializable{
 
 	/****************   PRODUCT METHODS   ********************/
 	public void addProduct(String _description, double _purchasePrice, double _salePrice){
-		ProductList.insertProduct(_description, _purchasePrice, _salePrice);
+		products.insertProduct(_description, _purchasePrice, _salePrice);
 	}
   public Iterator getProducts(){
-    return ProductList.getProduct();
+    return products.getProduct();
   }
 	public void showProductlist(){
-		ProductList.showList();
+		products.showList();
 	}
 	public Product findProduct(int id){
 		return products.findProduct(id);
 	}//end findProduct
 	public void removeProducts(int PID){
-		ProductList.removeProduct(PID);
+		products.removeProduct(PID);
 	}
 
 	/**************** END PRODUCT METHODS ********************/
