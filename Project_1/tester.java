@@ -1,5 +1,5 @@
 import Source_Code.*;
-
+/*
 public class tester{
   	public static void ProductTester(){
 		System.out.println("Testing Product:\n"+
@@ -7,7 +7,7 @@ public class tester{
   	    ProductList objList = new ProductList();
 
   	    Product obj = new Product();
-
+/*
   	    obj.setData();
 
   			for(int i = 0; i < 10; i++){
@@ -21,8 +21,8 @@ public class tester{
 
   	    objList.showList();
   	}
-
-	
+*/
+/*	
 	public static void clientTester(){
 		System.out.println("\n\nTesting Clients:\n"+
 									"__________________\n");
@@ -36,10 +36,11 @@ public class tester{
 	*/
 		//System.out.println(myList.toString() );
 	
-	}//end clientTester
-	
+//	}//end clientTester
+	/*
     public static void main(String[] args){
       ProductTester();
 	  clientTester();
     }
 }
+*/

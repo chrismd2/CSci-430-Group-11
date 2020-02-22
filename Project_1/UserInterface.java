@@ -10,6 +10,7 @@ import java.lang.*;
 public class UserInterface
 {
 	private static Warehouse warehouse;
+	private static UserInterface userInterface;
 	final static String FILENAME = "WareData";
 	final static String MAINMENU =  "	MAIN MENU	\n" +
 									"______________________________________________\n" +
@@ -35,8 +36,7 @@ public class UserInterface
 										"Enter m for main menu | Enter e to quit\n" +
 										"Enter ADDPRODUCT for add a product to the Warehouse\n" +
 										"Enter DISPLAYALLPRODUCTS to display all products\n" +
-										"Enter DISPLAYPRODUCT to find information about an individual product\n" +
-										"options.... \n";
+										"Enter DISPLAYPRODUCT to find information about an individual product\n";
 	final static String SUPPLIEROPLIST = "SUPPLIER OPERATIONS \n" +
 										 "______________________________________________\n" +
 										 "Enter m for main menu | Enter e to quit\n" +
@@ -50,7 +50,7 @@ public class UserInterface
 		if(opt.equals("Y"))
 			openWarehouse();
 		else{
-			warehouse = new Warehouse();
+			warehouse = Warehouse.instance();
 			System.out.println("New Warehouse system created");
 		}//end else
 		//View or change:
@@ -279,4 +279,15 @@ public class UserInterface
 		else
 			System.out.println("Save failed. Error occured");
 	}//end saveChanges
+
+	/******************************************************************************
+	instance()
+	Called to create an instance of the UserInterface
+	*****************************************************************************/
+	public static UserInterface instance() {
+		if(userInterface == null)
+			return userInterface = new UserInterface();
+		else
+			return userInterface;
+	}//end instance()
 }
