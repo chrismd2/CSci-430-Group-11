@@ -1,1 +1,19 @@
-<mxfile host="Electron" modified="2020-02-02T00:13:42.286Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/12.5.3 Chrome/78.0.3904.130 Electron/7.1.9 Safari/537.36" etag="9BWug4qvP1M_ObLcTI07" version="12.5.3" type="device"><diagram id="CLRaHryyYa0xOvTVhCor" name="Page-1">1VZdj6IwFP01PGqgBcTHUWc/kl13Eh72cVJphWYKJaUMur9+b6FoDWMyOrMPWxPTnnt72p77oR5el4evitTFT0mZ8JBPDx7eeAjhEMO3AY4DgKJ4AHLF6QAFZyDlf5gFfYu2nLLmwlFLKTSvL8FMVhXL9AVGlJLdpdteistTa5KzCZBmREzR35zqYkCTyD/j3xjPi/HkwLeWkozOFmgKQmXnQPjRw2slpR5m5WHNhNFu1GXY9+WK9XQxxSr9ng2HVyGSbfG8XdaULknaRc/dLBlYXolo7YNn9rb6OEqQK9nW1o8pzQ5vCU92o7s/vVhwei6kCZMl0+oILpYoXNgtNkVCu+zOep9YC0drNAaB2BjnJ+qzDDCxStygSjxRJW3rWnCmJuKAHHCdVaFLOGETwJQInlcwz+D5sAGvjGgcMurBGkpOqdm+6gquWVqTzHB1UD6AgdYVZeZyPqwareQLW0shVX8c9vsBlj0XwsH3/QD8apzceFxPhWmQ3CgEy/nSHYtpUILFPIjiJEaLMPKXiY+jfxSjxSRGHopJaTSsdk3dS+HP3sBSrXiVe/jBiKIkbTO9JSUDT2EiuYMYx7nufe/l+775FLYNazLFa81ldTcflW1fmYbvqVVZQRr2pHh2/3tdxhT65MfY3PeORfYB+dqqgSKD+kG+kCNv1iqT+6mW2cvdzL8UhWqOVl60GVg7wvUP3uje0NzQGATb6/++LRydcg+dTzzt3e/oGgijeeLSoJu7BizPv6W9zflDgh//Ag==</diagram></mxfile>
+<mxfile host="www.draw.io" modified="2020-02-22T19:30:45.781Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36" etag="mBqJAAJB8yeh466mRII7" version="12.7.4" type="github">
+  <diagram id="CLRaHryyYa0xOvTVhCor" name="Page-1">
+    <mxGraphModel dx="706" dy="446" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xvll8Nh_N9pdd9aSw5_w-8" value="-" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="220" y="80" width="220" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="xvll8Nh_N9pdd9aSw5_w-6" value="Supplier" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#000000;fillColor=#ffffff;" parent="xvll8Nh_N9pdd9aSw5_w-8" vertex="1">
+          <mxGeometry width="219.99999999999997" height="17.156862745098035" as="geometry" />
+        </mxCell>
+        <mxCell id="xvll8Nh_N9pdd9aSw5_w-7" value="&amp;nbsp; -&amp;nbsp; String: productName&lt;br&gt;&amp;nbsp; -&amp;nbsp; String: productID&lt;br&gt;&amp;nbsp; -&amp;nbsp; String: Description&lt;br&gt;&amp;nbsp; -&amp;nbsp; double: PurchasePrice&lt;br&gt;&amp;nbsp; -&amp;nbsp; double: SalePrice&lt;br&gt;&amp;nbsp; -&amp;nbsp; String: SupplierID&lt;br&gt;&amp;nbsp; -&amp;nbsp; unsigned long: currentStock&lt;br&gt;&amp;nbsp; -&amp;nbsp; Order[]: waitListOrders&lt;br&gt;&amp;nbsp;+ Constructor: Supplier(int, double)&lt;br&gt;&amp;nbsp;+ int: getQuantity()&lt;br&gt;&amp;nbsp;+ double: getPrice()&lt;br&gt;&amp;nbsp;+ int: getID();&lt;br&gt;&amp;nbsp;+ void: setNewQuantity(int)" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#000000;fillColor=#ffffff;" parent="xvll8Nh_N9pdd9aSw5_w-8" vertex="1">
+          <mxGeometry y="17.154545454545456" width="219.99999999999997" height="232.84545454545452" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
