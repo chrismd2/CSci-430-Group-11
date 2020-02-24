@@ -12,7 +12,6 @@ CSci 430 Object Oriented Programming
 
   COMMENTS: Manages the products currently tracked by a warehouse
 */
-
 package Source_Code;
 
 import java.util.*;

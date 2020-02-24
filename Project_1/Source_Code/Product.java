@@ -39,12 +39,14 @@ public class Product implements Serializable {
   private String description;
   private double purchasePrice;
   private double salePrice;
+  private int stock;
 
   public Product(){
     productID = ProductIdServer.instance().getId();
     description = "";
     purchasePrice = 0;
     salePrice = 0;
+	stock = 10; ////FIX LATER
   }
 
   public int getProductNumber(){
@@ -62,6 +64,13 @@ public class Product implements Serializable {
   public double getSalePrice(){
     return salePrice;
   }
+
+  public int getStock(){
+	return stock;
+  }
+  public void removeStock(int r){
+	stock -= r;
+  }//end removeStock
 
   public String getData(){
     String data = "";

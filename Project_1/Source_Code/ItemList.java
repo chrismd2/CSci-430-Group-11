@@ -28,6 +28,10 @@ public class ItemList implements Serializable{
 		itemList.add( new OrderedItem(newProduct, quantity) );
 	}
 
+	public void addItem(OrderedItem item){
+		itemList.add(item);
+	}
+
 	public void removeItem(Product removeProduct){
 		itemList.remove(removeProduct);
 	}//end removeItem

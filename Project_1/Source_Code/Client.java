@@ -180,6 +180,8 @@ public class Client implements Serializable{
 		return shoppingCart.getIterator();
 	}//end getCart
 	/****************** END GETTERS ***********************/
+	
+	/**************************** Process functions ******************************/
 
 	
 	public String toString(){

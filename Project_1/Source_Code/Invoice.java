@@ -22,14 +22,13 @@ public class Invoice implements Serializable{
 	private double invoiceAmount;
 	private Client clientAccount;
 	private String date;
-	private Order order;
+	private ItemList invoiceItems;
 
 	//Constructor:
 	public Invoice(Client clientAccount, Order order){
 		this.clientAccount = clientAccount;
 		date = new SimpleDateFormat(Constants.DATE_FORMAT).format(new Date());
-		this.order = order;
-		/***** Modify in the future to calculate the invoice: *****/
+		invoicesItems = new ItemList();
 		invoiceAmount = 0.0f;
 	}//end Constructor
 
@@ -44,6 +43,9 @@ public class Invoice implements Serializable{
 			clientAccount.addInvoice(this);
 	}//end sendToAccount
 
+	public void addItem(OrderedItem item){
+		invoiceItems.add(item);
+	}//end addItem
 
 	//getInvoiceAmount:
 	public double getInvoiceAmount(){

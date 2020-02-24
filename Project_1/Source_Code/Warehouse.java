@@ -195,8 +195,22 @@ public class Warehouse implements Serializable{
 	public Iterator getCart(int cId){
 		return clients.findClient(cId).getCart();
 	}//end getCart
-
 	/***************** END CLIENT METHODS ********************/
+
+	/******************** ORDER METHODS *******************************/
+	/*************************************************************
+	placeOrder
+	Given a client id
+	Places the order for that client.
+	*************************************************************/
+	public void placeOrder(int clientId){
+		//Create an order corresponding to the client
+		Order order = new Order(clients.findClient(clientId) );
+		//Add the order to the orderList
+		orders.add(order);
+		
+		
+	}//end placeOrder
 
 	/****************   PRODUCT METHODS   ********************/
 	public void addProduct(String _description, double _purchasePrice, double _salePrice){
