@@ -31,7 +31,9 @@ public class UserInterface
 									    "Enter m for main menu | Enter e to quit\n" +
 										"Enter ADDTOCART to add a product to a client's cart\n" +
 									  	"Enter DISPLAYCART to display a client's cart\n" + 
-										"Enter PLACEORDER to place an order using the client's current cart\n";
+										"Enter PLACEORDER to place an order using the client's current cart\n" +
+										"Enter DISPLAYCLIENT to find information about an individual client\n" +
+										"Enter ADDTOCART to add a product to a client's cart\n";
 	final static String PRODUCTOPLIST = "PRODUCT OPERATIONS: \n" +
 										"______________________________________________\n" +
 										"Enter m for main menu | Enter e to quit\n" +
@@ -42,27 +44,35 @@ public class UserInterface
 										 "______________________________________________\n" +
 										 "Enter m for main menu | Enter e to quit\n" +
 										 "options...\n";
-										
+
 	public static void main(String[] args){
-		//Open the Warehouse:
-		Scanner input = new Scanner(System.in);		
-		System.out.println("Open saved warehouse?(Y|N)");
-		String opt = input.next();
-		if(opt.equals("Y"))
-			openWarehouse();
+		if(args.length > 0){
+			switch(args[0]){
+				case "UI":
+					//Open the Warehouse:
+					Scanner input = new Scanner(System.in);
+					System.out.println("Open saved warehouse?(Y|N)");
+					String opt = input.next();
+					if(opt.equals("Y"))
+						openWarehouse();
+					else{
+						warehouse = Warehouse.instance();
+						System.out.println("New Warehouse system created");
+					}//end else
+					//View or change:
+					processInput();
+
+					//Close the Warehouse:
+					System.out.println("Save changes to warehouse?\n(Y|N)");
+					opt = input.next();
+					if(opt.equals("Y"))
+						saveChanges();
+					break;
+			}//end switch
+		}//end if
 		else{
-			warehouse = Warehouse.instance();
-			System.out.println("New Warehouse system created");
-		}//end else
-		//View or change:
-		processInput();
-		
-		//Close the Warehouse:
-		System.out.println("Save changes to warehouse?\n(Y|N)");
-		opt = input.next();
-		if(opt.equals("Y"))
-			saveChanges();
-		
+			tester();
+		}
 	}//end run
 
 	/*************************************************************************
@@ -73,7 +83,7 @@ public class UserInterface
 	public static void processInput(){
 		Scanner input = new Scanner(System.in);
 		String inputStr = "";
-		System.out.println(MAINMENU);		
+		System.out.println(MAINMENU);
 		while(!inputStr.equals("exit") && !inputStr.equals("e")){
 			inputStr = input.next();
 	
@@ -112,6 +122,14 @@ public class UserInterface
 				case "EXIT": case "E":
 					System.out.println("Exiting warehouse operations\n"); break;
 				case "M": case "MAIN":
+					addClient();
+					break;
+				case "exit":
+				case "e":
+					System.out.println("Exiting warehouse operations\n");
+					break;
+				case "m":
+				case "main":
 					System.out.println(MAINMENU);
 					break;
 				default:
@@ -119,7 +137,7 @@ public class UserInterface
 			}//end switch
 			System.out.println("Please enter an option");
 		}//end while
-			
+
 	}//end processInput
 
 	/******************************************************************************
@@ -177,7 +195,7 @@ public class UserInterface
 		warehouse.addClient(name, phone, address);
 		System.out.println("Client added successfully");
 	}//end addClient
-	
+
 	/*****************************************************************************
 	displayClient
 	Prompts user for an id number, then displays information about that client
@@ -367,4 +385,8 @@ public class UserInterface
 		else
 			return userInterface;
 	}//end instance()
+
+	public static void tester(){
+		System.out.println("Running tester\n");
+	}
 }
