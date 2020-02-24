@@ -388,5 +388,7 @@ public class UserInterface
 
 	public static void tester(){
 		System.out.println("Running tester\n");
+		ChristensonTesting CT = new ChristensonTesting();
+		CT.testProductList();
 	}
 }
