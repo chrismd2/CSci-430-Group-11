@@ -7,6 +7,7 @@
 		void addItem(Product newItem, int quantity)
 		void removeItem(Product removeProduct)
 		void changeQuantity(Product changeProduct, int quantity)
+		void clear()
 		Iterator getIterator()
 ******************************************************************************/
 package Source_Code;
@@ -30,6 +31,12 @@ public class ItemList implements Serializable{
 	public void removeItem(Product removeProduct){
 		itemList.remove(removeProduct);
 	}//end removeItem
+
+	public void clear(){
+		itemList = new ArrayList<OrderedItem>();
+		//Gives itemList a blank list to refer to
+		//Old list will be cleared by the garbage collector.
+	}//end clear()
 
 	public void changeQuantity(Product changeProduct, int quantity){
 		Iterator<OrderedItem> it = itemList.iterator();

@@ -44,6 +44,10 @@ public class ProductList implements Serializable{
   public Iterator getProduct(){
     return products.iterator();
   }
+  public int size(){
+	return products.size();
+  }//end size()
+  
   public void showList(){
     for(Iterator current = products.iterator(); current.hasNext();){
       Product P = (Product) current.next();

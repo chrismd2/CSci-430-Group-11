@@ -20,9 +20,7 @@ and modify that information.
 			void setPhone(String phone)
 			void setAddress(String address)
 			void addPayment(Payment p)
-			void removePayment(Payment p)
 			void addInvoice(Invoice i)
-			void removeInvoice(Invoice i)
 		Getters:
 			String getName()
 			int getId()
@@ -33,7 +31,6 @@ and modify that information.
 			Iterator getCart()
 *****************************************************************/
 package Source_Code;
-
 
 import java.util.*;
 import java.lang.*;
@@ -98,10 +95,6 @@ public class Client implements Serializable{
 		balance -= newPayment.getPaymentAmount();
 	}//end addPayment
 
-	public void removePayment(Payment removedPayment){
-		balance += removedPayment.getPaymentAmount();
-	}//end removePayment
-
 	/***************************
 		myInvoices:
 		Can add or remove Invoices
@@ -110,21 +103,40 @@ public class Client implements Serializable{
 		balance += newInvoice.getInvoiceAmount();
 	}//end addInvoice
 
-	public void removeInvoice(Invoice removedInvoice){
-		balance -= removedInvoice.getInvoiceAmount();
-	}//end removeInvoice
-
-	/*******************************************************
-		shoppingCart:
-		Can add an item or item list
-		Can remove an item or item list
+	/*************************************************************************
+		shoppingCart methods:
+		Can add an item
 		Can change the quantity of an item
 		Can clear all items from the cart
+	*************************************************************************/
+
+	/*******************************************************
+		addToCart
+		Given a product and a quantity, this method adds that
+		item to the ShoppingCart
+	********************************************************/
+	public void addToCart(Product p, int quantity){
+		shoppingCart.addItem(p, quantity);
+	}//end endToCart
+	
+	/********************************************************
+		changeItemQuantity
+		Given a product that is already in the cart and a 
+		quantity, this methods changes the quantity of that
+		item.
 	*******************************************************/
+	public void changeItemQuantity(Product p, int quantity){
+		shoppingCart.changeQuantity(p, quantity);
+	}//end changeQuantity
 
-/**************** COME BACK LATER TO DO THESE, MORE DETAILS PREFERRED ************/
-
-
+	/********************************************************
+		clearCart
+		Removes all items from the shoppingCart.
+		This method should be called whenever an order is placed.
+	*********************************************************/
+	public void clearCart(){
+		shoppingCart.clear();
+	}//end clearCart
 	/**************** END SETTERS ************************/
 
 	/****************** BEGIN GETTERS *********************/

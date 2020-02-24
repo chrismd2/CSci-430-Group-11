@@ -159,6 +159,14 @@ public class Warehouse implements Serializable{
 		return null;
 	}//end findClient
 
+	/*********************************************************************
+	verifyClient
+	Returns true if the client exists in clientList; false otherwise.
+	*********************************************************************/
+	public boolean verifyClient(int id){
+		return !(clients.findClient(id) == null);
+	}//end verifyClient
+	
 	/****************************************************************
 	getClients
 	Returns an iterator to the list of Clients in the system.
@@ -168,6 +176,26 @@ public class Warehouse implements Serializable{
 	public Iterator getClients(){
 		return clients.getIterator();
 	}//end getClients
+	
+	/************************************************************
+	addToCart
+	Given a client id, a product id and a quantity,
+	adds the given product to that client's cart.
+	*************************************************************/
+	public void addToCart(int cId, int pId, int quantity){
+		Client myClient = clients.findClient(cId);
+		Product myProduct = products.findProduct(pId);
+		myClient.addToCart(myProduct, quantity);
+	}//end addToCart
+	
+	/*************************************************************
+	getCart
+	Given a client id, returns an iterator to that client's cart
+	**************************************************************/
+	public Iterator getCart(int cId){
+		return clients.findClient(cId).getCart();
+	}//end getCart
+
 	/***************** END CLIENT METHODS ********************/
 
 	/****************   PRODUCT METHODS   ********************/
@@ -186,6 +214,14 @@ public class Warehouse implements Serializable{
 	public void removeProducts(int PID){
 		products.removeProduct(PID);
 	}
+	/********************************
+		verifyProduct
+		Returns true if the product exists in productList. False otherwise.
+	********************************/
+	public boolean verifyProduct(int id){
+		//null when not in list, so want to return false when null
+		return !(products.findProduct(id) == null);
+	}//end verifyProduct
 
 	/**************** END PRODUCT METHODS ********************/
 }//end Warehouse class

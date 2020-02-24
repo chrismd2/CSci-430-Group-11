@@ -25,12 +25,13 @@ public class UserInterface
 										"Enter ADDCLIENT to add a client to the Warehouse\n" +
 										"Enter MODIFYCLIENT to modify information about a client\n" +
 										"Enter DISPLAYALLCLIENTS to display all clients\n" +
-										"Enter DISPLAYCLIENT to find information about an individual client\n" + 
-										"Enter ADDTOCART to add a product to a client's cart\n";
-	final static String ORDEROPLIST = "ORDER OPERATIONS:\n" + 
-									  "______________________________________________________\n" +
-									  "Enter m for main menu | Enter e to quit\n" +
-									  " options.... \n";
+										"Enter DISPLAYCLIENT to find information about an individual client\n";
+	final static String ORDEROPLIST =   "ORDER OPERATIONS:\n" + 
+									    "______________________________________________________\n" +
+									    "Enter m for main menu | Enter e to quit\n" +
+										"Enter ADDTOCART to add a product to a client's cart\n" +
+									  	"Enter DISPLAYCART to display a client's cart\n" + 
+										"Enter PLACEORDER to place an order using the client's current cart\n";
 	final static String PRODUCTOPLIST = "PRODUCT OPERATIONS: \n" +
 										"______________________________________________\n" +
 										"Enter m for main menu | Enter e to quit\n" +
@@ -76,53 +77,41 @@ public class UserInterface
 		while(!inputStr.equals("exit") && !inputStr.equals("e")){
 			inputStr = input.next();
 	
-			switch(inputStr){
-				case "client":
-				case "c":	//print list of queries
-					System.out.println(CLIENTOPLIST);
-					break;
-				case "order":
-				case "o":
-					System.out.println(ORDEROPLIST);
-					break;
-				case "product":
-				case "p":
-					System.out.println(PRODUCTOPLIST);
-					break;
-				case "supplier":
-				case "s":
-					System.out.println(SUPPLIEROPLIST);
-					break;
-
+			switch(inputStr.toUpperCase()){
+				case "CLIENT":case "C":	//print list of client operations
+					System.out.println(CLIENTOPLIST); break;
+				case "ORDER": case "O": //Print list of order operations
+					System.out.println(ORDEROPLIST); break;
+				case "PRODUCT": case "P": //Print list of product operations
+					System.out.println(PRODUCTOPLIST); break;
+				case "SUPPLIER": case "S": //Print list of supplier operations
+					System.out.println(SUPPLIEROPLIST); break;
+		/*************** PRODUCTS ********************************/
 				case "ADDPRODUCT":
-					addProduct();
-					break;
+					addProduct(); break;
 				case "DISPLAYPRODUCT":
-					displayProduct();
-					break;
+					displayProduct(); break;
 				case "DISPLAYALLPRODUCTS":
-					displayAllProducts();
-					break;
-
+					displayAllProducts(); break;
+		/****************** CLIENTS *****************************/
 				case "ADDCLIENT":
-					addClient();
-					break;
+					addClient(); break;
 				case "DISPLAYCLIENT": 
-					displayClient();
-					break;
+					displayClient(); break;
 				case "DISPLAYALLCLIENTS":
-					displayAllClients();
-					break;
+					displayAllClients(); break;
 				case "MODIFYCLIENT":	
-					modifyClient();
-					break;
-				case "exit":
-				case "e":
-					System.out.println("Exiting warehouse operations\n");
-					break;
-				case "m":
-				case "M":
-				case "main":
+					modifyClient(); break;
+		/******************** PRODUCTS **************************/
+				case "ADDTOCART":
+					addToCart(); break;
+				case "DISPLAYCART":
+					displayCart(); break;
+				case "PLACEORDER":
+					placeOrder(); break;
+				case "EXIT": case "E":
+					System.out.println("Exiting warehouse operations\n"); break;
+				case "M": case "MAIN":
 					System.out.println(MAINMENU);
 					break;
 				default:
@@ -253,6 +242,94 @@ public class UserInterface
 			System.out.println(it.next().toString());
 	}//end displayAllClients
 	
+	/*******************************************************************************
+	addToCart
+	Prompts the user for a product id, then asks for the quantity. Adds that item
+	to the cart.
+	********************************************************************************/
+	public static void addToCart(){
+		int productid, clientid, quantity;
+		//Get the client: 
+		System.out.print("Enter a client id: ");
+		clientid = getClientId();
+		if(!warehouse.verifyClient(clientid)){
+			System.out.println("Error, invalid client id. Aborting operation");
+			return;
+		}//end if
+
+		//Get the product:
+		productid = getProductId();
+		if(!warehouse.verifyProduct(productid) ){
+			System.out.println("Error, invalid product id. Aborting operation");
+			return;
+		}//end if
+
+		//Should now have a valid id in choice
+		System.out.print("\nEnter a quantity: ");
+		Scanner s = new Scanner(System.in); //flush buffer
+		quantity = s.nextInt(); //get quantity
+		warehouse.addToCart(clientid, productid, quantity); //Warehouse takes over from here
+		System.out.println("Item added to cart.");
+	}//end addToCart
+	
+	/*******************************************************************************
+	displayCart
+	Will prompt for a client's id, and will display that client's cart if client exists
+	********************************************************************************/
+	public static void displayCart(){
+		System.out.print("Please enter a client id: ");
+		Scanner s = new Scanner(System.in);
+		int id = s.nextInt();
+		Iterator it;
+		if(warehouse.verifyClient(id)){
+			it = warehouse.getCart(id);
+			while(it.hasNext()) //Display every item in cart
+				System.out.println( ((OrderedItem)it.next()).toString() );
+		}//end if
+		else
+			System.out.println("Error: Invalid id given");
+	}//end displayCart
+
+	/*****************************************************************************
+	placeOrder()
+	Will prompt operator for a client id and verify. Then will place an order using
+	that client's current cart.
+	Order will be created, and status of every item will be displayed.
+	Displays that an invoice is created, and displays the price. Does not include
+	waitlisted items.
+	Invoice is applied to client's balance.
+	*****************************************************************************/
+	public static void placeOrder(){
+		
+		
+	}//end placeOrder
+
+/*************************** Generic prompt methods ******************************/
+	/*** For prompts that are used many times in many applications ******************/
+
+	/*********************************************************************
+	getClientId
+	Prompts user for client id, retrieves it and returns it
+	**********************************************************************/
+	public static int getClientId(){
+		System.out.print("Please enter a client id: ");
+		Scanner s = new Scanner(System.in);
+		return s.nextInt();
+	}//end getClientId()
+	
+	/*********************************************************************
+	getProductId
+	Prompts user for product id, retrieves it and returns it
+	**********************************************************************/
+	public static int getProductId(){
+		System.out.println("Please enter a product id: ");
+		Scanner s = new Scanner(System.in);
+		return s.nextInt();
+	}//end getProductId()
+
+
+/************************** File reading methods **********************************/
+
 	/******************************************************************************
 	openWarehouse
 	Opens the given Warehouse, or creates if it doesn't exist
