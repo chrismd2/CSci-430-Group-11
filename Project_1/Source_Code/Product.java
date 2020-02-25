@@ -47,7 +47,7 @@ public class Product implements Serializable {
     description = "";
     purchasePrice = 0;
     salePrice = 0;
-	stock = 10; ////FIX LATER
+	stock = 0;
   }
 
   public int getProductNumber(){
@@ -93,10 +93,11 @@ public class Product implements Serializable {
     System.out.println("To use data Setter input data members in this order\n\tString description\n\tdouble purchasePrice\n\tdouble salePrice");
   }
 
-  public void setData(String _description, double _purchasePrice, double _salePrice){
+  public void setData(String _description, double _purchasePrice, double _salePrice, int _stock){
     description     =     _description;
     purchasePrice   =   _purchasePrice;
     salePrice       =       _salePrice;
+	stock 			=           _stock;
   }
 
   public void setPurchasePrice(double input){

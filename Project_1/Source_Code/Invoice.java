@@ -32,19 +32,9 @@ public class Invoice implements Serializable{
 		invoiceAmount = 0.0f;
 	}//end Constructor
 
-	/************************************************************
-		sendToAccount
-
-		Sends the Invoice to the client's account, modifies the applied flag to specify that a Invoice has been made.
-
-		If the applied flag is set to true when called, then the method won't apply the balance.
-	*************************************************************/
-	public void sendToAccount(){
-			clientAccount.addInvoice(this);
-	}//end sendToAccount
-
 	public void addItem(OrderedItem item){
 		invoiceItems.addItem(item);
+		invoiceAmount += item.getQuantity() * item.getProduct().getSalePrice();
 	}//end addItem
 
 	//getInvoiceAmount:
@@ -53,12 +43,6 @@ public class Invoice implements Serializable{
 	}//end getInvoiceAmount
 
 	public void applyInvoice(){
-		Iterator it = invoiceItems.getIterator();
-		OrderedItem currItem;
-		while(it.hasNext() ){
-			currItem = (OrderedItem) it.next();
-			invoiceAmount += currItem.getQuantity() * currItem.getProduct().getSalePrice();
-		}//end while
 		clientAccount.addInvoice(this);
 	}//end applyInvoice
 

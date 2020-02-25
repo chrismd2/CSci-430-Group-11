@@ -215,8 +215,8 @@ public class Warehouse implements Serializable{
 	}//end placeOrder
 
 	/****************   PRODUCT METHODS   ********************/
-	public void addProduct(String _description, double _purchasePrice, double _salePrice){
-		products.insertProduct(_description, _purchasePrice, _salePrice);
+	public void addProduct(String _description, double _purchasePrice, double _salePrice, int _stock){
+		products.insertProduct(_description, _purchasePrice, _salePrice, _stock);
 	}
   public Iterator getProducts(){
     return products.getProduct();

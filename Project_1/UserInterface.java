@@ -122,15 +122,8 @@ public class UserInterface
 					placeOrder(); break;
 				case "EXIT": case "E":
 					System.out.println("Exiting warehouse operations\n"); break;
-				case "M": case "MAIN":
-					addClient();
-					break;
-				case "exit":
-				case "e":
-					System.out.println("Exiting warehouse operations\n");
-					break;
-				case "m":
-				case "main":
+				case "M":
+				case "MAIN":
 					System.out.println(MAINMENU);
 					break;
 				default:
@@ -153,7 +146,9 @@ public class UserInterface
 		String purchasePrice = input.nextLine();
 		System.out.print("Enter an sale price for the product: ");
 		String salePrice = input.nextLine();
-		warehouse.addProduct(description, Double.valueOf(purchasePrice), Double.valueOf(salePrice) );
+		System.out.print("Enter a stock for the product: ");
+		int stock = input.nextInt();
+		warehouse.addProduct(description, Double.valueOf(purchasePrice), Double.valueOf(salePrice), stock);
 		System.out.println("Product added successfully");
 	}//end addProduct
 
@@ -341,7 +336,7 @@ public class UserInterface
 		//Client id now verified
 		//Tell warehouse to place that client's order
 		warehouse.placeOrder(clientId);
-		
+		System.out.println("Order placed successfully");
 	}//end placeOrder
 
 /*************************** Generic prompt methods ******************************/
@@ -362,7 +357,7 @@ public class UserInterface
 	Prompts user for product id, retrieves it and returns it
 	**********************************************************************/
 	public static int getProductId(){
-		System.out.println("Please enter a product id: ");
+		System.out.print("Please enter a product id: ");
 		Scanner s = new Scanner(System.in);
 		return s.nextInt();
 	}//end getProductId()
