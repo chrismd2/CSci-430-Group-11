@@ -177,6 +177,10 @@ public class Warehouse implements Serializable{
 		return clients.getIterator();
 	}//end getClients
 
+	public double getClientBalance(int id){
+		return clients.findClient(id).getClientBalance();
+	}//end getClientBalance
+
 	/************************************************************
 	addToCart
 	Given a client id, a product id and a quantity,
@@ -208,8 +212,6 @@ public class Warehouse implements Serializable{
 		Order order = new Order(clients.findClient(clientId) );
 		//Add the order to the orderList
 		orders.addOrder(order);
-
-
 	}//end placeOrder
 
 	/****************   PRODUCT METHODS   ********************/

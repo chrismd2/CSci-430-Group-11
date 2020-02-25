@@ -25,15 +25,14 @@ public class UserInterface
 										"Enter ADDCLIENT to add a client to the Warehouse\n" +
 										"Enter MODIFYCLIENT to modify information about a client\n" +
 										"Enter DISPLAYALLCLIENTS to display all clients\n" +
-										"Enter DISPLAYCLIENT to find information about an individual client\n";
+										"Enter DISPLAYCLIENT to find information about an individual client\n" + 
+										"Enter DISPLAYBALANCE to show a client's balance\n";
 	final static String ORDEROPLIST =   "ORDER OPERATIONS:\n" + 
 									    "______________________________________________________\n" +
 									    "Enter m for main menu | Enter e to quit\n" +
 										"Enter ADDTOCART to add a product to a client's cart\n" +
 									  	"Enter DISPLAYCART to display a client's cart\n" + 
-										"Enter PLACEORDER to place an order using the client's current cart\n" +
-										"Enter DISPLAYCLIENT to find information about an individual client\n" +
-										"Enter ADDTOCART to add a product to a client's cart\n";
+										"Enter PLACEORDER to place an order using the client's current cart\n";
 	final static String PRODUCTOPLIST = "PRODUCT OPERATIONS: \n" +
 										"______________________________________________\n" +
 										"Enter m for main menu | Enter e to quit\n" +
@@ -112,6 +111,8 @@ public class UserInterface
 					displayAllClients(); break;
 				case "MODIFYCLIENT":	
 					modifyClient(); break;
+				case "DISPLAYBALANCE":
+					displayClientBalance(); break;
 		/******************** PRODUCTS **************************/
 				case "ADDTOCART":
 					addToCart(); break;
@@ -260,6 +261,19 @@ public class UserInterface
 			System.out.println(it.next().toString());
 	}//end displayAllClients
 	
+	/********************************************************************************
+	displayClientBalance
+	Displays the balance of a client
+	********************************************************************************/
+	public static void displayClientBalance(){
+		int clientId = getClientId();
+		if(!warehouse.verifyClient(clientId)){
+			System.out.println("Error, invalid client id. Aborting operation");
+			return;
+		}//end if
+		System.out.println("Client Balance: " + warehouse.getClientBalance(clientId));
+	}//end displayClientBalance
+	
 	/*******************************************************************************
 	addToCart
 	Prompts the user for a product id, then asks for the quantity. Adds that item
@@ -268,7 +282,6 @@ public class UserInterface
 	public static void addToCart(){
 		int productid, clientid, quantity;
 		//Get the client: 
-		System.out.print("Enter a client id: ");
 		clientid = getClientId();
 		if(!warehouse.verifyClient(clientid)){
 			System.out.println("Error, invalid client id. Aborting operation");
@@ -318,7 +331,16 @@ public class UserInterface
 	Invoice is applied to client's balance.
 	*****************************************************************************/
 	public static void placeOrder(){
-		
+		//Get client id:
+		int clientId = getClientId();
+		//Verify client id:
+		if(!warehouse.verifyClient(clientId) ){
+			System.out.println("Error, invalid client id. Aborting operation");
+			return;
+		}//end if
+		//Client id now verified
+		//Tell warehouse to place that client's order
+		warehouse.placeOrder(clientId);
 		
 	}//end placeOrder
 
@@ -388,7 +410,5 @@ public class UserInterface
 
 	public static void tester(){
 		System.out.println("Running tester\n");
-		ChristensonTesting CT = new ChristensonTesting();
-		CT.testProductList();
 	}
 }

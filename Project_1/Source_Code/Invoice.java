@@ -44,7 +44,7 @@ public class Invoice implements Serializable{
 	}//end sendToAccount
 
 	public void addItem(OrderedItem item){
-		invoiceItems.add(item);
+		invoiceItems.addItem(item);
 	}//end addItem
 
 	//getInvoiceAmount:
@@ -54,8 +54,10 @@ public class Invoice implements Serializable{
 
 	public void applyInvoice(){
 		Iterator it = invoiceItems.getIterator();
+		OrderedItem currItem;
 		while(it.hasNext() ){
-			invoiceAmount += it.next().getProduct().getSalePrice();
+			currItem = (OrderedItem) it.next();
+			invoiceAmount += currItem.getQuantity() * currItem.getProduct().getSalePrice();
 		}//end while
 		clientAccount.addInvoice(this);
 	}//end applyInvoice

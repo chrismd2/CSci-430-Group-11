@@ -58,7 +58,7 @@ public class Order implements Serializable{
 	private void fillOrder(){
 		Iterator it = clientAccount.getCart();
 		while(it.hasNext()){
-			itemsOrdered.add(it.next() );
+			itemsOrdered.addItem((OrderedItem)it.next());
 		}//end while
 	}//end fillOrder
 	/****** END SETTERS ********/
@@ -106,19 +106,19 @@ public class Order implements Serializable{
 	Client's cart is cleared
 	*****************************************************************************/
 	public void processOrder(){
-		clientAccount.getCart().clear(); //Clear client's cart
+		clientAccount.clearCart(); //Clear client's cart
 		Iterator orderIt = itemsOrdered.getIterator(); //Get iterator for all items
 		Invoice invoice = new Invoice(clientAccount, this); //Create the invoice
 		OrderedItem currItem;
-		while(it.hasNext() ){
-			currItem = (OrderedItem) it.next(); //Get next item in the list
+		while(orderIt.hasNext() ){
+			currItem = (OrderedItem) orderIt.next(); //Get next item in the list
 			//Check if we can fulfill it with current stock
 			if(currItem.getProduct().getStock() >= currItem.getQuantity() ){
 				//Decrement stock, add it to the invoice
 				currItem.getProduct().removeStock(currItem.getQuantity() );
 				invoice.addItem(currItem);
 			} else{	//Not enough in stock, add it to the wait list
-				
+				currItem.getProduct().waitListItem(this, currItem.getQuantity());
 			}//end else
 		}//end while		
 		//Apply the invoice with the items that are currently being fulfilled

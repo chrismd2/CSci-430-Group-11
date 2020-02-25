@@ -40,6 +40,7 @@ public class Product implements Serializable {
   private double purchasePrice;
   private double salePrice;
   private int stock;
+  private List<WaitListItem> waitList = new ArrayList<WaitListItem>();
 
   public Product(){
     productID = ProductIdServer.instance().getId();
@@ -109,4 +110,9 @@ public class Product implements Serializable {
   public String toString(){
     return getData();
   }
+  
+  public void waitListItem(Order o, int quantity){
+	waitList.add(new WaitListItem(o, quantity));
+  }//end waitListItem
+  
 }

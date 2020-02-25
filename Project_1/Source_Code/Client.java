@@ -93,6 +93,7 @@ public class Client implements Serializable{
 	****************************/
 	public void addPayment(Payment newPayment){
 		balance -= newPayment.getPaymentAmount();
+		myPayments.addPayment(newPayment);
 	}//end addPayment
 
 	/***************************
@@ -101,7 +102,7 @@ public class Client implements Serializable{
 	*************************/
 	public void addInvoice(Invoice newInvoice){
 		balance += newInvoice.getInvoiceAmount();
-		myInvoices.addItem(newInvoice);
+		myInvoices.addInvoice(newInvoice);
 	}//end addInvoice
 
 	/*************************************************************************
