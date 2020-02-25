@@ -37,6 +37,27 @@ import java.lang.*;
 import java.io.*;
 
 public class ChristensonTesting {
+  public ChristensonTesting(){}
+  private void displayList(List<Product> foundProducts){
+    Iterator current = foundProducts.iterator();
+    while(current.hasNext()){
+      Product tProduct = (Product)current.next();
+      System.out.println("\n" + tProduct.getData());
+    }//end while
+  }//end displayList
+  private void productListSearchTest(ProductList PList){
+    System.out.println("\n\nTesting Search Function\nTesting with string");
+    List<Product> foundProducts = PList.search("Item");
+    displayList(foundProducts);
+
+    System.out.println("\nTesting with long");
+    foundProducts = PList.search(3);
+    displayList(foundProducts);
+
+    System.out.println("\nTesting with double");
+    foundProducts = PList.search(12.0);
+    displayList(foundProducts);
+  }//end productListSearchTest
   public void testProductList(){
     int itemCount = 10;
     System.out.println("Testing Product List");
@@ -68,5 +89,7 @@ public class ChristensonTesting {
 
     System.out.println("\nDisplaying data with showList function.");
     PList.showList();
-  }//end test
+
+    productListSearchTest(PList);
+  }//end testProductList
 }//end ChristensonTesting

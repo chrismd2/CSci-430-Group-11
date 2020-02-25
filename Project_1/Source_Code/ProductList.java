@@ -27,12 +27,11 @@ public class ProductList implements Serializable{
   }
 
   public static ProductList instance() {
-	if(pList == null){
-		return (pList = new ProductList());
-	} else{
-		return pList;
-	}//end if-else
-
+  	if(pList == null){
+  		return (pList = new ProductList());
+  	} else{
+  		return pList;
+  	}//end if-else
   }//end instance()
 
   public void insertProduct(String _description, double _purchasePrice, double _salePrice){
@@ -46,7 +45,7 @@ public class ProductList implements Serializable{
   public int size(){
 	return products.size();
   }//end size()
-  
+
   public void showList(){
     for(Iterator current = products.iterator(); current.hasNext();){
       Product P = (Product) current.next();
@@ -102,10 +101,50 @@ public class ProductList implements Serializable{
   }//end readObject
 
   public String toString(){
-	String returnedString = "";
-	Iterator curr = products.iterator();
-	while(curr.hasNext())
-		returnedString = returnedString.concat(curr.next().toString() + '\n');
-	return returnedString;
+  	String returnedString = "";
+  	Iterator curr = products.iterator();
+  	while(curr.hasNext())
+  		returnedString = returnedString.concat(curr.next().toString() + '\n');
+  	return returnedString;
   }//end toString
+
+  public List<Product> search(String parameter){
+    List<Product> returnProducts = new ArrayList<Product>();
+    Iterator current = products.iterator();
+    while(current.hasNext()){
+      Product tProduct = (Product)current.next();
+      String tString = tProduct.getDescription();
+      if(tString.contains(parameter)){
+        returnProducts.add(tProduct);
+      }//end if parameter equals
+    }//end while
+
+    return returnProducts;
+  }//end search with string
+
+  public List<Product> search(long parameter){
+    List<Product> returnProducts = new ArrayList<Product>();
+    Iterator current = products.iterator();
+    while(current.hasNext()){
+      Product tProduct = (Product)current.next();
+      if(tProduct.getProductNumber() == parameter){
+        returnProducts.add(tProduct);
+      }//end if parameter equals
+    }//end while
+
+    return returnProducts;
+  }//end search with long
+
+  public List<Product> search(double parameter){
+    List<Product> returnProducts = new ArrayList<Product>();
+    Iterator current = products.iterator();
+    while(current.hasNext()){
+      Product tProduct = (Product)current.next();
+      if(tProduct.getSalePrice() == parameter || tProduct.getPurchasePrice() == parameter){
+        returnProducts.add(tProduct);
+      }//end if parameter equals
+    }//end while
+
+    return returnProducts;
+  }//end search with double
  }
