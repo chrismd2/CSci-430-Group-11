@@ -36,7 +36,9 @@ public class Order implements Serializable{
 		clientAccount = c;
 		orderNumber = (OrderIdServer.instance() ).getId();
 		itemsOrdered = new ItemList();
+		fillOrder(); //Add all items from client's cart to order
 		date = new SimpleDateFormat(Constants.DATE_FORMAT).format(new Date());
+		processOrder();
 	}//end Order constructor
 
 	/****** Setters **********/
@@ -53,7 +55,12 @@ public class Order implements Serializable{
 		itemsOrdered.changeQuantity(p, quantity);
 	}//end modifyItemQuantity
 
-
+	private void fillOrder(){
+		Iterator it = clientAccount.getCart();
+		while(it.hasNext()){
+			itemsOrdered.add(it.next() );
+		}//end while
+	}//end fillOrder
 	/****** END SETTERS ********/
 
 
@@ -87,4 +94,35 @@ public class Order implements Serializable{
 					+ "\n" + itemsOrdered.toString();
 	}//end toString
 
-}
+	/********************* Processing methods *********************************/
+	/****************************************************************************
+	processOrder
+	Will go through each item in the order, and attempt to fulfill it.
+	Successfully fulfilled items will be added to an invoice
+	Items that are not fulfilled are added to a waitlist corresponding to that 
+	product
+	The invoice is told to calculate its total when finished going through the list,
+	and is added to the Client.
+	Client's cart is cleared
+	*****************************************************************************/
+	public void processOrder(){
+		clientAccount.getCart().clear(); //Clear client's cart
+		Iterator orderIt = itemsOrdered.getIterator(); //Get iterator for all items
+		Invoice invoice = new Invoice(clientAccount, this); //Create the invoice
+		OrderedItem currItem;
+		while(it.hasNext() ){
+			currItem = (OrderedItem) it.next(); //Get next item in the list
+			//Check if we can fulfill it with current stock
+			if(currItem.getProduct().getStock() >= currItem.getQuantity() ){
+				//Decrement stock, add it to the invoice
+				currItem.getProduct().removeStock(currItem.getQuantity() );
+				invoice.addItem(currItem);
+			} else{	//Not enough in stock, add it to the wait list
+				
+			}//end else
+		}//end while		
+		//Apply the invoice with the items that are currently being fulfilled
+		invoice.sendToAccount();
+	}//end processOrder
+
+}//end Order Class

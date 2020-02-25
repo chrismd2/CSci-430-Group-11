@@ -101,6 +101,7 @@ public class Client implements Serializable{
 	*************************/
 	public void addInvoice(Invoice newInvoice){
 		balance += newInvoice.getInvoiceAmount();
+		myInvoices.addItem(newInvoice);
 	}//end addInvoice
 
 	/*************************************************************************

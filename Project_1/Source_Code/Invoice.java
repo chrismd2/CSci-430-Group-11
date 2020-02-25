@@ -52,6 +52,14 @@ public class Invoice implements Serializable{
 		return invoiceAmount;
 	}//end getInvoiceAmount
 
+	public void applyInvoice(){
+		Iterator it = invoiceItems.getIterator();
+		while(it.hasNext() ){
+			invoiceAmount += it.next().getProduct().getSalePrice();
+		}//end while
+		clientAccount.addInvoice(this);
+	}//end applyInvoice
+
 	public String toString(){
 		return "\nClient id: " + clientAccount.getId() + " Amount: " + invoiceAmount + " Date " + date;
 	}//end toString

@@ -204,7 +204,7 @@ public class Warehouse implements Serializable{
 	Places the order for that client.
 	*************************************************************/
 	public void placeOrder(int clientId){
-		//Create an order corresponding to the client
+		//Create an order corresponding to the client, will clear client's cart
 		Order order = new Order(clients.findClient(clientId) );
 		//Add the order to the orderList
 		orders.add(order);
