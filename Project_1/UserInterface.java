@@ -26,7 +26,11 @@ public class UserInterface
 										"Enter MODIFYCLIENT to modify information about a client\n" +
 										"Enter DISPLAYALLCLIENTS to display all clients\n" +
 										"Enter DISPLAYCLIENT to find information about an individual client\n" + 
-										"Enter DISPLAYBALANCE to show a client's balance\n";
+										"Enter DISPLAYBALANCE to show a client's balance\n" +
+										"Enter MAKEPAYMENT to make a payment for a client.\n" +
+										"Enter DISPLAYPAYMENTS to display all payments on the client's account\n" +
+										"Enter DISPLAYINVOICES to display all invoices on the client's account\n" +
+										"Enter DISPLAYTRANSACTIONS to display all payments and invoices on the client's account\n";
 	final static String ORDEROPLIST =   "ORDER OPERATIONS:\n" + 
 									    "______________________________________________________\n" +
 									    "Enter m for main menu | Enter e to quit\n" +
@@ -113,6 +117,14 @@ public class UserInterface
 					modifyClient(); break;
 				case "DISPLAYBALANCE":
 					displayClientBalance(); break;
+				case "MAKEPAYMENT":
+					makePayment(); break;
+				case "DISPLAYPAYMENTS":
+					displayPayments(); break;
+				case "DISPLAYINVOICES":
+					displayInvoices(); break;
+				case "DISPLAYTRANSACTIONS":
+					displayTransactions(); break;
 		/******************** PRODUCTS **************************/
 				case "ADDTOCART":
 					addToCart(); break;
@@ -133,7 +145,7 @@ public class UserInterface
 		}//end while
 
 	}//end processInput
-
+/********************* PRODUCT METHODS *******************************/
 	/******************************************************************************
 	addProduct
 	Code to prompt user for necessary information to add a new product to the Warehouse
@@ -175,7 +187,7 @@ public class UserInterface
 		while(it.hasNext() )
 			System.out.println(it.next().toString());
 	}//end displayAllProducts
-
+/*********************** CLIENT METHODS *************************************/
 	/******************************************************************************
 	addClient
 	Code to prompt user for necessary information to add a new client to the Warehouse
@@ -269,6 +281,100 @@ public class UserInterface
 		System.out.println("Client Balance: " + warehouse.getClientBalance(clientId));
 	}//end displayClientBalance
 	
+	/*********************************************************************************
+	makePayment
+	Prompts user for a client id and a payment amount. Makes a payment to the client's
+	account for that amount
+	*********************************************************************************/
+	public static void makePayment(){
+		//Get client id
+		int clientId = getClientId();
+		if(!warehouse.verifyClient(clientId)){
+			System.out.println("Error, invalid client id. Aborting operation");
+			return;
+		}//end if
+		//Get payment amount
+		System.out.print("Enter a payment amount: ");
+		double amount = Double.valueOf(new Scanner(System.in).nextLine());
+		if(amount <= 0.0){
+			System.out.println("Error, payment must be a positive value. Aborting operation");
+			return;
+		}//end if
+		warehouse.makePayment(clientId, amount);
+		System.out.println("Payment received successfully");
+	}//end makePayment
+	
+	/**************************************************************************
+	displayPayments()
+	Prompts the user for a client id.
+	Displays the payment date and amount for all payments that the client has 
+	made.
+	***************************************************************************/
+	public static void displayPayments(){
+		int clientId = getClientId();
+		Iterator paymentIt;
+		if(!warehouse.verifyClient(clientId)){
+			System.out.println("Error, invalid client id. Aborting operation");
+			return;
+		}//end if
+		paymentIt = warehouse.getPaymentIt(clientId);
+		while(paymentIt.hasNext() )
+			System.out.println( ((Payment)(paymentIt.next())).toString() );
+	}//end displayPayments
+	
+	/**************************************************************************
+	displayInvoices()
+	Prompts the user for a client id.
+	Asks the user if they'd like to display detailed data (This includes the items
+															that were charged for)
+	Displays the date and relevant data for each invoice in the client's history
+	***************************************************************************/
+	public static void displayInvoices(){	
+		int clientId = getClientId();
+		Iterator invoiceIt;
+		boolean choice;
+		if(!warehouse.verifyClient(clientId)){
+			System.out.println("Error, invalid client id. Aborting operation");
+			return;
+		}//end if
+		System.out.print("Would you like to display detailed transactions? (Y|N) ");
+		choice = new Scanner(System.in).next().equals("Y"); //true if Y
+		invoiceIt = warehouse.getInvoiceIt(clientId);
+		if(choice)
+			while(invoiceIt.hasNext() )
+				System.out.println(((Invoice)(invoiceIt.next())).detailedString() );
+		else
+			while(invoiceIt.hasNext() )
+				System.out.println(((Invoice)(invoiceIt.next())).toString());
+	}//end displayInvoices()
+	
+	/**************************************************************************
+	displayTransactions()
+	Prompts the user for a client id.
+	Displays all invoices and payments that are in the client's account history.
+	***************************************************************************/
+	public static void displayTransactions(){
+		int clientId = getClientId();
+		Iterator paymentIt, invoiceIt;
+		if(!warehouse.verifyClient(clientId)){
+			System.out.println("Error, invalid client id. Aborting operation");
+			return;
+		}//end if
+		invoiceIt = warehouse.getInvoiceIt(clientId);
+		paymentIt = warehouse.getPaymentIt(clientId);
+		System.out.println("INVOICES\n" +
+						   "_____________________");
+		while(invoiceIt.hasNext() )
+			System.out.println(((Invoice)(invoiceIt.next())).toString());
+		System.out.println("PAYMENTS\n" +
+						   "_____________________");		
+		while(paymentIt.hasNext() )
+			System.out.println( ((Payment)(paymentIt.next())).toString() );
+	}//end displayTransactions
+	
+	
+/********************** ORDER METHODS *******************************************/
+
 	/*******************************************************************************
 	addToCart
 	Prompts the user for a product id, then asks for the quantity. Adds that item
@@ -291,7 +397,7 @@ public class UserInterface
 		}//end if
 
 		//Should now have a valid id in choice
-		System.out.print("\nEnter a quantity: ");
+		System.out.print("Enter a quantity: ");
 		Scanner s = new Scanner(System.in); //flush buffer
 		quantity = s.nextInt(); //get quantity
 		warehouse.addToCart(clientid, productid, quantity); //Warehouse takes over from here
@@ -338,6 +444,7 @@ public class UserInterface
 		warehouse.placeOrder(clientId);
 		System.out.println("Order placed successfully");
 	}//end placeOrder
+
 
 /*************************** Generic prompt methods ******************************/
 	/*** For prompts that are used many times in many applications ******************/

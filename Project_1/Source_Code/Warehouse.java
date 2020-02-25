@@ -199,6 +199,34 @@ public class Warehouse implements Serializable{
 	public Iterator getCart(int cId){
 		return clients.findClient(cId).getCart();
 	}//end getCart
+
+	/**************************************************************
+	makePayment
+	Given a client id and a positive payment amount, this method
+	create a payment for that client's account
+	***************************************************************/
+	public void makePayment(int clientId, double amount){
+		Payment p = new Payment(amount, clients.findClient(clientId));
+	}//end makePayment
+
+	/***************************************************************
+	getPaymentIt
+	Given a client id, this method returns an iterator to that client's
+	list of payments
+	*****************************************************************/
+	public Iterator getPaymentIt(int id){
+		return clients.findClient(id).getPayments();
+	}//end getPaymentIt
+	
+	/***************************************************************
+	getInvoiceIt
+	Given a client id, this method returns an iterator to that client's
+	list of invoices
+	*****************************************************************/
+	public Iterator getInvoiceIt(int id){
+		return clients.findClient(id).getInvoices();
+	}//end getPaymentIt
+
 	/***************** END CLIENT METHODS ********************/
 
 	/******************** ORDER METHODS *******************************/

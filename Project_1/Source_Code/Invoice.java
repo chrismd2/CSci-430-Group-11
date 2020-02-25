@@ -49,5 +49,13 @@ public class Invoice implements Serializable{
 	public String toString(){
 		return "\nClient id: " + clientAccount.getId() + " Amount: " + invoiceAmount + " Date " + date;
 	}//end toString
-
+	
+	/*********************************************************************************
+	detailedString()
+	Returns a string consisting of the contents of toString() AND the list of products
+	on the invoice
+	***********************************************************************************/
+	public String detailedString(){
+		return toString() + '\n' + invoiceItems.toString();
+	}//end detailedString()
 }
