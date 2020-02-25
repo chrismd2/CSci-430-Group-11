@@ -166,7 +166,7 @@ public class Warehouse implements Serializable{
 	public boolean verifyClient(int id){
 		return !(clients.findClient(id) == null);
 	}//end verifyClient
-	
+
 	/****************************************************************
 	getClients
 	Returns an iterator to the list of Clients in the system.
@@ -176,7 +176,7 @@ public class Warehouse implements Serializable{
 	public Iterator getClients(){
 		return clients.getIterator();
 	}//end getClients
-	
+
 	/************************************************************
 	addToCart
 	Given a client id, a product id and a quantity,
@@ -187,7 +187,7 @@ public class Warehouse implements Serializable{
 		Product myProduct = products.findProduct(pId);
 		myClient.addToCart(myProduct, quantity);
 	}//end addToCart
-	
+
 	/*************************************************************
 	getCart
 	Given a client id, returns an iterator to that client's cart
@@ -207,9 +207,9 @@ public class Warehouse implements Serializable{
 		//Create an order corresponding to the client
 		Order order = new Order(clients.findClient(clientId) );
 		//Add the order to the orderList
-		orders.add(order);
-		
-		
+		orders.addOrder(order);
+
+
 	}//end placeOrder
 
 	/****************   PRODUCT METHODS   ********************/

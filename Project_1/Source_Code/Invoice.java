@@ -28,7 +28,7 @@ public class Invoice implements Serializable{
 	public Invoice(Client clientAccount, Order order){
 		this.clientAccount = clientAccount;
 		date = new SimpleDateFormat(Constants.DATE_FORMAT).format(new Date());
-		invoicesItems = new ItemList();
+		invoiceItems = new ItemList();
 		invoiceAmount = 0.0f;
 	}//end Constructor
 
@@ -55,5 +55,5 @@ public class Invoice implements Serializable{
 	public String toString(){
 		return "\nClient id: " + clientAccount.getId() + " Amount: " + invoiceAmount + " Date " + date;
 	}//end toString
-	
+
 }
