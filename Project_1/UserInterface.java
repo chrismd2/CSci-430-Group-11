@@ -25,17 +25,17 @@ public class UserInterface
 										"Enter ADDCLIENT to add a client to the Warehouse\n" +
 										"Enter MODIFYCLIENT to modify information about a client\n" +
 										"Enter DISPLAYALLCLIENTS to display all clients\n" +
-										"Enter DISPLAYCLIENT to find information about an individual client\n" + 
+										"Enter DISPLAYCLIENT to find information about an individual client\n" +
 										"Enter DISPLAYBALANCE to show a client's balance\n" +
 										"Enter MAKEPAYMENT to make a payment for a client.\n" +
 										"Enter DISPLAYPAYMENTS to display all payments on the client's account\n" +
 										"Enter DISPLAYINVOICES to display all invoices on the client's account\n" +
 										"Enter DISPLAYTRANSACTIONS to display all payments and invoices on the client's account\n";
-	final static String ORDEROPLIST =   "ORDER OPERATIONS:\n" + 
+	final static String ORDEROPLIST =   "ORDER OPERATIONS:\n" +
 									    "______________________________________________________\n" +
 									    "Enter m for main menu | Enter e to quit\n" +
 										"Enter ADDTOCART to add a product to a client's cart\n" +
-									  	"Enter DISPLAYCART to display a client's cart\n" + 
+									  	"Enter DISPLAYCART to display a client's cart\n" +
 										"Enter PLACEORDER to place an order using the client's current cart\n";
 	final static String PRODUCTOPLIST = "PRODUCT OPERATIONS: \n" +
 										"______________________________________________\n" +
@@ -89,7 +89,7 @@ public class UserInterface
 		System.out.println(MAINMENU);
 		while(!inputStr.equals("exit") && !inputStr.equals("e")){
 			inputStr = input.next();
-	
+
 			switch(inputStr.toUpperCase()){
 				case "CLIENT":case "C":	//print list of client operations
 					System.out.println(CLIENTOPLIST); break;
@@ -109,11 +109,11 @@ public class UserInterface
 		/****************** CLIENTS *****************************/
 				case "ADDCLIENT":
 					addClient(); break;
-				case "DISPLAYCLIENT": 
+				case "DISPLAYCLIENT":
 					displayClient(); break;
 				case "DISPLAYALLCLIENTS":
 					displayAllClients(); break;
-				case "MODIFYCLIENT":	
+				case "MODIFYCLIENT":
 					modifyClient(); break;
 				case "DISPLAYBALANCE":
 					displayClientBalance(); break;
@@ -267,7 +267,7 @@ public class UserInterface
 		while(it.hasNext() )
 			System.out.println(it.next().toString());
 	}//end displayAllClients
-	
+
 	/********************************************************************************
 	displayClientBalance
 	Displays the balance of a client
@@ -280,7 +280,7 @@ public class UserInterface
 		}//end if
 		System.out.println("Client Balance: " + warehouse.getClientBalance(clientId));
 	}//end displayClientBalance
-	
+
 	/*********************************************************************************
 	makePayment
 	Prompts user for a client id and a payment amount. Makes a payment to the client's
@@ -303,11 +303,11 @@ public class UserInterface
 		warehouse.makePayment(clientId, amount);
 		System.out.println("Payment received successfully");
 	}//end makePayment
-	
+
 	/**************************************************************************
 	displayPayments()
 	Prompts the user for a client id.
-	Displays the payment date and amount for all payments that the client has 
+	Displays the payment date and amount for all payments that the client has
 	made.
 	***************************************************************************/
 	public static void displayPayments(){
@@ -321,7 +321,7 @@ public class UserInterface
 		while(paymentIt.hasNext() )
 			System.out.println( ((Payment)(paymentIt.next())).toString() );
 	}//end displayPayments
-	
+
 	/**************************************************************************
 	displayInvoices()
 	Prompts the user for a client id.
@@ -329,7 +329,7 @@ public class UserInterface
 															that were charged for)
 	Displays the date and relevant data for each invoice in the client's history
 	***************************************************************************/
-	public static void displayInvoices(){	
+	public static void displayInvoices(){
 		int clientId = getClientId();
 		Iterator invoiceIt;
 		boolean choice;
@@ -347,7 +347,7 @@ public class UserInterface
 			while(invoiceIt.hasNext() )
 				System.out.println(((Invoice)(invoiceIt.next())).toString());
 	}//end displayInvoices()
-	
+
 	/**************************************************************************
 	displayTransactions()
 	Prompts the user for a client id.
@@ -367,12 +367,12 @@ public class UserInterface
 		while(invoiceIt.hasNext() )
 			System.out.println(((Invoice)(invoiceIt.next())).toString());
 		System.out.println("PAYMENTS\n" +
-						   "_____________________");		
+						   "_____________________");
 		while(paymentIt.hasNext() )
 			System.out.println( ((Payment)(paymentIt.next())).toString() );
 	}//end displayTransactions
-	
-	
+
+
 /********************** ORDER METHODS *******************************************/
 
 	/*******************************************************************************
@@ -382,7 +382,7 @@ public class UserInterface
 	********************************************************************************/
 	public static void addToCart(){
 		int productid, clientid, quantity;
-		//Get the client: 
+		//Get the client:
 		clientid = getClientId();
 		if(!warehouse.verifyClient(clientid)){
 			System.out.println("Error, invalid client id. Aborting operation");
@@ -403,7 +403,7 @@ public class UserInterface
 		warehouse.addToCart(clientid, productid, quantity); //Warehouse takes over from here
 		System.out.println("Item added to cart.");
 	}//end addToCart
-	
+
 	/*******************************************************************************
 	displayCart
 	Will prompt for a client's id, and will display that client's cart if client exists
@@ -458,7 +458,7 @@ public class UserInterface
 		Scanner s = new Scanner(System.in);
 		return s.nextInt();
 	}//end getClientId()
-	
+
 	/*********************************************************************
 	getProductId
 	Prompts user for product id, retrieves it and returns it
@@ -512,5 +512,8 @@ public class UserInterface
 
 	public static void tester(){
 		System.out.println("Running tester\n");
+		ChristensonTesting CT = new ChristensonTesting();
+		//CT.testProductList();
+		CT.testAcceptShipment();
 	}
 }

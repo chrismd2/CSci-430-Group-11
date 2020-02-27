@@ -217,7 +217,7 @@ public class Warehouse implements Serializable{
 	public Iterator getPaymentIt(int id){
 		return clients.findClient(id).getPayments();
 	}//end getPaymentIt
-	
+
 	/***************************************************************
 	getInvoiceIt
 	Given a client id, this method returns an iterator to that client's
@@ -268,4 +268,33 @@ public class Warehouse implements Serializable{
 	}//end verifyProduct
 
 	/**************** END PRODUCT METHODS ********************/
+
+	//Accept shipment with a productList
+	public ProductList AcceptShipment(ProductList PList){
+		//insert each product in the product list
+		ProductList incompleteProducts = PList;
+		Iterator current = PList.getProduct();
+		while(current.hasNext()){
+			Product tProduct = (Product)current.next();
+			//check suppliers if invalid then add
+			addProduct(	tProduct.getDescription(), tProduct.getPurchasePrice(),
+									tProduct.getSalePrice(), tProduct.getStock());
+			//incompleteProducts.removeProduct(tProduct.getProductNumber());
+		}//end while loop
+
+		return incompleteProducts;
+	}//end AcceptShipment
+
+	//Accept shipment with an itemList
+	public void AcceptShipment(ItemList IList){
+		//insert each product in the product list
+		Iterator current = IList.getIterator();
+		while(current.hasNext()){
+			Product tProduct = ((OrderedItem)current.next()).getProduct();
+			//check suppliers if invalid then add
+			addProduct(	tProduct.getDescription(), tProduct.getPurchasePrice(),
+									tProduct.getSalePrice(), tProduct.getStock());
+			//incompleteProducts.removeProduct(tProduct.getProductNumber());
+		}//end while loop
+	}//end AcceptShipment
 }//end Warehouse class

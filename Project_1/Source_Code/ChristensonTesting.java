@@ -92,4 +92,27 @@ public class ChristensonTesting {
 
     productListSearchTest(PList);
   }//end testProductList
+  public void testAcceptShipment(){
+    int itemCount = 10;
+    System.out.println("Testing AcceptShipment");
+    //create warehouse
+    Warehouse w = new Warehouse();
+    //create product list
+    ProductList shipmentList = new ProductList();
+    for(int i = 0; i < itemCount; i++){
+      shipmentList.insertProduct("Item " + Integer.toString(i), 10 + i/4, 15 + i/2);
+    }//finished inserting itemCount number of products
+    //add Product list to warehouse with AcceptShipment function
+    //w.AcceptShipment(shipmentList);
+
+    ItemList shipmentIList = new ItemList();
+    Iterator current = shipmentList.getProduct();
+    for(int i = 0; i < itemCount; i++){
+      Product tProduct = (Product)current.next();
+      shipmentIList.addItem(tProduct, tProduct.getStock());
+    }
+    w.AcceptShipment(shipmentIList);
+
+    w.showProductlist();
+  }//end testAcceptShipment
 }//end ChristensonTesting
