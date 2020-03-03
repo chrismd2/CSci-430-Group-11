@@ -177,6 +177,10 @@ public class Warehouse implements Serializable{
 		return clients.getIterator();
 	}//end getClients
 
+	public double getClientBalance(int id){
+		return clients.findClient(id).getClientBalance();
+	}//end getClientBalance
+
 	/************************************************************
 	addToCart
 	Given a client id, a product id and a quantity,
@@ -195,6 +199,34 @@ public class Warehouse implements Serializable{
 	public Iterator getCart(int cId){
 		return clients.findClient(cId).getCart();
 	}//end getCart
+
+	/**************************************************************
+	makePayment
+	Given a client id and a positive payment amount, this method
+	create a payment for that client's account
+	***************************************************************/
+	public void makePayment(int clientId, double amount){
+		Payment p = new Payment(amount, clients.findClient(clientId));
+	}//end makePayment
+
+	/***************************************************************
+	getPaymentIt
+	Given a client id, this method returns an iterator to that client's
+	list of payments
+	*****************************************************************/
+	public Iterator getPaymentIt(int id){
+		return clients.findClient(id).getPayments();
+	}//end getPaymentIt
+
+	/***************************************************************
+	getInvoiceIt
+	Given a client id, this method returns an iterator to that client's
+	list of invoices
+	*****************************************************************/
+	public Iterator getInvoiceIt(int id){
+		return clients.findClient(id).getInvoices();
+	}//end getPaymentIt
+
 	/***************** END CLIENT METHODS ********************/
 
 	/******************** ORDER METHODS *******************************/
@@ -204,17 +236,15 @@ public class Warehouse implements Serializable{
 	Places the order for that client.
 	*************************************************************/
 	public void placeOrder(int clientId){
-		//Create an order corresponding to the client
+		//Create an order corresponding to the client, will clear client's cart
 		Order order = new Order(clients.findClient(clientId) );
 		//Add the order to the orderList
 		orders.addOrder(order);
-
-
 	}//end placeOrder
 
 	/****************   PRODUCT METHODS   ********************/
-	public void addProduct(String _description, double _purchasePrice, double _salePrice){
-		products.insertProduct(_description, _purchasePrice, _salePrice);
+	public void addProduct(String _description, double _purchasePrice, double _salePrice, int _stock){
+		products.insertProduct(_description, _purchasePrice, _salePrice, _stock);
 	}
   public Iterator getProducts(){
     return products.getProduct();
@@ -237,5 +267,114 @@ public class Warehouse implements Serializable{
 		return !(products.findProduct(id) == null);
 	}//end verifyProduct
 
+	public int getStock(int productId){
+		return products.findProduct(productId).getStock();
+	}//end getStock
+	
 	/**************** END PRODUCT METHODS ********************/
+
+	/******************* SUPPLIER METHODS ************************/
+	/*********************************************************
+	addSupplier
+	Given a supplier description, creates a new supplier object
+	**********************************************************/
+	public void addSupplier(String description){
+		Supplier s = new Supplier(description);
+		suppliers.add(s);
+	}//end addSupplier
+	
+	/***************************************************************
+	setSupplierDescription
+	Given a description and and id, changes the description for
+	that supplier
+	****************************************************************/
+	public void setSupplierDescription(int id, String description){
+		suppliers.find(id).setDescription(description);
+	}//end setSupplierDescription
+	
+	/********************************************************
+	findSupplier
+	Given a supplier ID, returns a reference to the corresponding
+	client. Returns null if doesn't exist
+	*********************************************************/
+	public Supplier findSupplier(int id){
+		Iterator it = suppliers.getIterator();
+		Supplier s;
+		while(it.hasNext()){
+			s = (Supplier)it.next();
+			if(s.getId() == id)
+				return s;
+		}//end while
+		return null;		
+	}//end findSupplier
+	
+	/******************************************************************************
+		verifySupplier
+		Returns true if the supplier exists in the supplierList. False otherwise
+	*******************************************************************************/
+	public boolean verifySupplier(int id){
+		return !(suppliers.findSupplier(id) == NULL);
+	}//end verifySupplier
+	
+	/***************************************************************
+	getSuppliers
+	Returns an iterator to the list of suppliers
+	***************************************************************/
+	public Iterator getSuppliers(){
+		return suppliers.getSuppliers();
+	}//end getSuppliers
+	
+	/*
+	//Accept shipment with a productList
+	public ProductList AcceptShipment(ProductList PList){
+		//insert each product in the product list
+		ProductList incompleteProducts = PList;
+		Iterator current = PList.getProduct();
+		while(current.hasNext()){
+			Product tProduct = (Product)current.next();
+			//check suppliers if invalid then add
+			addProduct(	tProduct.getDescription(), tProduct.getPurchasePrice(),
+									tProduct.getSalePrice(), tProduct.getStock());
+			//incompleteProducts.removeProduct(tProduct.getProductNumber());
+		}//end while loop
+
+		return incompleteProducts;
+	}//end AcceptShipment
+*/
+	//Accept shipment with an itemList
+	public void AcceptShipment(ItemList IList){
+		//insert each product in the product list
+		Iterator current = IList.getIterator();
+		while(current.hasNext()){
+			Product tProduct = ((OrderedItem)current.next()).getProduct();
+			//check suppliers if invalid then add
+			addProduct(	tProduct.getDescription(), tProduct.getPurchasePrice(),
+									tProduct.getSalePrice(), tProduct.getStock());
+			//incompleteProducts.removeProduct(tProduct.getProductNumber());
+		}//end while loop
+	}//end AcceptShipment
+	
+	/***************************************************
+	addShippedItem
+	Given a productId and a quantity, adds the given product
+	to the stock. Returns an iterator to the waitlist.
+	****************************************************/
+	public Iterator addShippedItem(int productId, int quantity){
+		Product p = products.findProduct(productId);
+		//Prompt product to add the item
+		p.addShippedItem(quantity);
+		return p.getWaitList();
+	}//end addShippedItem
+	
+	/*********************************************************
+	fulfillWaitListItem
+	UI will pass in a Product id and a waitlist item reference,
+	and will use them to fulfill the waitlisted item
+	*********************************************************/
+	public void fulfillWaitListItem( ){
+		
+		
+	}//end fulfillWaitListItem
+	
+	
 }//end Warehouse class
