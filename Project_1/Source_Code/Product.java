@@ -72,6 +72,10 @@ public class Product implements Serializable {
   public void removeStock(int r){
 	stock -= r;
   }//end removeStock
+  
+  public void addShippedItem(int quantity){
+	  stock += quantity;
+  }//end addShippedItem
 
   public String getData(){
     String data = "";
@@ -116,4 +120,7 @@ public class Product implements Serializable {
 	waitList.add(new WaitListItem(o, quantity));
   }//end waitListItem
   
+  public Iterator getWaitList(){
+	  return waitList.iterator();	  
+  }//end getWaitList
 }
