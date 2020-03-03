@@ -123,4 +123,10 @@ public class Product implements Serializable {
   public Iterator getWaitList(){
 	  return waitList.iterator();	  
   }//end getWaitList
+  
+  public void fulfillWaitListItem(WaitListItem item){
+	  item.process();
+	  waitList.remove(item);
+  }//end fulfillWaitListItem
+	  
 }

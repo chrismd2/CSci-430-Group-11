@@ -27,4 +27,9 @@ public class WaitListItem implements Serializable{
 	public String toString(){
 		return "Id: " + waitingOrder.getId() + " | Quantity: " + quantity + '\n';
 	}//end toString
+	
+	//Will tell the item to do something to itself for finances
+	public void process(){
+				
+	}//end process
 }
