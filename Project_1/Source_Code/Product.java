@@ -117,13 +117,18 @@ public class Product implements Serializable {
   }
   
   public void waitListItem(Order o, int quantity){
-	waitList.add(new WaitListItem(o, quantity));
+	waitList.add(new WaitListItem(o, quantity, this));
   }//end waitListItem
   
   public Iterator getWaitList(){
 	  return waitList.iterator();	  
   }//end getWaitList
   
+  /***************************************************************************
+  fulfillWaitListItem
+  Will process the specified item in the waitList, and then remove it from
+  the waitList
+  ***************************************************************************/
   public void fulfillWaitListItem(WaitListItem item){
 	  item.process();
 	  waitList.remove(item);

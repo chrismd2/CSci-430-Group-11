@@ -25,6 +25,8 @@ public class Warehouse implements Serializable{
 	private SupplierList suppliers;
 	private ProductList products;
 	private static Warehouse warehouse;
+	private List<WaitListItem> pendingWaitListRemoval = new LinkedList<>();
+	private List<Product> pendingWaitListProducts = new LinkedList<>();
 
 	//Default constructor:
 	public Warehouse(){
@@ -280,7 +282,7 @@ public class Warehouse implements Serializable{
 	**********************************************************/
 	public void addSupplier(String description){
 		Supplier s = new Supplier(description);
-		suppliers.add(s);
+		suppliers.insertSupplier(s);
 	}//end addSupplier
 	
 	/***************************************************************
@@ -289,7 +291,7 @@ public class Warehouse implements Serializable{
 	that supplier
 	****************************************************************/
 	public void setSupplierDescription(int id, String description){
-		suppliers.find(id).setDescription(description);
+		suppliers.search(id).setDescription(description);
 	}//end setSupplierDescription
 	
 	/********************************************************
@@ -298,7 +300,7 @@ public class Warehouse implements Serializable{
 	client. Returns null if doesn't exist
 	*********************************************************/
 	public Supplier findSupplier(int id){
-		Iterator it = suppliers.getIterator();
+		Iterator it = suppliers.getSuppliers();
 		Supplier s;
 		while(it.hasNext()){
 			s = (Supplier)it.next();
@@ -313,7 +315,7 @@ public class Warehouse implements Serializable{
 		Returns true if the supplier exists in the supplierList. False otherwise
 	*******************************************************************************/
 	public boolean verifySupplier(int id){
-		return !(suppliers.findSupplier(id) == NULL);
+		return !(suppliers.search(id) == null);
 	}//end verifySupplier
 	
 	/***************************************************************
@@ -372,8 +374,13 @@ public class Warehouse implements Serializable{
 	and will use them to fulfill the waitlisted item
 	*********************************************************/
 	public void fulfillWaitListItem(int productId, WaitListItem item){
-		products.findProduct(productId).fulfillWaitListItem(item);
+		pendingWaitListProducts.add(products.findProduct(productId));
+		pendingWaitListRemoval.add(item);
 	}//end fulfillWaitListItem
 	
+	public void doneAddingfulfillItems(){
+		while(pendingWaitListRemoval.size() > 0)
+			pendingWaitListProducts.get(0).fulfillWaitListItem(pendingWaitListRemoval.get(0));
+	}
 	
 }//end Warehouse class

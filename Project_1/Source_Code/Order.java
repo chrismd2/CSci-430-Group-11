@@ -86,6 +86,10 @@ public class Order implements Serializable{
 	public int getId(){
 		return orderNumber;
 	}//end getId
+	
+	public Client getClient(){
+		return clientAccount;
+	}
 	/******* END GETTERS *********/
 	
 	//toString:
