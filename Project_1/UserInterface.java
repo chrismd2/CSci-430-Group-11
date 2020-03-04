@@ -485,8 +485,10 @@ public class UserInterface
 	public static void addSupplier(){
 		String description;
 		Scanner s = new Scanner(System.in);
+      System.out.println("Enter a description for the supplier:");
 		description = s.nextLine();
 		warehouse.addSupplier(description);
+      System.out.println("Supplier added successfully");
 	}//end addSupplier
 	
 	/*************************************************************************
@@ -538,9 +540,11 @@ public class UserInterface
 		}//end if
 		while(moreProducts){
 			//Get product id:
-			System.out.print("Enter the received product's id: ");
+			System.out.print("Enter the received product's id (0 to quit): ");
 			scanner = new Scanner(System.in); //flush input buffer
 			productId = scanner.nextInt();
+         if(productId == 0) //Sentinel value to return with
+            return;
 			//Verify product id:
 			if(!warehouse.verifyProduct(productId)){
 				System.out.println("Error, invalid product id. Aborting operation");
@@ -556,13 +560,14 @@ public class UserInterface
 			quantCount = 0; //Reset quant count for new item
 			while(waitList.hasNext() ){
 				currItem = (WaitListItem)waitList.next();
-				if((currItem.getQuantity() + quantCount)< warehouse.getStock(productId)){
+				if((currItem.getQuantity() + quantCount)<= warehouse.getStock(productId)){
 					System.out.println("Order " + currItem.getOrder().getId() + 
 						" can be fulfilled with new stock.\n" +
 						"Fulfill? (Y|N) ");
 					scanner = new Scanner(System.in);
 					choice = scanner.next().charAt(0);
 					if(choice == 'Y'){
+                  System.out.println("Fulfilling order");
 						warehouse.fulfillWaitListItem(productId, currItem);
 						quantCount += currItem.getQuantity();
 					}
