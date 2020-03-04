@@ -1,5 +1,5 @@
 /**********************************************************************
-UserInterface.java
+Userinterface.java
 This file contains code for the user to interact with the Warehouse System via a terminal.
 ***********************************************************************/
 import Source_Code.*;
@@ -10,7 +10,7 @@ import java.lang.*;
 public class Userinterface
 {
 	private static Warehouse warehouse;
-	private static UserInterface userInterface;
+	private static Userinterface Userinterface;
    final static double OUTSTANDINGAMOUNT = 1000.00;
 	final static String FILENAME = "WareData";
 	final static String MAINMENU =  "	MAIN MENU	\n" +
@@ -802,13 +802,13 @@ public class Userinterface
 
 	/******************************************************************************
 	instance()
-	Called to create an instance of the UserInterface
+	Called to create an instance of the Userinterface
 	*****************************************************************************/
-	public static UserInterface instance() {
-		if(userInterface == null)
-			return userInterface = new UserInterface();
+	public static Userinterface instance() {
+		if(Userinterface == null)
+			return Userinterface = new Userinterface();
 		else
-			return userInterface;
+			return Userinterface;
 	}//end instance()
 
 }
