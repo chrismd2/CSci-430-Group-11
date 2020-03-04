@@ -42,11 +42,15 @@ public class UserInterface
 										"Enter m for main menu | Enter e to quit\n" +
 										"Enter ADDPRODUCT for add a product to the Warehouse\n" +
 										"Enter DISPLAYALLPRODUCTS to display all products\n" +
-										"Enter DISPLAYPRODUCT to find information about an individual product\n";
+										"Enter DISPLAYPRODUCT to find information about an individual product\n" + 
+										"Enter GETSTOCK to get the stock for a current product\n" + 
+										"Enter SHOWWAITLIST to display the wait list for a product\n";
 	final static String SUPPLIEROPLIST = "SUPPLIER OPERATIONS \n" +
 										 "______________________________________________\n" +
 										 "Enter m for main menu | Enter e to quit\n" +
-										 "options...\n";
+										 "Enter ADDSUPPLIER to add a supplier to the Warehouse\n" +
+										 "Enter CHANGESUPPLIERDESCRIPTION to change the description of an existing supplier\n" +
+										 "Enter ADDSHIPMENT to add a shipment for the supplier\n";
 
 	public static void main(String[] args){
 		if(args.length > 0){
@@ -91,6 +95,13 @@ public class UserInterface
 			inputStr = input.next();
 
 			switch(inputStr.toUpperCase()){
+		/******************** GENERAL ****************************/
+				case "EXIT": case "E":
+					System.out.println("Exiting warehouse operations\n"); break;
+				case "M":
+				case "MAIN":
+					System.out.println(MAINMENU);
+					break;
 				case "CLIENT":case "C":	//print list of client operations
 					System.out.println(CLIENTOPLIST); break;
 				case "ORDER": case "O": //Print list of order operations
@@ -132,12 +143,15 @@ public class UserInterface
 					displayCart(); break;
 				case "PLACEORDER":
 					placeOrder(); break;
-				case "EXIT": case "E":
-					System.out.println("Exiting warehouse operations\n"); break;
-				case "M":
-				case "MAIN":
-					System.out.println(MAINMENU);
-					break;
+				case "GETSTOCK":
+					getStock(); break;
+		/******************* SUPPLIERS ****************************/
+				case "ADDSHIPMENT":
+					addShipment(); break;
+				case "ADDSUPPLIER":
+					addSupplier(); break;
+				case "CHANGESUPPLIERDESCRIPTION":
+					changeSupplierDescription(); break;
 				default:
 					System.out.println("Entered text did not match an option; Please try again.");
 			}//end switch
@@ -187,6 +201,22 @@ public class UserInterface
 		while(it.hasNext() )
 			System.out.println(it.next().toString());
 	}//end displayAllProducts
+	
+	/********************************************************************************
+	getStock
+	Prompts for a product id, verifies, displays the stock
+	********************************************************************************/
+	public static void getStock(){
+		int id;
+		System.out.print("Enter an id for the product: ");
+		id = (new Scanner(System.in)).nextInt();
+		if(!warehouse.verifyProduct(id)){
+			System.out.println("Error, invalid product id. Aborting operation");
+			return;
+		}//end if
+      System.out.println("Current stock: " + warehouse.getStock(id));
+	}//end getStock
+	
 /*********************** CLIENT METHODS *************************************/
 	/******************************************************************************
 	addClient
@@ -445,7 +475,103 @@ public class UserInterface
 		System.out.println("Order placed successfully");
 	}//end placeOrder
 
-
+	
+/***************************** SUPPLIER METHODS *************************************/
+	/**************************************************************************
+	addSupplier()
+	Will prompt operator for a supplier description, and the supplier will be added
+	to the Warehouse
+	***************************************************************************/
+	public static void addSupplier(){
+		String description;
+		Scanner s = new Scanner(System.in);
+		description = s.nextLine();
+		warehouse.addSupplier(description);
+	}//end addSupplier
+	
+	/*************************************************************************
+	changeSupplierDescription()
+	Will prompt the user for a supplier ID. Verifies it.
+	Will prompt for a new description, and sets the supplier's description to that
+	************************************************************************/
+	public static void changeSupplierDescription(){
+		String description;
+		int id;
+		Scanner s = new Scanner(System.in);
+		System.out.print("Enter a supplier id: ");
+		id = s.nextInt();
+		if(!warehouse.verifySupplier(id) ){
+			System.out.println("Error, invalid supplier id. Aborting operation");
+			return;
+		}//end if
+		s = new Scanner(System.in); //flush input buffer
+		System.out.println("Enter a new description for this supplier:");
+		description = s.nextLine();
+		
+	}//end changeSupplierDescription
+	
+	/**************************************************************************
+	addShipment()
+	Will prompt operator for a supplier ID for the shipment being taken in.
+	Verifies that id
+	Will repeatedly prompt operator for a product id
+		Verifies that id
+		Prompts for a quantity
+		Increases that product's quantity
+	Repeats until user enters a sentinel key to exit
+	**************************************************************************/
+	public static void addShipment(){
+		int supplierId, productId, quantity, quantCount;
+		Scanner scanner;
+		boolean moreProducts = true;
+		Iterator waitList;
+		WaitListItem currItem;
+		char choice;
+		//Get supplier id:
+		System.out.print("Please enter a supplier id: ");
+		scanner = new Scanner(System.in);
+		supplierId = scanner.nextInt();
+		//Verify supplier id:
+		if(!warehouse.verifySupplier(supplierId)){
+			System.out.println("Error, invalid supplier id. Aborting operation");
+			return;
+		}//end if
+		while(moreProducts){
+			//Get product id:
+			System.out.print("Enter the received product's id: ");
+			scanner = new Scanner(System.in); //flush input buffer
+			productId = scanner.nextInt();
+			//Verify product id:
+			if(!warehouse.verifyProduct(productId)){
+				System.out.println("Error, invalid product id. Aborting operation");
+				return;
+			}//end if
+			//If valid, get product quantity
+			System.out.print("Enter a quantity for the product: ");
+			scanner = new Scanner(System.in); //flush buffer
+			quantity = scanner.nextInt();
+			//Increment product's quantity
+			waitList = warehouse.addShippedItem(productId, quantity);
+			//Receive waitList, prompt for any quantities that can be fulfilled.
+			quantCount = 0; //Reset quant count for new item
+			while(waitList.hasNext() ){
+				currItem = (WaitListItem)waitList.next();
+				if((currItem.getQuantity() + quantCount)< warehouse.getStock(productId)){
+					System.out.println("Order " + currItem.getOrder().getId() + 
+						" can be fulfilled with new stock.\n" +
+						"Fulfill? (Y|N) ");
+					scanner = new Scanner(System.in);
+					choice = scanner.next().charAt(0);
+					if(choice == 'Y'){
+						warehouse.fulfillWaitListItem(productId, currItem);
+						quantCount += currItem.getQuantity();
+					}
+				}//end if
+			}//end while
+			warehouse.doneAddingfulfillItems();
+		}//end while(moreProducts)
+	}//end addShipment
+	
 /*************************** Generic prompt methods ******************************/
 	/*** For prompts that are used many times in many applications ******************/
 
