@@ -35,6 +35,7 @@ import java.io.*;
 
 public class Product implements Serializable {
   private static final long serialVersionUID = 1L;
+  private Supplier supplier;
   private int productID;
   private String description;
   private double purchasePrice;
@@ -47,7 +48,8 @@ public class Product implements Serializable {
     description = "";
     purchasePrice = 0;
     salePrice = 0;
-	stock = 0;
+	 stock = 0;
+    supplier = null;
   }
 
   public int getProductNumber(){
@@ -69,6 +71,11 @@ public class Product implements Serializable {
   public int getStock(){
 	return stock;
   }
+  
+  public Supplier getSupplier(){
+   return supplier;
+  }
+  
   public void removeStock(int r){
 	stock -= r;
   }//end removeStock
@@ -76,16 +83,18 @@ public class Product implements Serializable {
   public void addShippedItem(int quantity){
 	  stock += quantity;
   }//end addShippedItem
+  
 
   public String getData(){
     String data = "";
-	data += productID;
-    data += " ";
     data += description;
+    data += "\n\tId: " + productID;
     data += "\n\tPurchase Price: ";
     data += purchasePrice;
-    data += "\n\tSale Price: ";
+    data += "\n\tSale Price:     ";
     data += salePrice;
+    data += "\n\tStock:          ";
+    data += stock;    
     return data;
   }
 
@@ -97,11 +106,12 @@ public class Product implements Serializable {
     System.out.println("To use data Setter input data members in this order\n\tString description\n\tdouble purchasePrice\n\tdouble salePrice");
   }
 
-  public void setData(String _description, double _purchasePrice, double _salePrice, int _stock){
+  public void setData(String _description, double _purchasePrice, double _salePrice, int _stock, Supplier s){
     description     =     _description;
     purchasePrice   =   _purchasePrice;
     salePrice       =       _salePrice;
-	stock 			=           _stock;
+	 stock 			=           _stock;
+    supplier        =                s; 
   }
 
   public void setPurchasePrice(double input){

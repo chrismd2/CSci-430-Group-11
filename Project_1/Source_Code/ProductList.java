@@ -34,16 +34,12 @@ public class ProductList implements Serializable{
   	}//end if-else
   }//end instance()
 
-  public void insertProduct(String _description, double _purchasePrice, double _salePrice, int _stock){
+  public void insertProduct(String _description, double _purchasePrice, double _salePrice, int _stock, Supplier _supplier){
     Product P = new Product();
-    P.setData(_description, _purchasePrice, _salePrice, _stock);
+    P.setData(_description, _purchasePrice, _salePrice, _stock, _supplier);
     products.add(P);
   }
-  public void insertProduct(String _description, double _purchasePrice, double _salePrice){
-    Product P = new Product();
-    P.setData(_description, _purchasePrice, _salePrice, 0);
-    products.add(P);
-  }
+
   public Iterator getProduct(){
     return products.iterator();
   }

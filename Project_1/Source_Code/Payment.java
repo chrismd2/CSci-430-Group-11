@@ -23,12 +23,14 @@ public class Payment implements Serializable{
 	private double clientPayment;
 	private Client clientAccount;
 	private String date;
+   private String description;
 
 	//Constructor:
-	public Payment(double paymentMade, Client clientAccount){
+	public Payment(double paymentMade, Client clientAccount, String description){
 		clientPayment = paymentMade;
 		this.clientAccount = clientAccount;
 		date = new SimpleDateFormat(Constants.DATE_FORMAT).format(new Date());
+      this.description = description;
 		sendToAccount();
 	}//end Constructor
 
@@ -47,7 +49,8 @@ public class Payment implements Serializable{
 	}//end getPaymentAmount
 	
 	public String toString(){
-		return "\nDate: " + date + " Amount: " + clientPayment;
+		return "\nDate: " + date + " Amount: " + clientPayment + 
+               "\n" + description;
 	}//end toString
 
 }

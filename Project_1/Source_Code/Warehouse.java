@@ -207,8 +207,8 @@ public class Warehouse implements Serializable{
 	Given a client id and a positive payment amount, this method
 	create a payment for that client's account
 	***************************************************************/
-	public void makePayment(int clientId, double amount){
-		Payment p = new Payment(amount, clients.findClient(clientId));
+	public void makePayment(int clientId, double amount, String description){
+		Payment p = new Payment(amount, clients.findClient(clientId), description);
 	}//end makePayment
 
 	/***************************************************************
@@ -245,8 +245,9 @@ public class Warehouse implements Serializable{
 	}//end placeOrder
 
 	/****************   PRODUCT METHODS   ********************/
-	public void addProduct(String _description, double _purchasePrice, double _salePrice, int _stock){
-		products.insertProduct(_description, _purchasePrice, _salePrice, _stock);
+	public void addProduct(String _description, double _purchasePrice, double _salePrice, int _stock, int supplierId){
+      Supplier s = suppliers.search(supplierId);
+		products.insertProduct(_description, _purchasePrice, _salePrice, _stock, s);
 	}
   public Iterator getProducts(){
     return products.getProduct();
@@ -273,6 +274,13 @@ public class Warehouse implements Serializable{
 		return products.findProduct(productId).getStock();
 	}//end getStock
 	
+   /*******************************************************************
+   getProductWaitList
+   Returns an iterator the product with the given id's wait list
+   ********************************************************************/
+   public Iterator getProductWaitList(int productId){
+      return products.findProduct(productId).getWaitList();
+   }//end getProductWaitList
 	/**************** END PRODUCT METHODS ********************/
 
 	/******************* SUPPLIER METHODS ************************/
@@ -325,36 +333,6 @@ public class Warehouse implements Serializable{
 	public Iterator getSuppliers(){
 		return suppliers.getSuppliers();
 	}//end getSuppliers
-	
-	/*
-	//Accept shipment with a productList
-	public ProductList AcceptShipment(ProductList PList){
-		//insert each product in the product list
-		ProductList incompleteProducts = PList;
-		Iterator current = PList.getProduct();
-		while(current.hasNext()){
-			Product tProduct = (Product)current.next();
-			//check suppliers if invalid then add
-			addProduct(	tProduct.getDescription(), tProduct.getPurchasePrice(),
-									tProduct.getSalePrice(), tProduct.getStock());
-			//incompleteProducts.removeProduct(tProduct.getProductNumber());
-		}//end while loop
-
-		return incompleteProducts;
-	}//end AcceptShipment
-*/
-	//Accept shipment with an itemList
-	public void AcceptShipment(ItemList IList){
-		//insert each product in the product list
-		Iterator current = IList.getIterator();
-		while(current.hasNext()){
-			Product tProduct = ((OrderedItem)current.next()).getProduct();
-			//check suppliers if invalid then add
-			addProduct(	tProduct.getDescription(), tProduct.getPurchasePrice(),
-									tProduct.getSalePrice(), tProduct.getStock());
-			//incompleteProducts.removeProduct(tProduct.getProductNumber());
-		}//end while loop
-	}//end AcceptShipment
 	
 	/***************************************************
 	addShippedItem

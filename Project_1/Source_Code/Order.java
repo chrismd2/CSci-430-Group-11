@@ -123,7 +123,7 @@ public class Order implements Serializable{
 				invoice.addItem(currItem);
 			} else{	//Not enough in stock, add it to the wait list
 				currItem.getProduct().waitListItem(this, currItem.getQuantity());
-				System.out.println("Waitlisting item");
+				System.out.println("Waitlisting item \"" + currItem.getProduct().getDescription() + "\" due to insufficient inventory.");
 			}//end else
 		}//end while		
 		//Apply the invoice with the items that are currently being fulfilled
