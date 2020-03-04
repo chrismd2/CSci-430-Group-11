@@ -95,6 +95,8 @@ public class Product implements Serializable {
     data += salePrice;
     data += "\n\tStock:          ";
     data += stock;    
+    data += "\n\tNumber of waitlisted orders: ";
+    data += waitList.size();
     return data;
   }
 
