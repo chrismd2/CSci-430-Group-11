@@ -379,8 +379,12 @@ public class Warehouse implements Serializable{
 	}//end fulfillWaitListItem
 	
 	public void doneAddingfulfillItems(){
-		while(pendingWaitListRemoval.size() > 0)
+		while(pendingWaitListRemoval.size() > 0){
 			pendingWaitListProducts.get(0).fulfillWaitListItem(pendingWaitListRemoval.get(0));
+         //Remove these items, dealt with now
+         pendingWaitListProducts.remove(0);
+         pendingWaitListRemoval.remove(0);  
+      }
 	}
 	
 }//end Warehouse class

@@ -130,6 +130,7 @@ public class Product implements Serializable {
   the waitList
   ***************************************************************************/
   public void fulfillWaitListItem(WaitListItem item){
+     removeStock(item.getQuantity());
 	  item.process();
 	  waitList.remove(item);
   }//end fulfillWaitListItem
