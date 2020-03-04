@@ -63,7 +63,7 @@ public class ChristensonTesting {
     System.out.println("Testing Product List");
     ProductList PList = new ProductList();
     for(int i = 0; i < itemCount; i++){
-      PList.insertProduct("Item " + Integer.toString(i), 10 + i/4, 15 + i/2);
+      //  PList.insertProduct("Item " + Integer.toString(i), 10 + i/4, 15 + i/2);
     }//finished inserting itemCount number of products
 
     System.out.println("\nDisplaying data with a getData function from iterator.");
@@ -100,7 +100,7 @@ public class ChristensonTesting {
     //create product list
     ProductList shipmentList = new ProductList();
     for(int i = 0; i < itemCount; i++){
-      shipmentList.insertProduct("Item " + Integer.toString(i), 10 + i/4, 15 + i/2);
+      //shipmentList.insertProduct("Item " + Integer.toString(i), 10 + i/4, 15 + i/2);
     }//finished inserting itemCount number of products
     //add Product list to warehouse with AcceptShipment function
     //w.AcceptShipment(shipmentList);
@@ -111,7 +111,7 @@ public class ChristensonTesting {
       Product tProduct = (Product)current.next();
       shipmentIList.addItem(tProduct, tProduct.getStock());
     }
-    w.AcceptShipment(shipmentIList);
+    //w.AcceptShipment(shipmentIList);
 
     w.showProductlist();
   }//end testAcceptShipment
