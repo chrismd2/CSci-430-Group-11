@@ -33,7 +33,16 @@ public class ItemList implements Serializable{
 	}
 
 	public void removeItem(Product removeProduct){
-		itemList.remove(removeProduct);
+		Iterator<OrderedItem> it = itemList.iterator();
+		OrderedItem curr;
+		boolean done = false;
+		while(it.hasNext() && !done){
+			curr = it.next();
+			if(curr.getProduct() == removeProduct){
+				it.remove();
+				done = true;
+			}//end if
+		}//end while()
 	}//end removeItem
 
 	public void clear(){

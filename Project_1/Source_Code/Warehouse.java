@@ -201,6 +201,24 @@ public class Warehouse implements Serializable{
 	public Iterator getCart(int cId){
 		return clients.findClient(cId).getCart();
 	}//end getCart
+   
+   /*************************************************************
+   clearCart
+   Given a client id, clears that client's cart
+   *************************************************************/
+   public void clearCart(int id){
+      clients.findClient(id).clearCart();
+   }//end clearCart
+   
+   /************************************************************
+   modifyCartItem
+   Given a client id, product id and quantity, modifies the 
+   quantity of that product. A quantity of 0 will remove it from the cart
+   *************************************************************/
+   public void modifyCartItem(int clientId, int productId, int quantity){
+      clients.findClient(clientId).changeItemQuantity(products.findProduct(productId), quantity);
+   }//end modifyCartItem
+
 
 	/**************************************************************
 	makePayment

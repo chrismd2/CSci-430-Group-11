@@ -125,10 +125,14 @@ public class Client implements Serializable{
 		changeItemQuantity
 		Given a product that is already in the cart and a 
 		quantity, this methods changes the quantity of that
-		item.
+		item. If the given quantity is 0, the product will
+      be removed
 	*******************************************************/
 	public void changeItemQuantity(Product p, int quantity){
-		shoppingCart.changeQuantity(p, quantity);
+      if(quantity == 0)
+         shoppingCart.removeItem(p);
+      else
+		   shoppingCart.changeQuantity(p, quantity);
 	}//end changeQuantity
 
 	/********************************************************
