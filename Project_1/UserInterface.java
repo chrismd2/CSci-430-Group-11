@@ -52,7 +52,8 @@ public class UserInterface
 										 "Enter m for main menu | Enter e to quit\n" +
 										 "Enter ADDSUPPLIER to add a supplier to the Warehouse\n" +
 										 "Enter CHANGESUPPLIERDESCRIPTION to change the description of an existing supplier\n" +
-										 "Enter ADDSHIPMENT to add a shipment for the supplier\n";
+										 "Enter ADDSHIPMENT to add a shipment for the supplier\n" +
+                               "Enter DISPLAYSUPPLIERPRODUCTS to display all products that the supplier stocks\n";
 
 	public static void main(String[] args){
 		if(args.length > 0){
@@ -158,6 +159,8 @@ public class UserInterface
 					addSupplier(); break;
 				case "CHANGESUPPLIERDESCRIPTION":
 					changeSupplierDescription(); break;
+            case "DISPLAYSUPPLIERPRODUCTS":
+               displaySupplierProducts(); break;
 				default:
 					System.out.println("Entered text did not match an option; Please try again.");
 			}//end switch
@@ -646,6 +649,38 @@ public class UserInterface
 			warehouse.doneAddingfulfillItems();
 		}//end while(moreProducts)
 	}//end addShipment
+   
+   /****************************************************************************
+   displaySupplierProducts()
+   Prompts the user for a supplier id/verifies it
+   Displays all products that the given supplier stocks in the warehouse
+   ***************************************************************************/
+   public static void displaySupplierProducts(){
+      Scanner scanner;
+      int supplierId;
+      Iterator it;
+      Product currProduct;
+      boolean found = false;
+      System.out.print("Please enter a supplier id: ");
+		scanner = new Scanner(System.in);
+		supplierId = scanner.nextInt();
+		//Verify supplier id:
+		if(!warehouse.verifySupplier(supplierId)){
+			System.out.println("Error, invalid supplier id. Aborting operation");
+			return;
+		}//end if
+      //Get list of all products
+      it = warehouse.getProducts();
+      while(it.hasNext()){
+         currProduct = (Product)it.next();
+         if(currProduct.getSupplier().getId() == supplierId){
+            System.out.println(currProduct.toString());
+            found = true;
+         }//end if
+      }//end while
+      if(!found)
+         System.out.println("This supplier currently has no products in the warehouse");
+   }//end displaySupplierProducts
 	
 /*************************** Generic prompt methods ******************************/
 	/*** For prompts that are used many times in many applications ******************/
