@@ -11,6 +11,7 @@ public class UserInterface
 {
 	private static Warehouse warehouse;
 	private static UserInterface userInterface;
+   final static double OUTSTANDINGAMOUNT = 1000.00;
 	final static String FILENAME = "WareData";
 	final static String MAINMENU =  "	MAIN MENU	\n" +
 									"______________________________________________\n" +
@@ -30,7 +31,8 @@ public class UserInterface
 										"Enter MAKEPAYMENT to make a payment for a client.\n" +
 										"Enter DISPLAYPAYMENTS to display all payments on the client's account\n" +
 										"Enter DISPLAYINVOICES to display all invoices on the client's account\n" +
-										"Enter DISPLAYTRANSACTIONS to display all payments and invoices on the client's account\n";
+										"Enter DISPLAYTRANSACTIONS to display all payments and invoices on the client's account\n" +
+                              "Enter DISPLAYOUTSTANDINGBALANCES to display all clients with an outstanding balance\n";
 	final static String ORDEROPLIST =   "ORDER OPERATIONS:\n" +
 									    "______________________________________________________\n" +
 									    "Enter m for main menu | Enter e to quit\n" +
@@ -136,6 +138,8 @@ public class UserInterface
 					displayInvoices(); break;
 				case "DISPLAYTRANSACTIONS":
 					displayTransactions(); break;
+            case "DISPLAYOUTSTANDINGBALANCES":
+               displayOutstandingBalances(); break;
 		/******************** PRODUCTS **************************/
 				case "ADDTOCART":
 					addToCart(); break;
@@ -145,6 +149,8 @@ public class UserInterface
 					placeOrder(); break;
 				case "GETSTOCK":
 					getStock(); break;
+            case "SHOWWAITLIST":
+               showWaitList(); break;
 		/******************* SUPPLIERS ****************************/
 				case "ADDSHIPMENT":
 					addShipment(); break;
@@ -165,17 +171,32 @@ public class UserInterface
 	Code to prompt user for necessary information to add a new product to the Warehouse
 	*******************************************************************************/
 	public static void addProduct(){
-		Scanner input = new Scanner(System.in);
-		System.out.print("Enter a description for the product: ");
-		String description = input.nextLine();
-		System.out.print("Enter a purchase price for the product: ");
-		String purchasePrice = input.nextLine();
-		System.out.print("Enter an sale price for the product: ");
-		String salePrice = input.nextLine();
-		System.out.print("Enter a stock for the product: ");
-		int stock = input.nextInt();
-		warehouse.addProduct(description, Double.valueOf(purchasePrice), Double.valueOf(salePrice), stock);
-		System.out.println("Product added successfully");
+      boolean adding = true;
+      Scanner input;   
+      while(adding){
+   		input = new Scanner(System.in);
+         System.out.print("Enter the id of the supplier that stocks this product: ");
+         int supplier = input.nextInt();
+         if(!warehouse.verifySupplier(supplier)){
+            System.out.println("Invalid supplier id. Teminating operation");
+            return;
+         }//end if
+         input = new Scanner(System.in);//clear buffer
+   		System.out.print("Enter a description for the product: ");
+   		String description = input.nextLine();
+   		System.out.print("Enter a purchase price for the product: ");
+   		String purchasePrice = input.nextLine();
+   		System.out.print("Enter an sale price for the product: ");
+   		String salePrice = input.nextLine();
+   		System.out.print("Enter a stock for the product: ");
+   		int stock = input.nextInt();
+   		warehouse.addProduct(description, Double.valueOf(purchasePrice), Double.valueOf(salePrice), stock, supplier);
+   		System.out.println("Product added successfully");
+         //Check to see if they want to add another product
+         System.out.print("Add another product? (Y|N) ");
+         input = new Scanner(System.in);
+         adding = (input.next().charAt(0) == 'Y');
+      }//end while
 	}//end addProduct
 
 	/*****************************************************************************
@@ -216,6 +237,29 @@ public class UserInterface
 		}//end if
       System.out.println("Current stock: " + warehouse.getStock(id));
 	}//end getStock
+   
+   /******************************************************************************
+   showWaitList
+   Gets the product id, then displays its wait list
+   ******************************************************************************/
+   public static void showWaitList(){
+      int productID = getProductId();
+      Iterator it;
+      if(!warehouse.verifyProduct(productID)){
+         System.out.println("Error, invalid product id. Aborting operation");
+         return;
+      }//end if
+      it = warehouse.getProductWaitList(productID);
+      System.out.println("Product: \n" + warehouse.findProduct(productID).toString());
+      if(!it.hasNext())
+         System.out.println("Product has no wait list currently");
+      else{
+         System.out.println("Wait list:\n"+
+                            "__________________");
+         while(it.hasNext())
+            System.out.println(((WaitListItem)it.next()).toString());
+      }//end else
+   }//end showWaitList
 	
 /*********************** CLIENT METHODS *************************************/
 	/******************************************************************************
@@ -330,7 +374,9 @@ public class UserInterface
 			System.out.println("Error, payment must be a positive value. Aborting operation");
 			return;
 		}//end if
-		warehouse.makePayment(clientId, amount);
+      System.out.println("Please enter a description for this transaction (ie payment method)");
+      String description = (new Scanner(System.in).nextLine());
+		warehouse.makePayment(clientId, amount, description);
 		System.out.println("Payment received successfully");
 	}//end makePayment
 
@@ -396,11 +442,33 @@ public class UserInterface
 						   "_____________________");
 		while(invoiceIt.hasNext() )
 			System.out.println(((Invoice)(invoiceIt.next())).toString());
-		System.out.println("PAYMENTS\n" +
+		System.out.println("\nPAYMENTS\n" +
 						   "_____________________");
 		while(paymentIt.hasNext() )
 			System.out.println( ((Payment)(paymentIt.next())).toString() );
 	}//end displayTransactions
+   
+   /******************************************************************************
+   displayOutstandingBalances
+   Displays all clients with a balance greater than the defined
+   final variable OUTSTANDINGAMOUNT
+   *****************************************************************************/
+   public static void displayOutstandingBalances(){
+      Iterator it = warehouse.getClients();
+      Client currClient = null;
+      boolean found = false;
+      while(it.hasNext()){
+         currClient = (Client)it.next();
+         if(currClient.getClientBalance() >= OUTSTANDINGAMOUNT){
+            System.out.println(currClient.toString());
+            found = true;
+         }//end if
+      }//end while()
+      if(!found)
+         System.out.println("No clients with an outstanding balance found");
+      if(currClient == null)
+         System.out.println("No clients in the database currently");
+   }//end displayOutstandingBalances
 
 
 /********************** ORDER METHODS *******************************************/
@@ -562,8 +630,10 @@ public class UserInterface
 				currItem = (WaitListItem)waitList.next();
 				if((currItem.getQuantity() + quantCount)<= warehouse.getStock(productId)){
 					System.out.println("Order " + currItem.getOrder().getId() + 
-						" can be fulfilled with new stock.\n" +
-						"Fulfill? (Y|N) ");
+						" can be fulfilled with new stock.\n" + 
+                  " Current stock: " + warehouse.getStock(productId) +
+                  " Order quantity needed: " + currItem.getQuantity() +
+						"\nFulfill? (Y|N) ");
 					scanner = new Scanner(System.in);
 					choice = scanner.next().charAt(0);
 					if(choice == 'Y'){
