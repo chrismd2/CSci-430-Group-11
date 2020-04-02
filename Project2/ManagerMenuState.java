@@ -130,10 +130,18 @@ public class ManagerMenuState{
 	**********************************************************************/
 	private static void viewAllSuppliers(){
 		Iterator it = warehouse.getSuppliers();
+		System.out.println("Suppliers:");
+		System.out.println("____________________");
 		while(it.hasNext())
 			System.out.println(it.next().toString());
 	}//end viewAllSuppliers
 	
+	/*********************************************************************
+	viewSuppliersOfProduct
+	User passes in the id of the product.
+	Interface displays all suppliers that supply that product, along with
+	their sale price for the product.
+	**********************************************************************/
 	private static void viewSuppliersOfProduct(){
 		
 	}//end viewSuppliersOfProduct

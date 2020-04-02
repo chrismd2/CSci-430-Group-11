@@ -263,9 +263,8 @@ public class Warehouse implements Serializable{
 	}//end placeOrder
 
 	/****************   PRODUCT METHODS   ********************/
-	public void addProduct(String _description, double _purchasePrice, double _salePrice, int _stock, int supplierId){
-      Supplier s = suppliers.search(supplierId);
-		products.insertProduct(_description, _purchasePrice, _salePrice, _stock, s);
+	public void addProduct(String _description, double _salePrice, int _stock){
+		products.insertProduct(_description, _salePrice, _stock);
 	}
   public Iterator getProducts(){
     return products.getProduct();
@@ -351,6 +350,15 @@ public class Warehouse implements Serializable{
 	public Iterator getSuppliers(){
 		return suppliers.getSuppliers();
 	}//end getSuppliers
+	
+	/**************************************************************
+	addSupplierItem
+	Given a Supplier, Product, Purchase price
+	Adds the product to the list of items that the supplier stocks
+	****************************************************************/
+	public void addSupplierItem(int supplierId, int productId, double purchasePrice){
+		suppliers.search(supplierId).addProduct(products.search(productId).get(0), purchasePrice);
+	}//end addSupplierItem
 	
 	/***************************************************
 	addShippedItem

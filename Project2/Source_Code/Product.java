@@ -20,10 +20,8 @@ Project 1 - Warehouse
     +  String: getProductNumber()
     +  String: getDescription()
     +  String: getData()
-    +  double: getPurchasePrice()
     +  double: getSalePrice()
     +  void: setDescription(String)
-    +  void: setPurchasePrice(double)
     +  void: setSalePrice(double)
 
 */
@@ -35,10 +33,9 @@ import java.io.*;
 
 public class Product implements Serializable {
   private static final long serialVersionUID = 1L;
-  private Supplier supplier;
+  private ArrayList<Supplier> suppliers;
   private int productID;
   private String description;
-  private double purchasePrice;
   private double salePrice;
   private int stock;
   private List<WaitListItem> waitList = new ArrayList<WaitListItem>();
@@ -46,10 +43,9 @@ public class Product implements Serializable {
   public Product(){
     productID = ProductIdServer.instance().getId();
     description = "";
-    purchasePrice = 0;
     salePrice = 0;
-	 stock = 0;
-    supplier = null;
+	stock = 0;
+    suppliers = new ArrayList<Supplier>();
   }
 
   public int getProductNumber(){
@@ -60,9 +56,6 @@ public class Product implements Serializable {
     return description;
   }
 
-  public double getPurchasePrice(){
-    return purchasePrice;
-  }
 
   public double getSalePrice(){
     return salePrice;
@@ -72,8 +65,8 @@ public class Product implements Serializable {
 	return stock;
   }
   
-  public Supplier getSupplier(){
-   return supplier;
+  public Iterator getSuppliers(){
+   return suppliers.iterator();
   }
   
   public void removeStock(int r){
@@ -89,8 +82,6 @@ public class Product implements Serializable {
     String data = "";
     data += description;
     data += "\n\tId: " + productID;
-    data += "\n\tPurchase Price: ";
-    data += purchasePrice;
     data += "\n\tSale Price:     ";
     data += salePrice;
     data += "\n\tStock:          ";
@@ -99,6 +90,10 @@ public class Product implements Serializable {
     data += waitList.size();
     return data;
   }
+  
+  public void addSupplier(Supplier s){
+	  suppliers.add(s);
+  }//end addSupplier
 
   public void setDescription(String input){
     description = input;
@@ -108,16 +103,10 @@ public class Product implements Serializable {
     System.out.println("To use data Setter input data members in this order\n\tString description\n\tdouble purchasePrice\n\tdouble salePrice");
   }
 
-  public void setData(String _description, double _purchasePrice, double _salePrice, int _stock, Supplier s){
+  public void setData(String _description, double _salePrice, int _stock){
     description     =     _description;
-    purchasePrice   =   _purchasePrice;
     salePrice       =       _salePrice;
 	 stock 			=           _stock;
-    supplier        =                s; 
-  }
-
-  public void setPurchasePrice(double input){
-    purchasePrice = input;
   }
 
   public void setSalePrice(double input){

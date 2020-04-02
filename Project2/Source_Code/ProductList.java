@@ -34,9 +34,9 @@ public class ProductList implements Serializable{
   	}//end if-else
   }//end instance()
 
-  public void insertProduct(String _description, double _purchasePrice, double _salePrice, int _stock, Supplier _supplier){
+  public void insertProduct(String _description, double _salePrice, int _stock){
     Product P = new Product();
-    P.setData(_description, _purchasePrice, _salePrice, _stock, _supplier);
+    P.setData(_description, _salePrice, _stock);
     products.add(P);
   }
 
@@ -141,7 +141,7 @@ public class ProductList implements Serializable{
     Iterator current = products.iterator();
     while(current.hasNext()){
       Product tProduct = (Product)current.next();
-      if(tProduct.getSalePrice() == parameter || tProduct.getPurchasePrice() == parameter){
+      if(tProduct.getSalePrice() == parameter){
         returnProducts.add(tProduct);
       }//end if parameter equals
     }//end while
