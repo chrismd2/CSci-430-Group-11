@@ -4,6 +4,7 @@ import java.util.*;
 import java.lang.*;
 
 public class SupplierItem{
+    private static final long serialVersionUID = 1L;
 	private final Supplier supplier;
 	private final Product product;
 	private double purchasePrice;
@@ -31,8 +32,7 @@ public class SupplierItem{
 	}//end getSupplier
 	
 	public String toString(){
-		return "Supplier: " + supplier.getDescription() +
-				"\nProduct: " + product.getDescription() +
+		return "Product: " + product.getDescription() +
 				"\nPrice: " + purchasePrice + "\n";
 	}//end toString
 }//end SupplierItem class

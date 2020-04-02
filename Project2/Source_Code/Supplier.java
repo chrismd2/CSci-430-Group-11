@@ -13,6 +13,7 @@ public class Supplier implements Serializable {
   public Supplier(String description){
     id = (SupplierIdServer.instance() ).getId();
     this.description = description;
+	suppliedProducts = new ArrayList<SupplierItem>();
   }
   
   public void addProduct(Product p, double purchasePrice){
@@ -54,7 +55,39 @@ public class Supplier implements Serializable {
   }//end getDescription
   
   public String toString(){
-	  return description + '\n' + suppliedProducts.toString();
+	  return description + "\tId: " + id + '\n';
   }//end toString
+  
+  /**************************************************************
+  searchProduct
+	Given a product id, this method will search for that product in
+	the supplier's list of products. If found, it will return a string
+	containing the supplier's id, name and purchase price of the product
+	If not found, it will return an empty string
+  **************************************************************/
+  public String searchProduct(int id){
+	  Iterator it = suppliedProducts.iterator();
+	  SupplierItem currSupplierItem;
+	  while(it.hasNext()){
+		  currSupplierItem = (SupplierItem)it.next();
+		  if(currSupplierItem.getProduct().getProductNumber() == id)
+			  return "Supplier id: " + id + " Name: " + description + '\n' +
+						"Purchase Price: " + currSupplierItem.getPurchasePrice();
+	  }//end while
+	  return "";
+  }//end searchProduct
+  
+  /******************************************************************
+  hasProduct
+	Given a product id, this method will return true if the supplier
+	stocks that product. False otherwise.
+  ********************************************************************/
+  public boolean hasProduct(int id){
+	 Iterator it = suppliedProducts.iterator();
+	 while(it.hasNext())
+		 if(((SupplierItem)it.next()).getProduct().getProductNumber() == id)
+			 return true;
+	 return false;
+  }//end hasProduct
 }
 

@@ -73,5 +73,3 @@ public class SupplierList implements Serializable {
 	return returnedString;
   }//end toString
 }
-
-
