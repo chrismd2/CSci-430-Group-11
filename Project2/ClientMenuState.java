@@ -19,6 +19,7 @@ import Source_Code.*;
 
 public class ClientMenuState{
 	private static Warehouse warehouse;
+	private int clientId;
 	private static ClerkMenuState clerkMenuState;
   final static String MAINMENU =  ""+
         "CLIENT MENU OPTIONS                                                  \n\t"+
@@ -39,27 +40,35 @@ public class ClientMenuState{
 	public static int getProductId(){
 		System.out.print("Please enter a product id: ");
 		Scanner s = new Scanner(System.in);
-		return s.nextInt();
+		int id = s.nextInt();
+		while(!warehouse.verifyProduct(id)){
+			System.out.print("Invalid id given, re-enter: ");
+			id = s.nextInt();
+		}//end if
+		return id;	
 	}//end getProductId()
 
 	/*******************************************************************************
 	displayClientDetails
-	Displays all Product objects in the system.
+	Displays the details of the client that is logged in
 	*******************************************************************************/
 	private static void displayClientsDetails(){
 		Iterator it = warehouse.getClients();
-		while(it.hasNext() )
-			System.out.println(it.next().toString());
+		Client c = warehouse.findClient(clientId);
+		System.out.println(c);
 	}//end displayAllProducts
 
 	/*******************************************************************************
 	displayProductList
-	Displays all client objects in the system.
+	Displays all products in the system, along with their sale prices
 	*******************************************************************************/
 	private static void displayProductList(){
 		Iterator it = warehouse.getProducts();
-		while(it.hasNext() )
-			System.out.println(it.next().toString());
+		Product p;
+		while(it.hasNext() ){
+			p = (Product)it.next();
+			System.out.println(p.getDescription() + "\tPrice: $" + p.getSalePrice() );
+		}//end while
 	}//end displayAllClients
 
   /**************************************************************************
@@ -70,19 +79,14 @@ public class ClientMenuState{
   Displays the date and relevant data for each invoice in the client's history
   ***************************************************************************/
   private void displayClientTransaction(){
-    int clientId = clerkMenuState.getClientId();
     Iterator invoiceIt;
     boolean choice;
-    if(!warehouse.verifyClient(clientId)){
-      System.out.println("Error, invalid client id. Aborting operation");
-      return;
-    }//end if
     System.out.print("Would you like to display detailed transactions? (Y|N) ");
     choice = new Scanner(System.in).next().equals("Y"); //true if Y
     invoiceIt = warehouse.getInvoiceIt(clientId);
     if(choice)
       while(invoiceIt.hasNext() )
-        System.out.println(((invoiceIt.next())).toString());
+        System.out.println(((invoiceIt.next())).detailedString());
     else
       while(invoiceIt.hasNext() )
         System.out.println(((invoiceIt.next())).toString());
@@ -90,37 +94,50 @@ public class ClientMenuState{
 
   /******************************************************************************
   showWaitList
-  Gets the product id, then displays its wait list
+  Displays the waitlist for the client
+  Poor design choices in the back end have made this sloppy
   ******************************************************************************/
   private static void showWaitList(){
-     int productID = getProductId();
-     Iterator it;
-     if(!warehouse.verifyProduct(productID)){
-        System.out.println("Error, invalid product id. Aborting operation");
-        return;
-     }//end if
-     it = warehouse.getProductWaitList(productID);
-     System.out.println("Product: \n" + warehouse.findProduct(productID).toString());
-     if(!it.hasNext())
-        System.out.println("Product has no wait list currently");
-     else{
-        System.out.println("Wait list:\n"+
-                           "__________________");
-        while(it.hasNext())
-           System.out.println(((WaitListItem)it.next()).toString());
-     }//end else
+     Iterator productIt, waitListIt;
+	 WaitListItem currItem;
+	 boolean productFound = false;
+	 //Get the list of products
+	 productIt = warehouse.getProducts();
+     //For each product, check its waitlist
+	 while(productIt.hasNext(){
+		waitListIt = ((Product)productIt.next()).getWaitList();
+		//For each item in waitlist, check if it belongs to this client
+		while(waitListIt.hasNext()){
+			currItem = (WaitListItem)waitListIt.next();
+			//If it does belong to the client, then display it
+			if(currItem.getOrder().getClient().getId() == clientId){
+				System.out.println(currItem.getProduct().getDescription() + "\tQt: " + currItem.getQuantity());
+				productFound = true;
+			}//end if
+		}//end while
+	 }//end while
+	 if(!productFound)
+		System.out.println("Client has no waitlisted items");
   }//end showWaitList
-
-
 
   public static void processInput(Warehouse w){
 		warehouse = w;
+		
+		//Get client id:
+		System.out.print("Enter your client id: ");
 		Scanner input = new Scanner(System.in);
+		clientID = input.nextInt();
+	    if(!warehouse.verifyClient(clientId)){
+			System.out.println("Error, invalid client id. Aborting operation");
+			return;
+		}//end if
+		
+		//Perform loop:
 		String inputStr = "";
 		System.out.println(MAINMENU);
 		while(!inputStr.equals("exit") && !inputStr.equals("g")){
 			inputStr = input.next();
-
+			
 			switch(inputStr.toUpperCase()){
 				case "EXIT":
 					System.out.println("Exiting warehouse operations\n");
