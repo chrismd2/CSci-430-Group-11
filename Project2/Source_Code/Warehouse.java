@@ -201,7 +201,7 @@ public class Warehouse implements Serializable{
 	public Iterator getCart(int cId){
 		return clients.findClient(cId).getCart();
 	}//end getCart
-   
+
    /*************************************************************
    clearCart
    Given a client id, clears that client's cart
@@ -209,10 +209,10 @@ public class Warehouse implements Serializable{
    public void clearCart(int id){
       clients.findClient(id).clearCart();
    }//end clearCart
-   
+
    /************************************************************
    modifyCartItem
-   Given a client id, product id and quantity, modifies the 
+   Given a client id, product id and quantity, modifies the
    quantity of that product. A quantity of 0 will remove it from the cart
    *************************************************************/
    public void modifyCartItem(int clientId, int productId, int quantity){
@@ -263,7 +263,8 @@ public class Warehouse implements Serializable{
 	}//end placeOrder
 
 	/****************   PRODUCT METHODS   ********************/
-	public void addProduct(String _description, double _salePrice, int _stock){
+	public void addProduct(String _description, double purchasePrice, double _salePrice, int _stock, int supplier){
+		System.out.println("WARNING: purchasePrice, purchasePrice, and supplier are not being added to product");
 		products.insertProduct(_description, _salePrice, _stock);
 	}
   public Iterator getProducts(){
@@ -290,7 +291,7 @@ public class Warehouse implements Serializable{
 	public int getStock(int productId){
 		return products.findProduct(productId).getStock();
 	}//end getStock
-	
+
    /*******************************************************************
    getProductWaitList
    Returns an iterator the product with the given id's wait list
@@ -309,7 +310,7 @@ public class Warehouse implements Serializable{
 		Supplier s = new Supplier(description);
 		suppliers.insertSupplier(s);
 	}//end addSupplier
-	
+
 	/***************************************************************
 	setSupplierDescription
 	Given a description and and id, changes the description for
@@ -318,7 +319,7 @@ public class Warehouse implements Serializable{
 	public void setSupplierDescription(int id, String description){
 		suppliers.search(id).setDescription(description);
 	}//end setSupplierDescription
-	
+
 	/********************************************************
 	findSupplier
 	Given a supplier ID, returns a reference to the corresponding
@@ -332,9 +333,9 @@ public class Warehouse implements Serializable{
 			if(s.getId() == id)
 				return s;
 		}//end while
-		return null;		
+		return null;
 	}//end findSupplier
-	
+
 	/******************************************************************************
 		verifySupplier
 		Returns true if the supplier exists in the supplierList. False otherwise
@@ -342,7 +343,7 @@ public class Warehouse implements Serializable{
 	public boolean verifySupplier(int id){
 		return !(suppliers.search(id) == null);
 	}//end verifySupplier
-	
+
 	/***************************************************************
 	getSuppliers
 	Returns an iterator to the list of suppliers
@@ -350,7 +351,7 @@ public class Warehouse implements Serializable{
 	public Iterator getSuppliers(){
 		return suppliers.getSuppliers();
 	}//end getSuppliers
-	
+
 	/**************************************************************
 	addSupplierItem
 	Given a Supplier, Product, Purchase price
@@ -359,7 +360,7 @@ public class Warehouse implements Serializable{
 	public void addSupplierItem(int supplierId, int productId, double purchasePrice){
 		suppliers.search(supplierId).addProduct(products.search(productId).get(0), purchasePrice);
 	}//end addSupplierItem
-	
+
 	/***************************************************
 	addShippedItem
 	Given a productId and a quantity, adds the given product
@@ -371,7 +372,7 @@ public class Warehouse implements Serializable{
 		p.addShippedItem(quantity);
 		return p.getWaitList();
 	}//end addShippedItem
-	
+
 	/*********************************************************
 	fulfillWaitListItem
 	UI will pass in a Product id and a waitlist item reference,
@@ -381,14 +382,14 @@ public class Warehouse implements Serializable{
 		pendingWaitListProducts.add(products.findProduct(productId));
 		pendingWaitListRemoval.add(item);
 	}//end fulfillWaitListItem
-	
+
 	public void doneAddingfulfillItems(){
 		while(pendingWaitListRemoval.size() > 0){
 			pendingWaitListProducts.get(0).fulfillWaitListItem(pendingWaitListRemoval.get(0));
          //Remove these items, dealt with now
          pendingWaitListProducts.remove(0);
-         pendingWaitListRemoval.remove(0);  
+         pendingWaitListRemoval.remove(0);
       }
 	}
-	
+
 }//end Warehouse class

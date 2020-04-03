@@ -20,47 +20,50 @@ public class ManagerMenuState{
 									"Enter m to modify the purchase price of a product from a supplier\n" +
 									"Enter c to login as a salesclerk\n" +
 									"Enter q to logout\n";
-	private final static Warehouse warehouse;
+	private static Warehouse warehouse;
+ 	final static String FILENAME = "WareData";
+	private static ManagerMenuState ManagerMenuState;
 
 	/*****************************************************************
 	performMenu
 	Continuously displays the menu for the user and receives their choice.
 	Sends that input to processUserChoice()
 	*****************************************************************/
-	private static void performMenu(){
+	public static void performMenu(){
 		boolean getNextOption = true;
 		Scanner s = new Scanner(System.in);
-		char choice;
+		String choice;
+		openWarehouse();
 		while(getNextOption){
 			//Print the menu
 			System.out.println(MENUOPTIONS);
-			//Get the user's selection
-			choice = s.nextLine()[0];
+			//Get the user"s selection
+			choice = s.nextLine();
 			//Process that chosen option
 			getNextOption = processUserChoice(choice);
 		}//end getNextOption
 	}//end performMenu
 
-	private static boolean processUserChoice(char choice){
+	private static boolean processUserChoice(String choice){
 		boolean iterateAgain = true;
 		switch(choice.toLowerCase()){
-			case 'a':
+			case "a":
 				addProduct(); break;
-			case 's':
+			case "s":
 				addSupplier(); break;
-			case 'v':
+			case "v":
 				viewAllSuppliers(); break;
-			case 'l':
+			case "l":
 				viewSuppliersOfProduct(); break;
-			case 'p':
+			case "p":
 				viewProductsOfSupplier(); break;
-			case 'n':
+			case "n":
 				addSupplierForProduct(); break;
-			case 'm':
+			case "m":
 				modifyPurchasePrice(); break;
-			case 'c':
+			case "c":
 				loginAsClerk(); break;
-			case 'q':
+			case "q":
 				System.out.println("Logging out");
 				iterateAgain = false; break;
 			default:
@@ -68,6 +71,22 @@ public class ManagerMenuState{
 		}//end switch
 		return iterateAgain;
 	}//end processUserChoice
+
+	/******************************************************************************
+	openWarehouse
+	Opens the given Warehouse, or creates if it doesn't exist
+	Returns the Warehouse object
+	*******************************************************************************/
+	public static void openWarehouse(){
+			Warehouse w = Warehouse.retrieveData(FILENAME);
+			if(w == null){
+				System.out.println("Warehouse not found in file. Creating new Warehouse.");
+				warehouse = Warehouse.instance();
+			} else{
+				System.out.println("Warehouse successfully read from file.");
+				warehouse = w;
+			}//end else
+	}//end openWarehouse
 
 	/**************************************************************************
 	addProduct
@@ -99,7 +118,7 @@ public class ManagerMenuState{
          //Check to see if they want to add another product
          System.out.print("Add another product? (Y|N) ");
          input = new Scanner(System.in);
-         adding = (input.next().charAt(0) == 'Y');
+         adding = (input.next() == "Y");
       }//end while
 	}//end addProduct
 

@@ -10,7 +10,7 @@ public class UserInterface {
 	          "3. Manager Menu State\n\n";
 
   public static void main(String args[]){
-			//Creating warehouse	  
+			//Creating warehouse
       Scanner s = new Scanner(System.in);
       System.out.println(MAINMENU);
       String choice = s.nextLine();
@@ -22,12 +22,11 @@ public class UserInterface {
           ClerkMenuState.processInput();
           break;
         case "3":
-          //ManagerMenuState.performMenu();
-          System.out.println("ERROR: manager operations are unavailable at this time");
+          ManagerMenuState.performMenu();
+          //System.out.println("ERROR: manager operations are unavailable at this time");
           break;
         default:
           System.out.println("ERROR: invalid option, exiting warehouse");
       }//end switch
 	}//end main
 }
-

@@ -6,7 +6,7 @@ Responsible individual: Sabin Basnet
 (a)	Show client details. The state invokes a method on Facade to get the Client object and then gets the client details. Note that the ClientID is available in the Context.
 (b)	Show list of products with sale prices.  The state invokes a method on Facade to get an iterator, and then extracts the needed information.
 (c)	Show client transactions. The state invokes a method on Facade to get the Client object and then gets the transaction details for the client. Note that the ClientID is available in the Context.
-(d)	Edit clientâ€™s shopping cart. Change quantities of products in the shopping cart. Facade provides the iterator. 
+(d)	Edit clientâ€™s shopping cart. Change quantities of products in the shopping cart. Facade provides the iterator.
 (e)	Add to clientâ€™s shopping cart. Actor provides the product id and quantity; invoke method on FaÃ§ade.
 (f)	Display clientâ€™s waitlist.
 (g)	Logout. System transitions to the previous  state, which has to be remembered in the context. (If previous state was the OpeningState, it goes there; otherwise it goes to ClientMenuState.)
@@ -41,7 +41,7 @@ public class ClientMenuState{
 		Scanner s = new Scanner(System.in);
 		return s.nextInt();
 	}//end getProductId()
-	
+
 	/*******************************************************************************
 	displayClientDetails
 	Displays all Product objects in the system.
@@ -111,7 +111,7 @@ public class ClientMenuState{
      }//end else
   }//end showWaitList
 
-	
+
 
   public static void processInput(){
 		Scanner input = new Scanner(System.in);
@@ -137,7 +137,8 @@ public class ClientMenuState{
         case "C":
         case "DISPLAYCLIENTTRANSACTIONS":
         case "SHOWCLIENTTRANSACTIONS":
-          clerkMenuState.displayAllClients();
+          //clerkMenuState.displayAllClients();
+					System.out.println("ERROR: clerkMenuState.displayAllClients() is a private clerk function");
           break;
         case "D":
         case "DISPLAYSHOPPINGCART":
