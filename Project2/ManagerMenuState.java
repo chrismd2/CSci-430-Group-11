@@ -235,7 +235,7 @@ public class ManagerMenuState{
 	}//end modifyPurchasePrice
 	
 	private static void loginAsClerk(){
-		//TODO: Write code that launches the Clerk module
+		ClerkMenuState.processInput(warehouse);
 	}//end loginAsClerk
 	
 	/*************************************************************************

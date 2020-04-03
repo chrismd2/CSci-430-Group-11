@@ -8,27 +8,34 @@ public class OpeningState {
 	        "SELECT STATE          \n\t"+
 	          "1. Client Menu State\n\t"+
 	          "2. Clerk Menu State\n\t"+
-	          "3. Manager Menu State\n\n";
+	          "3. Manager Menu State\n\t" +
+			  "q. Quit the program\n\n";
 	final static String FILENAME = "WareData";
 
   public static void main(String args[]){
 	  Warehouse warehouse = openWarehouse(FILENAME);
       Scanner s = new Scanner(System.in);
-      System.out.println(MAINMENU);
-      String choice = s.nextLine();
-      switch(choice){
-        case "1":
-          ClientMenuState.processInput(warehouse);
-          break;
-        case "2":
-          ClerkMenuState.processInput(warehouse);
-          break;
-        case "3":
-          ManagerMenuState.performMenu(warehouse);
-          break;
-        default:
-          System.out.println("ERROR: invalid option, exiting program");
-      }//end switch
+	  boolean notDone = true;
+	  while(notDone){
+		  System.out.println(MAINMENU);
+		  String choice = s.nextLine();
+		  switch(choice){
+			case "1":
+			  ClientMenuState.processInput(warehouse);
+			  break;
+			case "2":
+			  ClerkMenuState.processInput(warehouse);
+			  break;
+			case "3":
+			  ManagerMenuState.performMenu(warehouse);
+			  break;
+			case "q":
+				notDone = false;
+				break;
+			default:
+			  System.out.println("ERROR: invalid option, exiting program");
+		  }//end switch
+	  }//end while
 	  saveChanges(FILENAME, warehouse);
 	}//end main
 	
@@ -53,14 +60,16 @@ public class OpeningState {
 		Warehouse w;
 		try{
 			w = Warehouse.retrieveData(file);
-		} catch(IOException ioe){
-			w = Warehouse.instance();
-		}
 			if(w == null){
 				System.out.println("Empty file. Creating new warehouse.");
 				w = Warehouse.instance();
 			} else
 				System.out.println("Warehouse successfully read from file.");
+		} catch(IOException ioe){
+			w = Warehouse.instance();
+			System.out.println("Warehouse file not found. Creating new warehouse");
+		}
+
 		return w;
 	}//end openWarehouse
 }

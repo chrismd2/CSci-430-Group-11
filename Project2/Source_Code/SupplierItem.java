@@ -2,8 +2,9 @@ package Source_Code;
 
 import java.util.*;
 import java.lang.*;
+import java.io.*;
 
-public class SupplierItem{
+public class SupplierItem implements Serializable{
     private static final long serialVersionUID = 1L;
 	private final Supplier supplier;
 	private final Product product;
