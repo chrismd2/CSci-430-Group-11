@@ -148,4 +148,13 @@ public class ProductList implements Serializable{
 
     return returnProducts;
   }//end search with double
- }
+
+  public void add(int itemID, String itemName, double itemPrice, String itemDescription, int itemQuantity,
+		double itemTax) {
+	System.out.println("Calling Add.");
+	}
+
+  public void remove(String choice) {
+	System.out.println("Calling Remove.");
+  }
+}
