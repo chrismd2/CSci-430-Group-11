@@ -26,9 +26,15 @@ Manages clerk options
       System transitions to the previous  state, which has to be remembered in the context.
       (If previous state was the OpeningState, it goes there; otherwise it goes to ManagerMenuState.)
 *****************************************************************/
+import Source_Code.*;
+import java.util.*;
+import java.io.*;
+import java.lang.*;
 
 public class ClerkMenuState{
 	private static Warehouse warehouse;
+	private static ClerkMenuState ClerkMenuState;
+ 	final static String FILENAME = "WareData";
   final static String MAINMENU =  ""+
         "CLERK MENU OPTIONS                                                  \n\t"+
           "a. Add A Client                                        (ADDCLIENT)\n\t"+
@@ -41,11 +47,83 @@ public class ClerkMenuState{
           "h. Record a payment from a client.                                \n\t"+
           "i. Logout                                                         \n\n";
 
+
+
+/*************************** Generic prompt methods ******************************/
+	/*** For prompts that are used many times in many applications ******************/
+
+	/*********************************************************************
+	getClientId
+	Prompts user for client id, retrieves it and returns it
+	**********************************************************************/
+	public static int getClientId(){
+		System.out.print("Please enter a client id: ");
+		Scanner s = new Scanner(System.in);
+		return s.nextInt();
+	}//end getClientId()
+
+	/*********************************************************************
+	getProductId
+	Prompts user for product id, retrieves it and returns it
+	**********************************************************************/
+	public static int getProductId(){
+		System.out.print("Please enter a product id: ");
+		Scanner s = new Scanner(System.in);
+		return s.nextInt();
+	}//end getProductId()
+
+
+/************************** File reading methods **********************************/
+
+	/******************************************************************************
+	openWarehouse
+	Opens the given Warehouse, or creates if it doesn't exist
+	Returns the Warehouse object
+	*******************************************************************************/
+	public static void openWarehouse(){
+			Warehouse w = Warehouse.retrieveData(FILENAME);
+			if(w == null){
+				System.out.println("Warehouse not found in file. Creating new Warehouse.");
+				warehouse = Warehouse.instance();
+			} else{
+				System.out.println("Warehouse successfully read from file.");
+				warehouse = w;
+			}//end else
+	}//end openWarehouse
+
+	/******************************************************************************
+	saveChanges
+	Saves any changes made to the warehouse.
+	******************************************************************************/
+	public static void saveChanges(){
+		if(warehouse.saveData(FILENAME) )
+				System.out.println("Saved successfully");
+		else
+			System.out.println("Save failed. Error occured");
+	}//end saveChanges
+
+	/******************************************************************************
+	instance()
+	Called to create an instance of the ClerkMenuState
+	*****************************************************************************/
+	public static void logOut(){saveChanges();}
+
+	/******************************************************************************
+	instance()
+	Called to create an instance of the ClerkMenuState
+	*****************************************************************************/
+	public static ClerkMenuState instance() {
+		if(ClerkMenuState == null)
+			return ClerkMenuState = new ClerkMenuState();
+		else
+			return ClerkMenuState;
+	}//end instance()
+
   /******************************************************************************
   addClient
   Code to prompt user for necessary information to add a new client to the Warehouse
   *******************************************************************************/
-  private void addClient(){
+  private static void addClient(){
     Scanner input = new Scanner(System.in);
     System.out.print("Enter a name for the client: ");
     String name = input.nextLine();
@@ -61,7 +139,7 @@ public class ClerkMenuState{
 	displayAllProducts
 	Displays all Product objects in the system.
 	*******************************************************************************/
-	private void displayAllProducts(){
+	private static void displayAllProducts(){
 		Iterator it = warehouse.getProducts();
 		while(it.hasNext() )
 			System.out.println(it.next().toString());
@@ -71,7 +149,7 @@ public class ClerkMenuState{
 	displayAllClients
 	Displays all client objects in the system.
 	*******************************************************************************/
-	private void displayAllClients(){
+	private static void displayAllClients(){
 		Iterator it = warehouse.getClients();
 		while(it.hasNext() )
 			System.out.println(it.next().toString());
@@ -84,7 +162,7 @@ public class ClerkMenuState{
                               that were charged for)
   Displays the date and relevant data for each invoice in the client's history
   ***************************************************************************/
-  private void displayInvoices(){
+  private static void displayInvoices(){
     int clientId = getClientId();
     Iterator invoiceIt;
     boolean choice;
@@ -107,7 +185,7 @@ public class ClerkMenuState{
   showWaitList
   Gets the product id, then displays its wait list
   ******************************************************************************/
-  private void showWaitList(){
+  private static void showWaitList(){
      int productID = getProductId();
      Iterator it;
      if(!warehouse.verifyProduct(productID)){
@@ -136,7 +214,7 @@ public class ClerkMenuState{
 		Increases that product's quantity
 	Repeats until user enters a sentinel key to exit
 	**************************************************************************/
-	private void addShipment(){
+	private static void addShipment(){
 		int supplierId, productId, quantity, quantCount;
 		Scanner scanner;
 		boolean moreProducts = true;
@@ -202,7 +280,7 @@ public class ClerkMenuState{
 
 			switch(inputStr.toUpperCase()){
 				case "EXIT":
-					System.out.println("Exiting warehouse operations\n");
+					System.out.println("Exiting Clerk Operations\n");
           break;
         case "A":
 				case "ADDCLIENT":
