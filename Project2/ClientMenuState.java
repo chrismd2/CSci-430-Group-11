@@ -19,7 +19,7 @@ import Source_Code.*;
 
 public class ClientMenuState{
 	private static Warehouse warehouse;
-	private int clientId;
+	private static int clientId;
 	private static ClerkMenuState clerkMenuState;
   final static String MAINMENU =  ""+
         "CLIENT MENU OPTIONS                                                  \n\t"+
@@ -45,7 +45,7 @@ public class ClientMenuState{
 			System.out.print("Invalid id given, re-enter: ");
 			id = s.nextInt();
 		}//end if
-		return id;	
+		return id;
 	}//end getProductId()
 
 	/*******************************************************************************
@@ -104,7 +104,7 @@ public class ClientMenuState{
 	 //Get the list of products
 	 productIt = warehouse.getProducts();
      //For each product, check its waitlist
-	 while(productIt.hasNext(){
+	 while(productIt.hasNext()){
 		waitListIt = ((Product)productIt.next()).getWaitList();
 		//For each item in waitlist, check if it belongs to this client
 		while(waitListIt.hasNext()){
@@ -119,12 +119,12 @@ public class ClientMenuState{
 	 if(!productFound)
 		System.out.println("Client has no waitlisted items");
   }//end showWaitList
-	       
-	       
+
+
 /*	        //editing and adding the products in the shopping cart
 	public class shop {
     public void main(String[] args) {
-	   
+
 	  Scanner sc = new Scanner(System.in);
 	    ArrayList<ItemList> cart = new ArrayList<ItemList>();
 
@@ -189,29 +189,29 @@ public class ClientMenuState{
 
 	}
 	       */
-	       
-	       
-	       
-	       
+
+
+
+
 
   public static void processInput(Warehouse w){
 		warehouse = w;
-		
+
 		//Get client id:
 		System.out.print("Enter your client id: ");
 		Scanner input = new Scanner(System.in);
-		clientID = input.nextInt();
+		clientId = input.nextInt();
 	    if(!warehouse.verifyClient(clientId)){
 			System.out.println("Error, invalid client id. Aborting operation");
 			return;
 		}//end if
-		
+
 		//Perform loop:
 		String inputStr = "";
 		System.out.println(MAINMENU);
 		while(!inputStr.equals("exit") && !inputStr.equals("g")){
 			inputStr = input.next();
-			
+
 			switch(inputStr.toUpperCase()){
 				case "EXIT":
 					System.out.println("Exiting warehouse operations\n");
