@@ -113,7 +113,8 @@ public class ClientMenuState{
 
 
 
-  public static void processInput(){
+  public static void processInput(Warehouse w){
+		warehouse = w;
 		Scanner input = new Scanner(System.in);
 		String inputStr = "";
 		System.out.println(MAINMENU);

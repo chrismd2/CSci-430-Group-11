@@ -50,7 +50,7 @@ public class Warehouse implements Serializable{
 		}//end if-else
 	}//end instance
 
-	public static Warehouse retrieveData(String filename){
+	public static Warehouse retrieveData(String filename) throws IOException{
 		try {
 		  FileInputStream file = new FileInputStream(filename);
 		  ObjectInputStream in = new ObjectInputStream(file);
@@ -62,12 +62,12 @@ public class Warehouse implements Serializable{
 		  SupplierIdServer.retrieve(in);
 		  return warehouse;
 		} catch(IOException ioe) {
-		  ioe.printStackTrace();
-		  return null;
+		  //ioe.printStackTrace();
+		  throw ioe;
 		} catch(ClassNotFoundException cnfe) {
 		  cnfe.printStackTrace();
-		  return null;
 		}
+		return null; 
 	}//end retrieveData
 
 	public static boolean saveData(String filename){
@@ -263,8 +263,7 @@ public class Warehouse implements Serializable{
 	}//end placeOrder
 
 	/****************   PRODUCT METHODS   ********************/
-	public void addProduct(String _description, double purchasePrice, double _salePrice, int _stock, int supplier){
-		System.out.println("WARNING: purchasePrice, purchasePrice, and supplier are not being added to product");
+	public void addProduct(String _description, double _salePrice, int _stock){
 		products.insertProduct(_description, _salePrice, _stock);
 	}
   public Iterator getProducts(){

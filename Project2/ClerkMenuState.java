@@ -80,7 +80,7 @@ public class ClerkMenuState{
 	Opens the given Warehouse, or creates if it doesn't exist
 	Returns the Warehouse object
 	*******************************************************************************/
-	public static void openWarehouse(){
+/*	public static void openWarehouse(){
 			Warehouse w = Warehouse.retrieveData(FILENAME);
 			if(w == null){
 				System.out.println("Warehouse not found in file. Creating new Warehouse.");
@@ -90,23 +90,23 @@ public class ClerkMenuState{
 				warehouse = w;
 			}//end else
 	}//end openWarehouse
-
+*/
 	/******************************************************************************
 	saveChanges
 	Saves any changes made to the warehouse.
 	******************************************************************************/
-	public static void saveChanges(){
+/*	public static void saveChanges(){
 		if(warehouse.saveData(FILENAME) )
 				System.out.println("Saved successfully");
 		else
 			System.out.println("Save failed. Error occured");
 	}//end saveChanges
-
+*/
 	/******************************************************************************
 	instance()
 	Called to create an instance of the ClerkMenuState
 	*****************************************************************************/
-	public static void logOut(){saveChanges();}
+//	public static void logOut(){saveChanges();}
 
 	/******************************************************************************
 	instance()
@@ -277,13 +277,12 @@ public class ClerkMenuState{
   calls the ClientMenuState
   ******************************************************************************/
 	private static void callClient(){
-		System.out.println("WARNING: consider saving the warehouse before logging as client\n");
-		ClientMenuState.processInput();
-		System.out.println("WARNING: consider opening the warehouse after exiting as client\n");
+		ClientMenuState.processInput(warehouse);
 		System.out.println(MAINMENU);
 	}
 
-  public static void processInput(){
+  public static void processInput(Warehouse w){
+		warehouse = w;
 		Scanner input = new Scanner(System.in);
 		String inputStr = "";
 		System.out.println(MAINMENU);

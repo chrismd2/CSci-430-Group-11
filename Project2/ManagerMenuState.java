@@ -10,60 +10,59 @@ import java.lang.*;
 
 public class ManagerMenuState{
 	private final static String MENUOPTIONS = "		MANAGER MENU	\n" +
-									"_____________________________________" +
+									"_____________________________________\n" +
 									"Enter a to add a product\n" +
 									"Enter s to add a supplier\n" +
 									"Enter v to view all suppliers\n" +
 									"Enter l to view suppliers of a product\n" +
-									"Enter p to view all products of a suppliers\n" +
+									"Enter p to view all products of a supplier\n" +
 									"Enter n to add a supplier for a product\n" +
 									"Enter m to modify the purchase price of a product from a supplier\n" +
 									"Enter c to login as a salesclerk\n" +
 									"Enter q to logout\n";
 	private static Warehouse warehouse;
- 	final static String FILENAME = "WareData";
 	private static ManagerMenuState ManagerMenuState;
-
+	
 	/*****************************************************************
 	performMenu
 	Continuously displays the menu for the user and receives their choice.
 	Sends that input to processUserChoice()
 	*****************************************************************/
-	public static void performMenu(){
-		boolean getNextOption = true;
+	public static void performMenu(Warehouse w){
+		boolean getNextOption = true;		
 		Scanner s = new Scanner(System.in);
-		String choice;
-		openWarehouse();
+		warehouse = w;
+		char choice;
 		while(getNextOption){
 			//Print the menu
 			System.out.println(MENUOPTIONS);
-			//Get the user"s selection
-			choice = s.nextLine();
+			//Get the user's selection
+			choice = s.nextLine().charAt(0);
 			//Process that chosen option
 			getNextOption = processUserChoice(choice);
 		}//end getNextOption
 	}//end performMenu
-
-	private static boolean processUserChoice(String choice){
+	
+	private static boolean processUserChoice(char choice){
 		boolean iterateAgain = true;
-		switch(choice.toLowerCase()){
-			case "a":
+		switch(Character.toLowerCase(choice)){
+			case 'a':
 				addProduct(); break;
-			case "s":
+			case 's':
 				addSupplier(); break;
-			case "v":
+			case 'v':
 				viewAllSuppliers(); break;
-			case "l":
+			case 'l':
 				viewSuppliersOfProduct(); break;
-			case "p":
+			case 'p':
 				viewProductsOfSupplier(); break;
-			case "n":
+			case 'n':
 				addSupplierForProduct(); break;
-			case "m":
+			case 'm':
 				modifyPurchasePrice(); break;
-			case "c":
+			case 'c':
 				loginAsClerk(); break;
-			case "q":
+			case 'q':
 				System.out.println("Logging out");
 				iterateAgain = false; break;
 			default:
@@ -71,23 +70,7 @@ public class ManagerMenuState{
 		}//end switch
 		return iterateAgain;
 	}//end processUserChoice
-
-	/******************************************************************************
-	openWarehouse
-	Opens the given Warehouse, or creates if it doesn't exist
-	Returns the Warehouse object
-	*******************************************************************************/
-	public static void openWarehouse(){
-			Warehouse w = Warehouse.retrieveData(FILENAME);
-			if(w == null){
-				System.out.println("Warehouse not found in file. Creating new Warehouse.");
-				warehouse = Warehouse.instance();
-			} else{
-				System.out.println("Warehouse successfully read from file.");
-				warehouse = w;
-			}//end else
-	}//end openWarehouse
-
+	
 	/**************************************************************************
 	addProduct
 	Provides necessary prompts for the user to add a product to the Warehouse
@@ -95,33 +78,24 @@ public class ManagerMenuState{
 	**************************************************************************/
 	private static void addProduct(){
 	  boolean adding = true;
-      Scanner input;
+      Scanner input;   
       while(adding){
    		input = new Scanner(System.in);
-         System.out.print("Enter the id of the supplier that stocks this product: ");
-         int supplier = input.nextInt();
-         if(!warehouse.verifySupplier(supplier)){
-            System.out.println("Invalid supplier id. Teminating operation");
-            return;
-        }//end if
-         input = new Scanner(System.in);//clear buffer
    		System.out.print("Enter a description for the product: ");
    		String description = input.nextLine();
-   		System.out.print("Enter a purchase price for the product: ");
-   		String purchasePrice = input.nextLine();
    		System.out.print("Enter an sale price for the product: ");
    		String salePrice = input.nextLine();
    		System.out.print("Enter a stock for the product: ");
    		int stock = input.nextInt();
-   		warehouse.addProduct(description, Double.valueOf(purchasePrice), Double.valueOf(salePrice), stock, supplier);
+   		warehouse.addProduct(description, Double.valueOf(salePrice), stock);
    		System.out.println("Product added successfully");
          //Check to see if they want to add another product
          System.out.print("Add another product? (Y|N) ");
          input = new Scanner(System.in);
-         adding = (input.next() == "Y");
+         adding = (input.next().charAt(0) == 'Y');
       }//end while
 	}//end addProduct
-
+	
 	/**********************************************************************************
 	addSupplier
 	Code to prompt user for necessary information to add a new supplier to the warehouse
@@ -134,7 +108,7 @@ public class ManagerMenuState{
 		warehouse.addSupplier(description);
 		System.out.println("Supplier added successfully");
 	}//end addSupplier
-
+	
 	/*********************************************************************
 	viewAllSuppliers
 	Displays all suppliers registered in the warehouse
@@ -146,7 +120,7 @@ public class ManagerMenuState{
 		while(it.hasNext())
 			System.out.println(it.next().toString());
 	}//end viewAllSuppliers
-
+	
 	/*********************************************************************
 	viewSuppliersOfProduct
 	User passes in the id of the product.
@@ -154,27 +128,116 @@ public class ManagerMenuState{
 	their sale price for the product.
 	**********************************************************************/
 	private static void viewSuppliersOfProduct(){
-
+		Scanner s = new Scanner(System.in);
+		int productId;
+		String output = "";
+		System.out.print("Please enter the product id to search for: ");
+		productId = s.nextInt();
+		if(!warehouse.verifyProduct(productId)){
+			System.out.println("No product found with given id. Aborting\n");
+			return;
+		}//end if
+		Iterator it = warehouse.getSuppliers();
+		Supplier currSupplier;
+		while(it.hasNext()){
+			currSupplier = (Supplier)it.next();
+			output += currSupplier.searchProduct(productId) + '\n';
+		}//end while
+		System.out.println(output);
 	}//end viewSuppliersOfProduct
-
+	
 	private static void viewProductsOfSupplier(){
-
+		Scanner s = new Scanner(System.in);
+		int supplierId;
+		System.out.print("Enter a supplier id: ");
+		supplierId = s.nextInt();
+		Supplier supp = warehouse.findSupplier(supplierId);
+		if(supp == null){
+			System.out.println("Error, no supplier found with given id. Aborting.\n");
+			return;
+		}//end if
+		System.out.println("\n" + supp.toString() + "\n" + "___________" + "\n");
+		Iterator it = supp.getProducts();
+		while(it.hasNext())
+			System.out.println(((SupplierItem)it.next()).toString());
 	}//end viewProductsOfSupplier
-
+	
+	/**********************************************************************
+	addSupplierForProduct
+	Prompts the user for a supplier id, product id and price. If the supplier
+	does not already stock the given product, the product will be added to the list
+	of products that the supplier provides, and will be assigned the given price..
+	***********************************************************************/
 	private static void addSupplierForProduct(){
-
+		Scanner s = new Scanner(System.in);
+		int supplierId, productId;
+		double price;
+		Supplier supplier;
+		Product product;
+		System.out.print("Enter the id of the supplier who will stock this product: ");
+		supplierId = s.nextInt();
+		supplier = warehouse.findSupplier(supplierId);
+		if(supplier == null){
+			System.out.println("Error, no supplier found with given id. Aborting");
+			return;
+		}//end if
+		System.out.print("Enter the id of the product to be added: ");
+		productId = s.nextInt();
+		product = warehouse.findProduct(productId);
+		if(product == null){
+			System.out.println("Error, no product found with given id. Aborting");
+			return;
+		}//end if
+		if(supplier.hasProduct(productId)){
+			System.out.println("Error, Product already supplied by supplier. Aborting");
+			return;
+		}//end if
+		s = new Scanner(System.in);
+		System.out.print("Enter the purchase price for this product: ");
+		price = Double.valueOf(s.nextLine());
+		supplier.addProduct(product, price);
 	}//end addSupplierForProduct
-
+	
+	/******************************************************************
+	modifiyPurchasePrice()
+	Prompts the user for a supplier id, product id and price. If the supplier
+	stocks the given product, this method will reassign the price of the product
+	to the new one specified
+	******************************************************************/
 	private static void modifyPurchasePrice(){
-
+		Scanner s = new Scanner(System.in);
+		int supplierId, productId;
+		double price;
+		Supplier supplier;
+		Product product;
+		System.out.print("Enter the id of the supplier who stocks this product: ");
+		supplierId = s.nextInt();
+		supplier = warehouse.findSupplier(supplierId);
+		if(supplier == null){
+			System.out.println("Error, no supplier found with given id. Aborting");
+			return;
+		}//end if
+		System.out.print("Enter the id of the product: ");
+		productId = s.nextInt();
+		product = warehouse.findProduct(productId);
+		if(product == null){
+			System.out.println("Error, no product found with given id. Aborting");
+			return;
+		}//end if
+		if(!supplier.hasProduct(productId)){
+			System.out.println("Error, Product not supplied by supplier. Aborting");
+			return;
+		}//end if
+		s = new Scanner(System.in); //flush input buffer
+		System.out.print("Enter the purchase price for this product: ");
+		price = Double.valueOf(s.nextLine());
+		supplier.setPurchasePrice(product, price);
 	}//end modifyPurchasePrice
-
+	
 	private static void loginAsClerk(){
-		System.out.println("WARNING: consider saving the warehouse before logging as clerk\n");
-		ClerkMenuState.processInput();
-		System.out.println("WARNING: consider reopening the warehouse after exiting as clerk\n");
+		//TODO: Write code that launches the Clerk module
 	}//end loginAsClerk
-
+	
 	/*************************************************************************
 	instance()
 	Used to implement class as singleton. Returns an instance of the ManagerMenuState
@@ -184,5 +247,5 @@ public class ManagerMenuState{
 			return ManagerMenuState = new ManagerMenuState();
 		else
 			return ManagerMenuState;
-	}//end ManagerMenuState
+	}//end instance()
 }//end class

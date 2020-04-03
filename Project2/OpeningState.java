@@ -1,0 +1,66 @@
+import Source_Code.*;
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+public class OpeningState {
+	final static String MAINMENU =  ""+
+	        "SELECT STATE          \n\t"+
+	          "1. Client Menu State\n\t"+
+	          "2. Clerk Menu State\n\t"+
+	          "3. Manager Menu State\n\n";
+	final static String FILENAME = "WareData";
+
+  public static void main(String args[]){
+	  Warehouse warehouse = openWarehouse(FILENAME);
+      Scanner s = new Scanner(System.in);
+      System.out.println(MAINMENU);
+      String choice = s.nextLine();
+      switch(choice){
+        case "1":
+          ClientMenuState.processInput(warehouse);
+          break;
+        case "2":
+          ClerkMenuState.processInput(warehouse);
+          break;
+        case "3":
+          ManagerMenuState.performMenu(warehouse);
+          break;
+        default:
+          System.out.println("ERROR: invalid option, exiting program");
+      }//end switch
+	  saveChanges(FILENAME, warehouse);
+	}//end main
+	
+	/******************************************************************************
+	saveChanges
+	Saves any changes made to the warehouse.
+	******************************************************************************/
+	public static void saveChanges(String file, Warehouse warehouse){
+		if(warehouse.saveData(file))
+				System.out.println("Saved successfully");
+		else
+			System.out.println("Save failed. Error occured");
+	}//end saveChanges
+	
+	/*************************************************************
+	openWarehouse
+	Given a filename, attempts to open the warehouse file
+	If not found, then it creates a new warehouse
+	Returns a warehouse object.
+	**************************************************************/
+	private static Warehouse openWarehouse(String file){
+		Warehouse w;
+		try{
+			w = Warehouse.retrieveData(file);
+		} catch(IOException ioe){
+			w = Warehouse.instance();
+		}
+			if(w == null){
+				System.out.println("Empty file. Creating new warehouse.");
+				w = Warehouse.instance();
+			} else
+				System.out.println("Warehouse successfully read from file.");
+		return w;
+	}//end openWarehouse
+}
