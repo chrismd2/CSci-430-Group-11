@@ -111,72 +111,7 @@ public class ClientMenuState{
      }//end else
   }//end showWaitList
 
-	/**************************************************************************
-	addShipment()
-	Will prompt operator for a supplier ID for the shipment being taken in.
-	Verifies that id
-	Will repeatedly prompt operator for a product id
-		Verifies that id
-		Prompts for a quantity
-		Increases that product's quantity
-	Repeats until user enters a sentinel key to exit
-	**************************************************************************/
-	private void addShipment(){
-		int supplierId, productId, quantity, quantCount;
-		Scanner scanner;
-		boolean moreProducts = true;
-		Iterator waitList;
-		WaitListItem currItem;
-		char choice;
-		//Get supplier id:
-		System.out.print("Please enter a supplier id: ");
-		scanner = new Scanner(System.in);
-		supplierId = scanner.nextInt();
-		//Verify supplier id:
-		if(!warehouse.verifySupplier(supplierId)){
-			System.out.println("Error, invalid supplier id. Aborting operation");
-			return;
-		}//end if
-		while(moreProducts){
-			//Get product id:
-			System.out.print("Enter the received product's id (0 to quit): ");
-			scanner = new Scanner(System.in); //flush input buffer
-			productId = scanner.nextInt();
-         if(productId == 0) //Sentinel value to return with
-            return;
-			//Verify product id:
-			if(!warehouse.verifyProduct(productId)){
-				System.out.println("Error, invalid product id. Aborting operation");
-				return;
-			}//end if
-			//If valid, get product quantity
-			System.out.print("Enter a quantity for the product: ");
-			scanner = new Scanner(System.in); //flush buffer
-			quantity = scanner.nextInt();
-			//Increment product's quantity
-			waitList = warehouse.addShippedItem(productId, quantity);
-			//Receive waitList, prompt for any quantities that can be fulfilled.
-			quantCount = 0; //Reset quant count for new item
-			while(waitList.hasNext() ){
-				currItem = (WaitListItem)waitList.next();
-				if((currItem.getQuantity() + quantCount)<= warehouse.getStock(productId)){
-					System.out.println("Order " + currItem.getOrder().getId() +
-						" can be fulfilled with new stock.\n" +
-                  " Current stock: " + warehouse.getStock(productId) +
-                  " Order quantity needed: " + currItem.getQuantity() +
-						"\nFulfill? (Y|N) ");
-					scanner = new Scanner(System.in);
-					choice = scanner.next().charAt(0);
-					if(choice == 'Y'){
-                  System.out.println("Fulfilling order");
-						warehouse.fulfillWaitListItem(productId, currItem);
-						quantCount += currItem.getQuantity();
-					}
-				}//end if
-			}//end while
-			warehouse.doneAddingfulfillItems();
-		}//end while(moreProducts)
-	}//end addShipment
+	
 
   public static void processInput(){
 		Scanner input = new Scanner(System.in);
