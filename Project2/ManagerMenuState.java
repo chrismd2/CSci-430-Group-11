@@ -170,7 +170,9 @@ public class ManagerMenuState{
 	}//end modifyPurchasePrice
 
 	private static void loginAsClerk(){
-
+		System.out.println("WARNING: consider saving the warehouse before logging as clerk\n");
+		ClerkMenuState.processInput();
+		System.out.println("WARNING: consider reopening the warehouse after exiting as clerk\n");
 	}//end loginAsClerk
 
 	/*************************************************************************

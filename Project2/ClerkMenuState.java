@@ -271,11 +271,23 @@ public class ClerkMenuState{
 		}//end while(moreProducts)
 	}//end addShipment
 
+
+  /******************************************************************************
+  callClient
+  calls the ClientMenuState
+  ******************************************************************************/
+	private static void callClient(){
+		System.out.println("WARNING: consider saving the warehouse before logging as client\n");
+		ClientMenuState.processInput();
+		System.out.println("WARNING: consider opening the warehouse after exiting as client\n");
+		System.out.println(MAINMENU);
+	}
+
   public static void processInput(){
 		Scanner input = new Scanner(System.in);
 		String inputStr = "";
 		System.out.println(MAINMENU);
-		while(!inputStr.equals("exit") && !inputStr.equals("e")){
+		while(!inputStr.equals("exit") && !inputStr.equals("i") && !inputStr.equals("logout")){
 			inputStr = input.next();
 
 			switch(inputStr.toUpperCase()){
@@ -303,6 +315,7 @@ public class ClerkMenuState{
           displayInvoices();
           break;
         case "E":
+					callClient();
           break;
         case "F":
         case "SHOWWAITLIST":

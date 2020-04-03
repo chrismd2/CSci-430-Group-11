@@ -117,7 +117,7 @@ public class ClientMenuState{
 		Scanner input = new Scanner(System.in);
 		String inputStr = "";
 		System.out.println(MAINMENU);
-		while(!inputStr.equals("exit") && !inputStr.equals("e")){
+		while(!inputStr.equals("exit") && !inputStr.equals("g")){
 			inputStr = input.next();
 
 			switch(inputStr.toUpperCase()){
@@ -153,6 +153,7 @@ public class ClientMenuState{
           showWaitList();
           break;
         case "G":
+					System.out.println("Logging out of client\n");
           break;
         default:
           System.out.print("ERROR: Invalid option\n" + MAINMENU);
