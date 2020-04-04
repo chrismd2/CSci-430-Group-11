@@ -1,3 +1,20 @@
+
+/*******************************************************************************
+OpeningState.java
+Provides Interface to chose the users role
+
+	- typeing exit can be used to quit any state
+	- higher authorities may log into lower permissions
+		+ after exiting the user will return to the origional role
+
+Responsible individual: ALL
+
+Options:
+	1. Client
+	2. Clerk
+	3. Manager
+	q. quit
+********************************************************************************/
 import Source_Code.*;
 import java.util.*;
 import java.io.*;
@@ -29,6 +46,7 @@ public class OpeningState {
 			case "3":
 			  ManagerMenuState.performMenu(warehouse);
 			  break;
+			case "exit":
 			case "q":
 				notDone = false;
 				break;
@@ -38,7 +56,7 @@ public class OpeningState {
 	  }//end while
 	  saveChanges(FILENAME, warehouse);
 	}//end main
-	
+
 	/******************************************************************************
 	saveChanges
 	Saves any changes made to the warehouse.
@@ -49,7 +67,7 @@ public class OpeningState {
 		else
 			System.out.println("Save failed. Error occured");
 	}//end saveChanges
-	
+
 	/*************************************************************
 	openWarehouse
 	Given a filename, attempts to open the warehouse file

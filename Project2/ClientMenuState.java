@@ -6,7 +6,7 @@ Responsible individual: Sabin Basnet
 (a)	Show client details. The state invokes a method on Facade to get the Client object and then gets the client details. Note that the ClientID is available in the Context.
 (b)	Show list of products with sale prices.  The state invokes a method on Facade to get an iterator, and then extracts the needed information.
 (c)	Show client transactions. The state invokes a method on Facade to get the Client object and then gets the transaction details for the client. Note that the ClientID is available in the Context.
-(d)	Edit client's shopping cart. Change quantities of products in the shopping cart. Facade provides the iterator. 
+(d)	Edit client's shopping cart. Change quantities of products in the shopping cart. Facade provides the iterator.
 (e)	Add to client's shopping cart. Actor provides the product id and quantity; invoke method on Façade.
 (f)	Display client waitlist.
 (g)	Logout. System transitions to the previous  state, which has to be remembered in the context. (If previous state was the OpeningState, it goes there; otherwise it goes to ClientMenuState.)
@@ -42,16 +42,19 @@ public class ClientMenuState{
 		Scanner s = new Scanner(System.in);
 		return s.nextInt();
 	}//end getProductId()
-	
+
 	/*******************************************************************************
 	displayClientDetails
 	Displays all Product objects in the system.
 	*******************************************************************************/
 	private static void displayClientsDetails(){
-		int clientId = clerkMenuState.getClientId();
-		Iterator it = warehouse.getClients();
-		while(it.hasNext() )
-			System.out.println(it.next().toString());
+		try {
+			int clientId = clerkMenuState.getClientId();
+			Iterator it = warehouse.getClients();
+			while(it.hasNext() )
+				System.out.println(it.next().toString());
+		}
+		catch (Exception e){ System.out.println("ERROR: displayClientDetails() in ClientMenuState " + e);}
 	}//end displayAllProducts
 
 	/*******************************************************************************
@@ -59,9 +62,12 @@ public class ClientMenuState{
 	Displays all client objects in the system.
 	*******************************************************************************/
 	private static void displayProductList(){
-		Iterator it = warehouse.getProducts();
-		while(it.hasNext() )
-			System.out.println(it.next().toString());
+		try {
+			Iterator it = warehouse.getProducts();
+			while(it.hasNext() )
+				System.out.println(it.next().toString());
+		}
+		catch (Exception e){ System.out.println("ERROR: getProducts() in ClientMenuState " + e);}
 	}//end displayAllClients
 
   /**************************************************************************
@@ -95,25 +101,28 @@ public class ClientMenuState{
   Gets the product id, then displays its wait list
   ******************************************************************************/
   private static void showWaitList(){
-     int productID = getProductId();
-     Iterator it;
-     if(!warehouse.verifyProduct(productID)){
-        System.out.println("Error, invalid product id. Aborting operation");
-        return;
-     }//end if
-     it = warehouse.getProductWaitList(productID);
-     System.out.println("Product: \n" + warehouse.findProduct(productID).toString());
-     if(!it.hasNext())
-        System.out.println("Product has no wait list currently");
-     else{
-        System.out.println("Wait list:\n"+
-                           "__________________");
-        while(it.hasNext())
-           System.out.println(((WaitListItem)it.next()).toString());
-     }//end else
+			try {
+	     int productID = getProductId();
+	     Iterator it;
+	     if(!warehouse.verifyProduct(productID)){
+	        System.out.println("Error, invalid product id. Aborting operation");
+	        return;
+	     }//end if
+	     it = warehouse.getProductWaitList(productID);
+	     System.out.println("Product: \n" + warehouse.findProduct(productID).toString());
+	     if(!it.hasNext())
+	        System.out.println("Product has no wait list currently");
+	     else{
+	        System.out.println("Wait list:\n"+
+	                           "__________________");
+	        while(it.hasNext())
+	           System.out.println(((WaitListItem)it.next()).toString());
+	     }//end else
+		 }//end try
+		 catch (Exception e){ System.out.println("ERROR: showWaitList() in ClientMenuState " + e);}
   }//end showWaitList
 
-  
+
   /*******************************************************************************
 	Editing the Shopping cart
 	Add and remove in the shopping cart.
@@ -126,7 +135,7 @@ public class ClientMenuState{
 
   //editing and adding the products in the shopping cart
 	private static void displayShoppingCart() {
-	   
+
 	  Scanner sc = new Scanner(System.in);
 	    ArrayList<ItemList> cart = new ArrayList<ItemList>();
 
@@ -192,7 +201,7 @@ public class ClientMenuState{
 		Scanner input = new Scanner(System.in);
 		String inputStr = "";
 		System.out.println(MAINMENU);
-		while(!inputStr.equals("exit") && !inputStr.equals("e")){
+		while(!inputStr.equals("exit") && !inputStr.equals("g")){
 			inputStr = input.next();
 
 			switch(inputStr.toUpperCase()){
@@ -212,7 +221,7 @@ public class ClientMenuState{
         case "C":
         case "DISPLAYCLIENTTRANSACTIONS":
         case "SHOWCLIENTTRANSACTIONS":
-          
+					System.out.println("WARNING: Show client transactions unavailable");
           break;
         case "D":
         case "DISPLAYSHOPPINGCART":
@@ -220,13 +229,15 @@ public class ClientMenuState{
           displayShoppingCart();
           break;
         case "E":
-          break;
+					System.out.println("WARNING: Add client shopping cart unavailable");
+					break;
         case "F":
         case "Add":
         case "DISPLAYTHECLIENTWAITLIST":
           showWaitList();
           break;
         case "G":
+					System.out.println("Logging out of client\n");
           break;
         default:
           System.out.print("ERROR: Invalid option\n" + MAINMENU);

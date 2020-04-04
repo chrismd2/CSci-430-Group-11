@@ -179,6 +179,8 @@ public class ClerkMenuState{
     else
       while(invoiceIt.hasNext() )
         System.out.println(((Invoice)(invoiceIt.next())).toString());
+
+		System.out.println("WARNING: displayInvoices in ClerkMenuState testing incomplete");
   }//end displayInvoices()
 
   /******************************************************************************
@@ -327,6 +329,7 @@ public class ClerkMenuState{
 					addShipment();
           break;
         case "H":
+					System.out.println("WARNING: Record a payment from a client unavailable");
           break;
         case "I":
           break;
